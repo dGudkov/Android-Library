@@ -17,9 +17,8 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity" >
-        </activity>
+        <!--<activity android:name=".horizontalscrollview.HorizontalScrollViewActivity"  />-->
+        <!--<activity android:name=".foldingverticallayout.FoldingVerticaLayoutActivity"  />-->
 
     </application>
 

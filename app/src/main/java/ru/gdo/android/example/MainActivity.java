@@ -8,16 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
-
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import ru.gdo.android.example.foldingverticallayout.FoldingVerticaLayoutActivity;
+import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
 
 /**
  * @author Danil Gudkov <d_n_l@mail.ru>
@@ -34,7 +34,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         ArrayList<ContentItem> objects = new ArrayList<>();
 
-        objects.add(new ContentItem("Horizontal scroll view", "A simple demonstration of the horizontal scroll view."));
+        objects.add(new ContentItem("Horizontal scroll view",
+                "A simple demonstration of the horizontal scroll view.",
+                HorizontalScrollViewActivity.class));
+        objects.add(new ContentItem("Vertical folding layout",
+                "A simple demonstration of the Vertical folding layout.",
+                FoldingVerticaLayoutActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 
@@ -46,28 +51,23 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-
-        Intent intent = null;
-
-        switch (pos) {
-            case 0:
-                intent = new Intent(this, HorizontalScrollViewActivity.class);
-                break;
-        }
-
-        if (intent != null) {
+        ViewHolder holder = (ViewHolder) view.getTag();
+        if (holder != null) {
+            Intent intent = new Intent(this, holder.mClass);
             startActivity(intent);
             overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
         }
     }
 
     private class ContentItem {
-        String name;
-        String desc;
+        String mName;
+        String mDescription;
+        Class mClass;
 
-        public ContentItem(String name, String desc) {
-            this.name = name;
-            this.desc = desc;
+        public ContentItem(String name, String description, Class clazz) {
+            this.mName = name;
+            this.mDescription = description;
+            this.mClass = clazz;
         }
     }
 
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, null);
                 holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
                 holder.tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
+                holder.mClass = c.mClass;
 
                 convertView.setTag(holder);
 
@@ -98,15 +99,16 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.tvName.setText(c.name);
-            holder.tvDesc.setText(c.desc);
+            holder.tvName.setText(c.mName);
+            holder.tvDesc.setText(c.mDescription);
 
             return convertView;
         }
 
-        private class ViewHolder {
-            TextView tvName, tvDesc;
-        }
     }
 
+    private class ViewHolder {
+        TextView tvName, tvDesc;
+        Class mClass;
+    }
 }
