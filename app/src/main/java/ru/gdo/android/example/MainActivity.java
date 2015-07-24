@@ -20,6 +20,7 @@ import java.util.List;
 
 import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
 import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
+import ru.gdo.android.example.horizontalsliding.HorizontalSlidingLayoutActivity;
 
 /**
  * @author Danil Gudkov <d_n_l@mail.ru>
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         objects.add(new ContentItem("Horizontal folding layout",
                 "A simple demonstration of the horizontal folding layout.",
                 FoldingHorizontalLayoutActivity.class));
+        objects.add(new ContentItem("Horizontal sliding layout",
+                "A simple demonstration of the horizontal sliding layout.",
+                HorizontalSlidingLayoutActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

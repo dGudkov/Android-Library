@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SlidingLayoutStyles">
+        <attr name="duration" format="integer" />
+        <attr name="expandedPercentSize" format="float" />
+        <attr name="enableCollapseAllPanel" format="boolean" />
+    </declare-styleable>
+
+</resources>
