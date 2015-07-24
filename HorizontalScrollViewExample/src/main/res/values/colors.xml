@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="clr_white">#FFFFFF</color>
+    <color name="clr_black">#000000</color>
+
+    <color name="clr_alphabet_text_color">#0013ff</color>
+    <color name="clr_alphabet_background_text_color">#FFFFFF</color>
+    <color name="clr_alphabet_selected_color">#0013ff</color>
+
+    <color name="clr_calendar_text_color">#065b09</color>
+    <color name="clr_calendar_background_text_color">#ffd3eeff</color>
+    <color name="clr_calendar_selected_color">#065b09</color>
+
+    <color name="clr_images_background_color">#ffd3eeff</color>
+    <color name="clr_images_selected_color">#fff20010</color>
+
+    <color name="clr_collage_background_color">#ffd3eeff</color>
+    <color name="clr_collage_selected_color">#fff28b00</color>
+
+</resources>
