@@ -13,10 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gdo.android.example.foldinghorizontallayout.FoldingHorizontalLayoutActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.gdo.android.example.foldingverticallayout.FoldingVerticaLayoutActivity;
+import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
 import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
 
 /**
@@ -38,8 +40,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 "A simple demonstration of the horizontal scroll view.",
                 HorizontalScrollViewActivity.class));
         objects.add(new ContentItem("Vertical folding layout",
-                "A simple demonstration of the Vertical folding layout.",
-                FoldingVerticaLayoutActivity.class));
+                "A simple demonstration of the vertical folding layout.",
+                FoldingVerticalLayoutActivity.class));
+        objects.add(new ContentItem("Horizontal folding layout",
+                "A simple demonstration of the horizontal folding layout.",
+                FoldingHorizontalLayoutActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

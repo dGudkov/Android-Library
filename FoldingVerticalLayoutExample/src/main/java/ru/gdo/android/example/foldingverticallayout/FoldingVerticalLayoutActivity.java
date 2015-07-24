@@ -9,11 +9,11 @@ import android.os.Bundle;
  * @since 23.07.15.
  */
 
-public class FoldingVerticaLayoutActivity extends Activity {
+public class FoldingVerticalLayoutActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.foldingverticalayoutactivity);
+        setContentView(R.layout.foldingverticallayoutactivity);
     }
 }
