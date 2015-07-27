@@ -1,1 +1,1 @@
-include ':app', ':HorizontalScrollViewLibrary', ':HorizontalScrollViewExample', ':FoldingLayoutLibrary', ':FoldingVerticalLayoutExample', ':FoldingHorizontalLayoutExample', ':SlidingLayoutLibrary', ':HorizontalSlidingExample'
+include ':app', ':HorizontalScrollViewLibrary', ':HorizontalScrollViewExample', ':FoldingLayoutLibrary', ':FoldingVerticalLayoutExample', ':FoldingHorizontalLayoutExample', ':SlidingLayoutLibrary', ':HorizontalSlidingExample', ':VerticalSlidingExample'

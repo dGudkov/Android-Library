@@ -1,9 +1,9 @@
 package ru.gdo.android.example;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,7 @@ import java.util.List;
 import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
 import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
 import ru.gdo.android.example.horizontalsliding.HorizontalSlidingLayoutActivity;
+import ru.gdo.android.example.verticalsliding.VerticalSlidingLayoutActivity;
 
 /**
  * @author Danil Gudkov <d_n_l@mail.ru>
@@ -28,7 +29,7 @@ import ru.gdo.android.example.horizontalsliding.HorizontalSlidingLayoutActivity;
  * @since 23.07.15.
  */
 
-public class MainActivity extends AppCompatActivity implements OnItemClickListener  {
+public class MainActivity extends Activity implements OnItemClickListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         objects.add(new ContentItem("Horizontal folding layout",
                 "A simple demonstration of the horizontal folding layout.",
                 FoldingHorizontalLayoutActivity.class));
+        objects.add(new ContentItem("Vertical sliding layout",
+                "A simple demonstration of the vertical sliding layout.",
+                VerticalSlidingLayoutActivity.class));
         objects.add(new ContentItem("Horizontal sliding layout",
                 "A simple demonstration of the horizontal sliding layout.",
                 HorizontalSlidingLayoutActivity.class));
