@@ -21,6 +21,7 @@ import java.util.List;
 import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
 import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
 import ru.gdo.android.example.horizontalsliding.HorizontalSlidingLayoutActivity;
+import ru.gdo.android.example.infiniteviewpager.InfiniteViewPagerActivity;
 import ru.gdo.android.example.verticalsliding.VerticalSlidingLayoutActivity;
 
 /**
@@ -53,6 +54,9 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("Horizontal sliding layout",
                 "A simple demonstration of the horizontal sliding layout.",
                 HorizontalSlidingLayoutActivity.class));
+        objects.add(new ContentItem("???????",
+                "A simple demonstration of the horizontal sliding layout.",
+                InfiniteViewPagerActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

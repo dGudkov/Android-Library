@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.gdo.android.example.infiniteviewpager" >
+
+    <application android:allowBackup="true" android:label="@string/app_name">
+        <activity android:name=".InfiniteViewPagerActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>
