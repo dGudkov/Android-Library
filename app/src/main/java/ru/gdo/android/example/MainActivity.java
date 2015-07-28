@@ -54,8 +54,8 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("Horizontal sliding layout",
                 "A simple demonstration of the horizontal sliding layout.",
                 HorizontalSlidingLayoutActivity.class));
-        objects.add(new ContentItem("???????",
-                "A simple demonstration of the horizontal sliding layout.",
+        objects.add(new ContentItem("Infinite view pager",
+                "A simple demonstration of the infinite view pager.",
                 InfiniteViewPagerActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
