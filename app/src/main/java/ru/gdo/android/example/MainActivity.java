@@ -18,6 +18,7 @@ import com.gdo.android.example.foldinghorizontallayout.FoldingHorizontalLayoutAc
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.gdo.andriod.example.pagecurl.PageCurlActivity;
 import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
 import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
 import ru.gdo.android.example.horizontalsliding.HorizontalSlidingLayoutActivity;
@@ -57,6 +58,9 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("Infinite view pager",
                 "A simple demonstration of the infinite view pager.",
                 InfiniteViewPagerActivity.class));
+        objects.add(new ContentItem("Page curl",
+                "A simple demonstration of the page curl.",
+                PageCurlActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

@@ -34,4 +34,5 @@ dependencies {
     compile project(':HorizontalSlidingExample')
     compile project(':VerticalSlidingExample')
     compile project(':InfiniteViewPagerExample')
+    compile project(':PageCurlExample')
 }
