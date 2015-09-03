@@ -92,16 +92,20 @@ public class InfinitePagerAdapter<T extends IInfiniteViewPagerModel> extends Pag
             if (this.mAssignOnShift == AssignOnShift.BY_INDEX) {
                 leftPage.shift(shift);
                 middlePage.shift(shift);
-//                this.mViewPager.setCurrentItem(PAGE_MIDDLE, false);
+                this.mViewPager.setCurrentItem(PAGE_MIDDLE, false);
                 rightPage.shift(shift);
             } else {
-                leftPage.shift(middlePage, shift);
-                middlePage.shift(rightPage, shift);
-//                this.mViewPager.setCurrentItem(PAGE_MIDDLE, false);
-                rightPage.shift(null, shift);
-            }
-            this.setContent();
-            this.mViewPager.setCurrentItem(PAGE_MIDDLE, false);
+                if (shift > 0) {
+                    leftPage.shift(middlePage, shift);
+                    middlePage.shift(rightPage, shift);
+                    this.mViewPager.setCurrentItem(PAGE_MIDDLE, false);
+                    rightPage.shift(null, shift);
+                } else {
+                    rightPage.shift(middlePage, shift);
+                    middlePage.shift(leftPage, shift);
+                    this.mViewPager.setCurrentItem(PAGE_MIDDLE, false);
+                    leftPage.shift(null, shift);
+                }            }
         }
     }
 

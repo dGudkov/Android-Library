@@ -68,7 +68,6 @@ public class Data_Calendar implements IInfiniteViewPagerModel {
     public void shift(int dayShift) {
         this.mDate.add(Calendar.DAY_OF_MONTH, dayShift);
         this.setTextDate();
-
     }
 
     @Override
@@ -79,7 +78,7 @@ public class Data_Calendar implements IInfiniteViewPagerModel {
         } else {
             this.shift(shift);
         }
-//        setContent();
+        setContent();
     }
 
     @Override
