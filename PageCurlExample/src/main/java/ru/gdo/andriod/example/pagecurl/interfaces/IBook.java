@@ -1,4 +1,4 @@
-package ru.gdo.andriod.example.pagecurl.view;
+package ru.gdo.andriod.example.pagecurl.interfaces;
 
 
 import android.view.View;
