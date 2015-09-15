@@ -18,7 +18,9 @@ public class MessageHandler extends Handler {
     public static final int POST_LEFT_MODEL = 3;
     public static final int POST_MIDDLE_MODEL = 4;
     public static final int POST_RIGHT_MODEL = 5;
-    public static final int POST_INDEX = 6;
+    public static final int POST_PREPARE_MODEL = 6;
+    public static final int POST_FILL_MODEL = 7;
+    public static final int POST_INDEX = 8;
 
     private IHandlerSetData recepient;
 

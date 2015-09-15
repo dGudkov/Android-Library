@@ -11,13 +11,20 @@ import android.view.View;
 
 public interface IModel {
 
-    View getView(int position, Context context);
+    View getView(Context context);
 
-    boolean executeRequest(Thread thread);
+    View getView();
 
-    void setIndex(int index);
+    void setView(View mView);
+
+    boolean executeRequest(Thread thread, int index);
 
     void fillContent();
 
-    void setValue(int value);
+    void prepareContent();
+
+    int getIndex();
+
+    void assingModel(IModel iModel);
+
 }

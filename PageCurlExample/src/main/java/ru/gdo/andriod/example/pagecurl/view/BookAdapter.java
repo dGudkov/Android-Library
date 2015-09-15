@@ -69,12 +69,12 @@ public class BookAdapter implements IAdapter {
 		return viewList[position];
 	}
 
-	@Override
-	public void updateView(int shift) {
-		if (shift != 0) {
-			pageIndex += shift;
-		}
-	}
+//	@Override
+//	public void updateView(int shift) {
+//		if (shift != 0) {
+//			pageIndex += shift;
+//		}
+//	}
 
 	@Override
 	public void refreshHistoricallyData(int shift) {

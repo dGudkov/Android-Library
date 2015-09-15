@@ -1,9 +1,9 @@
 package ru.gdo.andriod.example.pagecurl.model;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import ru.gdo.andriod.example.pagecurl.R;
@@ -16,33 +16,54 @@ import ru.gdo.andriod.example.pagecurl.R;
 
 public class SimpleModel implements IModel {
 
-    private int value;
+    private SimpleDataWrapper dataWrapper;
     private int index;
-    private TextView textView;
+    private View mView;
+    private RelativeLayout mContent;
+    private RelativeLayout mContentOverlay;
+    private TextView mTextView;
 
-    public SimpleModel(int index, int value) {
+
+    public SimpleModel(int index, Context context, DataWrapper dataWrapper) {
         this.index = index;
-        this.value = value;
+        this.dataWrapper = (SimpleDataWrapper) dataWrapper;
+        this.getView(context);
     }
 
     @Override
-    public View getView(int index, Context context) {
-        if (this.textView == null) {
-            this.textView = new TextView(context);
-//			textView.setText(repeat(String.valueOf(pageIndex + position) + "_", 20));
-//			strList.get(position)
-            this.textView.setTextColor(Color.BLACK);
-            this.textView.setBackgroundColor(Color.WHITE);
-            this.textView.setBackgroundResource(R.drawable.ly);
-            this.textView.setPadding(10, 10, 10, 10);
-            this.textView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT));
+    public View getView(Context context) {
+        if (this.mView == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            this.mView = inflater.inflate(R.layout.simplemodel_layout, null);
+
+            this.mContent = (RelativeLayout) this.mView.findViewById(R.id.content);
+            this.mContentOverlay = (RelativeLayout) this.mView.findViewById(R.id.contentOverlay);
+
+            this.mTextView = (TextView) this.mContent.findViewById(R.id.textView);
+
+            if (this.mContent != null)
+                this.mContent.setVisibility(View.INVISIBLE);
+            if (this.mContentOverlay != null)
+                this.mContentOverlay.setVisibility(View.VISIBLE);
         }
-        this.textView.setText(repeat(String.valueOf(index + value) + "_", 20));
-        return this.textView;
+
+        return this.mView;
     }
 
     @Override
-    public boolean executeRequest(Thread thread) {
+    public View getView() {
+        return this.mView;
+    }
+
+    @Override
+    public void setView(View view) {
+        this.mView = view;
+
+    }
+
+    @Override
+    public boolean executeRequest(Thread thread, int index) {
+        this.index = index;
         return !Thread.currentThread().isInterrupted();
     }
 
@@ -51,18 +72,38 @@ public class SimpleModel implements IModel {
     }
 
     @Override
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    @Override
     public void fillContent() {
-        this.textView.setText(repeat(String.valueOf(index + value) + "_", 20));
+        if (this.mContent != null)
+            this.mContent.setVisibility(View.VISIBLE);
+
+        if (this.mContentOverlay != null)
+            this.mContentOverlay.setVisibility(View.INVISIBLE);
+
+        this.mTextView.setText(repeat(String.valueOf(index + this.dataWrapper.getValue()) + "_", 20));
     }
 
     @Override
-    public void setValue(int value) {
-        this.value = value;
+    public void prepareContent() {
+        if (this.mContent != null)
+            this.mContent.setVisibility(View.INVISIBLE);
+
+        if (this.mContentOverlay != null)
+            this.mContentOverlay.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public int getIndex() {
+        return this.index;
+    }
+
+    @Override
+    public void assingModel(IModel iModel) {
+//        this.index = iModel.getIndex();
+//        View view = iModel.getView();
+//        iModel.setView(this.mView);
+//        this.mView = view;
+        this.fillContent();
     }
 
 }

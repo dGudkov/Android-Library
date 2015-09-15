@@ -7,6 +7,7 @@ import ru.gdo.andriod.example.pagecurl.handler.MessageHandler;
 import ru.gdo.andriod.example.pagecurl.interfaces.IAdapter;
 import ru.gdo.andriod.example.pagecurl.interfaces.IHandlerSetData;
 import ru.gdo.andriod.example.pagecurl.model.IModel;
+import ru.gdo.andriod.example.pagecurl.model.SimpleDataWrapper;
 import ru.gdo.andriod.example.pagecurl.model.SimpleModel;
 
 /**
@@ -19,12 +20,12 @@ public class ModelController implements IAdapter, IHandlerSetData {
 
     private static int MODEL_COUNT = 4;
     private final MessageHandler mHandler;
+    private final SimpleDataWrapper dataWrapper;
 
-    private Context context;
+    private Context mContext;
     private IModel[] mModel;
-    private int modelsCount;
+    private int mModelsCount;
     private int mIndex;
-    private int mValue;
     private Thread thread;
 
     public ModelController() {
@@ -36,19 +37,20 @@ public class ModelController implements IAdapter, IHandlerSetData {
     }
 
     public ModelController(Context context, int modelCount) {
-        this.context = context;
+        this.mContext = context;
         if (modelCount < 3) {
             modelCount = MODEL_COUNT;
         }
         this.mModel = initModel(modelCount);
-        this.modelsCount = this.mModel.length;
+        this.mModelsCount = this.mModel.length;
         if (modelCount == 3) {
             this.mIndex = 1;
         } else {
-            this.mIndex = (this.modelsCount / 2);
+            this.mIndex = (this.mModelsCount / 2);
         }
-        this.mValue = 0;
         this.mHandler = new MessageHandler(this);
+        this.dataWrapper = new SimpleDataWrapper();
+        this.dataWrapper.setValue(0);
     }
 
     @Override
@@ -73,61 +75,74 @@ public class ModelController implements IAdapter, IHandlerSetData {
             public void run() {
                 mHandler.sendMessage(MessageHandler.PRE_EXECUTE, null);
                 if (shift > 0) {
+
                     int index = getIndex() + 1;
-//                    HistoryData.HebrewDate hebrewDate = historyData.getHebrewDates(index);
-//                    if (executeRequest(hebrewDate)) {
-//                        if (!Thread.currentThread().isInterrupted()) {
-//                            mHandler.sendMessage(MessageHandler.POST_RIGHT_MODEL, hebrewDate);
-//                        }
-//                    }
-//                    for (int i = index + 1; i < 9; i++) {
-//                        hebrewDate = historyData.getHebrewDates(i);
-//                        executeRequest(hebrewDate);
-//                    }
+                    IModel model = getModelByIndex(index);
+                    if (model.executeRequest(Thread.currentThread(), index)) {
+                        if (!Thread.currentThread().isInterrupted()) {
+                            mHandler.sendMessage(MessageHandler.POST_RIGHT_MODEL, null);
+                        }
+                    }
+                    for (int i = index + 1; i < ModelController.this.mModelsCount; i++) {
+                        model = getModelByIndex(i);
+                        model.executeRequest(Thread.currentThread(), i);
+                        if (!Thread.currentThread().isInterrupted()) {
+                            mHandler.sendMessage(MessageHandler.POST_FILL_MODEL, model);
+                        }
+                    }
                 } else if (shift == 0) {
                     int index = getIndex();
 
                     IModel model = getModelByIndex(index);
-                    if (model.executeRequest(Thread.currentThread())) {
+                    if (model.executeRequest(Thread.currentThread(), index)) {
                         if (!Thread.currentThread().isInterrupted()) {
-                            mHandler.sendMessage(MessageHandler.POST_MIDDLE_MODEL, mValue);
+                            mHandler.sendMessage(MessageHandler.POST_MIDDLE_MODEL, null);
                         }
                     }
 
                     model = getModelByIndex(index - 1);
-                    if (model.executeRequest(Thread.currentThread())) {
+                    if (model.executeRequest(Thread.currentThread(), index - 1)) {
                         if (!Thread.currentThread().isInterrupted()) {
-                            mHandler.sendMessage(MessageHandler.POST_LEFT_MODEL, mValue - 1);
+                            mHandler.sendMessage(MessageHandler.POST_LEFT_MODEL, null);
                         }
                     }
 
                     model = getModelByIndex(index + 1);
-                    if (model.executeRequest(Thread.currentThread())) {
+                    if (model.executeRequest(Thread.currentThread(), index + 1)) {
                         if (!Thread.currentThread().isInterrupted()) {
-                            mHandler.sendMessage(MessageHandler.POST_RIGHT_MODEL, mValue + 1);
+                            mHandler.sendMessage(MessageHandler.POST_RIGHT_MODEL, null);
                         }
                     }
 
-                    for (int i = 0; i < index - 1; i++) {
+                    for (int i = index - 2; i >= 0; i--) {
                         model = getModelByIndex(i);
-                        model.executeRequest(Thread.currentThread());
+                        model.executeRequest(Thread.currentThread(), i);
+                        if (!Thread.currentThread().isInterrupted()) {
+                            mHandler.sendMessage(MessageHandler.POST_FILL_MODEL, model);
+                        }
                     }
-                    for (int i = index + 2; i < modelsCount ; i++) {
+                    for (int i = index + 2; i < mModelsCount; i++) {
                         model = getModelByIndex(i);
-                        model.executeRequest(Thread.currentThread());
+                        model.executeRequest(Thread.currentThread(), i);
+                        if (!Thread.currentThread().isInterrupted()) {
+                            mHandler.sendMessage(MessageHandler.POST_FILL_MODEL, model);
+                        }
                     }
                 } else {
-//                    int index = historyData.getDayIndex() - 1;
-//                    HistoryData.HebrewDate hebrewDate = historyData.getHebrewDates(index);
-//                    if (executeRequest(hebrewDate)) {
-//                        if (!Thread.currentThread().isInterrupted()) {
-//                            mHandler.sendMessage(MessageHandler.POST_LEFT_MODEL, hebrewDate);
-//                        }
-//                    }
-//                    for (int i = 0; i < index; i++) {
-//                        hebrewDate = historyData.getHebrewDates(i);
-//                        executeRequest(hebrewDate);
-//                    }
+                    int index = getIndex() - 1;
+                    IModel model = getModelByIndex(index);
+                    if (model.executeRequest(Thread.currentThread(), index)) {
+                        if (!Thread.currentThread().isInterrupted()) {
+                            mHandler.sendMessage(MessageHandler.POST_LEFT_MODEL, null);
+                        }
+                    }
+                    for (int i = index - 1; i >= 0; i--) {
+                        model = getModelByIndex(i);
+                        model.executeRequest(Thread.currentThread(), i);
+                        if (!Thread.currentThread().isInterrupted()) {
+                            mHandler.sendMessage(MessageHandler.POST_FILL_MODEL, model);
+                        }
+                    }
                 }
                 if (!Thread.currentThread().isInterrupted()) {
                     mHandler.sendMessage(MessageHandler.POST_EXECUTE, null);
@@ -155,53 +170,46 @@ public class ModelController implements IAdapter, IHandlerSetData {
 
         boolean updated = (
                 (this.mModel[1] == null) ||
-                        (this.mModel[this.modelsCount - 2] == null) ||
+                        (this.mModel[this.mModelsCount - 2] == null) ||
                         (this.mIndex < 1) ||
-                        (this.mIndex > (this.modelsCount - 2))
+                        (this.mIndex > (this.mModelsCount - 2))
         );
-
 
         if (updated) {
             if (shift > 0) {
-                this.mValue += (this.modelsCount - 2);
-                this.mModel[0] = assingModel(this.modelsCount - 2, 0, this.mValue);
-                this.mModel[1] = assingModel(this.modelsCount - 1, 1, this.mValue);
-                for (int position = 2; position < this.modelsCount; position++) {
-                    this.mModel[position] = getModel(position, this.mValue);
+                dataWrapper.increment(this.mModelsCount - 2);
+                this.mModel[1].assingModel(this.mModel[this.mModelsCount - 1]);
+                this.mModel[0].assingModel(this.mModel[this.mModelsCount - 2]);
+                for (int position = 2; position < this.mModelsCount; position++) {
+                    mHandler.sendMessage(MessageHandler.POST_PREPARE_MODEL, this.mModel[position]);
+//                    this.mModel[position] = getModel(position);
                 }
                 this.mIndex = 1;
             } else if (shift == 0) {
-                for (int position = 0; position < this.modelsCount; position++) {
-                    this.mModel[position] = getModel(position, this.mValue);
+                for (int position = 0; position < this.mModelsCount; position++) {
+                    this.mModel[position] = getModel(position);
                 }
             } else {
-                this.mValue -= (this.modelsCount - 2);
-                this.mModel[this.modelsCount - 2] = assingModel(0, modelsCount - 2, this.mValue);
-                this.mModel[this.modelsCount - 1] = assingModel(1, modelsCount - 1,  this.mValue);
-                for (int position = 0; position < (this.modelsCount - 2); position++) {
-                    this.mModel[position] = getModel(position, this.mValue);
+                dataWrapper.decrement(this.mModelsCount - 2);
+                this.mModel[this.mModelsCount - 2].assingModel(this.mModel[0]);
+                this.mModel[this.mModelsCount - 1].assingModel(this.mModel[1]);
+                for (int position = this.mModelsCount - 3; position >= 0; position--) {
+                    mHandler.sendMessage(MessageHandler.POST_PREPARE_MODEL, this.mModel[position]);
+//                    this.mModel[position] = getModel(position);
                 }
-                this.mIndex = this.modelsCount - 2;
+                this.mIndex = this.mModelsCount - 2;
             }
         }
 
         return updated;
     }
 
-    private IModel assingModel(int modelIndex, int index, int value) {
-        IModel model = this.mModel[modelIndex];
-        model.setIndex(index);
-        model.setValue(value);
-        model.fillContent();
-        return model;
-    }
-
     protected IModel[] initModel(int modelCount) {
         return new IModel[modelCount];
     }
 
-    protected IModel getModel(int index, int value) {
-        return new SimpleModel(index, value);
+    protected IModel getModel(int index) {
+        return new SimpleModel(index, this.mContext, this.dataWrapper);
     }
 
     public IModel getModelByIndex(int index) {
@@ -215,7 +223,7 @@ public class ModelController implements IAdapter, IHandlerSetData {
     }
 
     public void setContext(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
@@ -225,11 +233,12 @@ public class ModelController implements IAdapter, IHandlerSetData {
 
     @Override
     public View getView(int position) {
-        return this.mModel[position].getView(position, context);
+        return this.mModel[position].getView(this.mContext);
     }
 
     @Override
     public void setHandlerData(int what, Object object) {
+        IModel model;
         switch (what) {
             case MessageHandler.PRE_EXECUTE:
 //                if (this.footerText != null)
@@ -252,8 +261,16 @@ public class ModelController implements IAdapter, IHandlerSetData {
             case MessageHandler.POST_RIGHT_MODEL:
                 this.mModel[this.mIndex+1].fillContent();
                 break;
+            case MessageHandler.POST_PREPARE_MODEL:
+                model = (IModel) object;
+                model.prepareContent();
+                break;
+            case MessageHandler.POST_FILL_MODEL:
+                model = (IModel) object;
+                model.fillContent();
+                break;
             case MessageHandler.POST_INDEX:
-                int dayIndex = (int) object;
+//                int dayIndex = (int) object;
 //                this.getHistoryData().setDayIndex(dayIndex);
 //                this.mCalendarWrapper.setCalendarDate(this.getHistoryData().getHebrewDates(dayIndex).getDate());
 //                this.calendarPageModel[1].fillContent(this.getHistoryData().getHebrewDates(dayIndex));
