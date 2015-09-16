@@ -1,5 +1,7 @@
 package ru.gdo.andriod.example.pagecurl.model;
 
+import android.content.Context;
+
 import java.util.Calendar;
 
 /**
@@ -8,10 +10,13 @@ import java.util.Calendar;
  * @since 16.09.15.
  */
 
-public class CalendarDataWrapper extends DataWrapper<Calendar> {
+public class CalendarDataWrapper extends DataWrapper<Calendar, CalendarModel> {
 
-    public CalendarDataWrapper() {
-        this.mValue = Calendar.getInstance();
+    public CalendarDataWrapper (
+            Context context,
+            int modelCount) throws IllegalAccessException, InstantiationException {
+        super(context, modelCount, CalendarModel.class);
+        this.mValue = Calendar.getInstance();;
     }
 
     @Override

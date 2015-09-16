@@ -14,7 +14,7 @@ import ru.gdo.andriod.example.pagecurl.R;
  * @since 04.09.15.
  */
 
-public class IntegerModel<W extends IntegerDataWrapper> extends IModel<W> {
+public class IntegerModel extends IModel<IntegerDataWrapper> {
 
     private TextView mTextView;
 
@@ -44,11 +44,7 @@ public class IntegerModel<W extends IntegerDataWrapper> extends IModel<W> {
 
     @Override
     public void fillContent() {
-        if (this.mContent != null)
-            this.mContent.setVisibility(View.VISIBLE);
-
-        if (this.mContentOverlay != null)
-            this.mContentOverlay.setVisibility(View.INVISIBLE);
+        super.fillContent();
 
         this.mTextView.setText(repeat(String.valueOf(index + this.dataWrapper.getValue()) + "_", 20));
     }
