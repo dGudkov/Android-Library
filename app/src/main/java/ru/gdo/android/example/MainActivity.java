@@ -18,7 +18,7 @@ import com.gdo.android.example.foldinghorizontallayout.FoldingHorizontalLayoutAc
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.gdo.andriod.example.pagecurl.PageCurlActivity;
+import ru.gdo.android.example.pagecurl.PageCurlActivity;
 import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
 import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
 import ru.gdo.android.example.horizontalsliding.HorizontalSlidingLayoutActivity;

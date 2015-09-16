@@ -10,15 +10,19 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:gravity="center_vertical|center_horizontal">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:textColor="#000000"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:textSize="48sp"
+            android:text="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 
@@ -26,7 +30,7 @@
         android:id="@+id/contentOverlay"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <ProgressBar
             android:id="@+id/progressbar"

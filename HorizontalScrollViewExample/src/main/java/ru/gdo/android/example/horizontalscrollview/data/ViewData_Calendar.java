@@ -9,7 +9,7 @@ import ru.gdo.android.example.horizontalscrollview.R;
 import java.util.Calendar;
 import java.util.Locale;
 
-import ru.gdo.android.library.horizontalscrollview.exception.ScrollViewData;
+import ru.gdo.android.library.horizontalscrollview.data.ScrollViewData;
 
 /**
  * @author Danil Gudkov <d_n_l@mail.ru>
