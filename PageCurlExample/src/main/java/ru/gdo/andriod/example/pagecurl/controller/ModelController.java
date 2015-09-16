@@ -3,12 +3,13 @@ package ru.gdo.andriod.example.pagecurl.controller;
 import android.content.Context;
 import android.view.View;
 
+import java.lang.reflect.Array;
+
 import ru.gdo.andriod.example.pagecurl.handler.MessageHandler;
 import ru.gdo.andriod.example.pagecurl.interfaces.IAdapter;
 import ru.gdo.andriod.example.pagecurl.interfaces.IHandlerSetData;
+import ru.gdo.andriod.example.pagecurl.model.DataWrapper;
 import ru.gdo.andriod.example.pagecurl.model.IModel;
-import ru.gdo.andriod.example.pagecurl.model.SimpleDataWrapper;
-import ru.gdo.andriod.example.pagecurl.model.SimpleModel;
 
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
@@ -16,31 +17,29 @@ import ru.gdo.andriod.example.pagecurl.model.SimpleModel;
  * @since 04.09.15.
  */
 
-public class ModelController implements IAdapter, IHandlerSetData {
+public class ModelController<W extends DataWrapper, M extends IModel<W>> implements IAdapter, IHandlerSetData {
 
-    private static int MODEL_COUNT = 4;
+    private static final int MODEL_COUNT = 4;
     private final MessageHandler mHandler;
-    private final SimpleDataWrapper dataWrapper;
+    private final W dataWrapper;
+    private final Class<M> mTypeClassModel;
 
     private Context mContext;
-    private IModel[] mModel;
+    private M[] mModel;
     private int mModelsCount;
     private int mIndex;
     private Thread thread;
 
-    public ModelController() {
-        this(null, MODEL_COUNT);
-    }
-
-    public ModelController(Context context) {
-        this(context, MODEL_COUNT);
-    }
-
-    public ModelController(Context context, int modelCount) {
+    public ModelController(
+            Context context,
+            int modelCount,
+            Class<W> typeClassWrapper,
+            Class<M> typeClassModel) throws IllegalAccessException, InstantiationException {
         this.mContext = context;
-        if (modelCount < 3) {
+        if (modelCount < MODEL_COUNT) {
             modelCount = MODEL_COUNT;
         }
+        this.mTypeClassModel = typeClassModel;
         this.mModel = initModel(modelCount);
         this.mModelsCount = this.mModel.length;
         if (modelCount == 3) {
@@ -49,15 +48,13 @@ public class ModelController implements IAdapter, IHandlerSetData {
             this.mIndex = (this.mModelsCount / 2);
         }
         this.mHandler = new MessageHandler(this);
-        this.dataWrapper = new SimpleDataWrapper();
-        this.dataWrapper.setValue(0);
+        this.dataWrapper = typeClassWrapper.newInstance();
     }
 
     @Override
     public void refreshHistoricallyData(int shift) {
         if (this.refreshModels(shift)) {
             this.execute(shift);
-            int modelIndex = this.getIndex();
         }
     }
 
@@ -77,7 +74,7 @@ public class ModelController implements IAdapter, IHandlerSetData {
                 if (shift > 0) {
 
                     int index = getIndex() + 1;
-                    IModel model = getModelByIndex(index);
+                    M model = getModelByIndex(index);
                     if (model.executeRequest(Thread.currentThread(), index)) {
                         if (!Thread.currentThread().isInterrupted()) {
                             mHandler.sendMessage(MessageHandler.POST_RIGHT_MODEL, null);
@@ -93,7 +90,7 @@ public class ModelController implements IAdapter, IHandlerSetData {
                 } else if (shift == 0) {
                     int index = getIndex();
 
-                    IModel model = getModelByIndex(index);
+                    M model = getModelByIndex(index);
                     if (model.executeRequest(Thread.currentThread(), index)) {
                         if (!Thread.currentThread().isInterrupted()) {
                             mHandler.sendMessage(MessageHandler.POST_MIDDLE_MODEL, null);
@@ -130,7 +127,7 @@ public class ModelController implements IAdapter, IHandlerSetData {
                     }
                 } else {
                     int index = getIndex() - 1;
-                    IModel model = getModelByIndex(index);
+                    M model = getModelByIndex(index);
                     if (model.executeRequest(Thread.currentThread(), index)) {
                         if (!Thread.currentThread().isInterrupted()) {
                             mHandler.sendMessage(MessageHandler.POST_LEFT_MODEL, null);
@@ -182,12 +179,15 @@ public class ModelController implements IAdapter, IHandlerSetData {
                 this.mModel[0].assingModel(this.mModel[this.mModelsCount - 2]);
                 for (int position = 2; position < this.mModelsCount; position++) {
                     mHandler.sendMessage(MessageHandler.POST_PREPARE_MODEL, this.mModel[position]);
-//                    this.mModel[position] = getModel(position);
                 }
                 this.mIndex = 1;
             } else if (shift == 0) {
                 for (int position = 0; position < this.mModelsCount; position++) {
-                    this.mModel[position] = getModel(position);
+                    try {
+                        this.mModel[position] = getModel(position);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 dataWrapper.decrement(this.mModelsCount - 2);
@@ -195,7 +195,6 @@ public class ModelController implements IAdapter, IHandlerSetData {
                 this.mModel[this.mModelsCount - 1].assingModel(this.mModel[1]);
                 for (int position = this.mModelsCount - 3; position >= 0; position--) {
                     mHandler.sendMessage(MessageHandler.POST_PREPARE_MODEL, this.mModel[position]);
-//                    this.mModel[position] = getModel(position);
                 }
                 this.mIndex = this.mModelsCount - 2;
             }
@@ -204,15 +203,18 @@ public class ModelController implements IAdapter, IHandlerSetData {
         return updated;
     }
 
-    protected IModel[] initModel(int modelCount) {
-        return new IModel[modelCount];
+    @SuppressWarnings("unchecked")
+    protected M[] initModel(int modelCount) {
+        return (M[]) Array.newInstance(mTypeClassModel, modelCount);
     }
 
-    protected IModel getModel(int index) {
-        return new SimpleModel(index, this.mContext, this.dataWrapper);
+    protected M getModel(int index) throws IllegalAccessException, InstantiationException {
+        M model = this.mTypeClassModel.newInstance();
+        model.init(index, this.mContext, this.dataWrapper);
+        return model;
     }
 
-    public IModel getModelByIndex(int index) {
+    public M getModelByIndex(int index) {
 
         return this.mModel[index];
     }
@@ -237,8 +239,9 @@ public class ModelController implements IAdapter, IHandlerSetData {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void setHandlerData(int what, Object object) {
-        IModel model;
+        M model;
         switch (what) {
             case MessageHandler.PRE_EXECUTE:
 //                if (this.footerText != null)
@@ -262,11 +265,11 @@ public class ModelController implements IAdapter, IHandlerSetData {
                 this.mModel[this.mIndex+1].fillContent();
                 break;
             case MessageHandler.POST_PREPARE_MODEL:
-                model = (IModel) object;
+                model = (M) object;
                 model.prepareContent();
                 break;
             case MessageHandler.POST_FILL_MODEL:
-                model = (IModel) object;
+                model = (M) object;
                 model.fillContent();
                 break;
             case MessageHandler.POST_INDEX:

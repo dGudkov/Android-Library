@@ -104,7 +104,7 @@ public class BookLayout extends FrameLayout {
 
     class BookView extends SurfaceView implements SurfaceHolder.Callback {
         DrawThread dt;
-        SurfaceHolder surfaceHolder;
+        final SurfaceHolder surfaceHolder;
         Paint mDarkPaint = new Paint();
         Paint mPaint = new Paint();
         Bitmap tmpBmp = Bitmap.createBitmap(contentWidth, contentHeight, Bitmap.Config.ARGB_8888);
@@ -601,8 +601,6 @@ public class BookLayout extends FrameLayout {
             if (mPageAdapter == null) {
                 throw new RuntimeException("please set the PageAdapter on init");
             }
-//            indexPage = mPageAdapter.getIndex();
-
             // Initialization
             totalPageNum = mPageAdapter.getCount();
             mainLayout = new LinearLayout(mContext);
@@ -629,7 +627,7 @@ public class BookLayout extends FrameLayout {
 
     /**
      * This method has been modified, into a display
-     * @param shift
+     * @param shift -
      */
     public void updatePageView(int shift) {
         Log.d(LOG_TAG, "updatePageView");
@@ -913,7 +911,7 @@ public class BookLayout extends FrameLayout {
         mSelectCorner = Corner.None;
 
         mGestureListener = new BookOnGestureListener();
-        mGestureDetector = new GestureDetector(mGestureListener);
+        mGestureDetector = new GestureDetector(getContext(), mGestureListener);
         mGestureDetector.setIsLongpressEnabled(false);
         aniEndHandle = new Handler();
 

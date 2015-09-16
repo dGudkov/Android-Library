@@ -6,5 +6,20 @@ package ru.gdo.andriod.example.pagecurl.model;
  * @since 14.09.15.
  */
 
-public interface DataWrapper {
+public abstract class DataWrapper<T> {
+
+    protected T mValue;
+
+    public DataWrapper() {
+        this.mValue = null;
+    }
+
+    public T getValue() {
+        return mValue;
+    }
+
+    public abstract void increment(int val);
+
+    public abstract void decrement(int val);
+
 }
