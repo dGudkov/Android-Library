@@ -35,5 +35,5 @@ dependencies {
     compile project(':InfiniteViewPagerExample')
     compile project(':PageCurlExample')
     compile project(':GCMExample')
-    compile project(':Notifications')
+    compile project(':NotificationsExample')
 }
