@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Notifications.Background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingEnd="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingStart="10dp"
+    tools:context="com.progforce.android.chabad.fragments.GCMSenderFragment">
+
+    <View
+        android:id="@+id/id_0"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_alignParentTop="true"/>
+
+    <LinearLayout
+        android:id="@+id/id_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_shadow"
+        android:orientation="vertical"
+        android:layout_below="@id/id_0"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/text_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Message to 'topics/global'"/>
+
+        <Button
+            android:id="@+id/sendbutton_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notification_bg_button"
+            android:text="Send to 'topics/global'"
+            android:textAllCaps="false"
+            android:textColor="#517c87"
+            android:enabled="false" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/id_2"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/id_1" />
+
+    <LinearLayout
+        android:id="@+id/id_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_shadow"
+        android:layout_below="@id/id_2"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/text_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Message to 'topics/local'"/>
+
+        <Button
+            android:id="@+id/sendbutton_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notification_bg_button"
+            android:text="Send to 'topics/local'"
+            android:textAllCaps="false"
+            android:textColor="#517c87"
+            android:enabled="false" />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/id_4"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/id_3" />
+
+    <LinearLayout
+        android:id="@+id/id_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_shadow"
+        android:layout_below="@id/id_4"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/text_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Message to this device only"/>
+
+        <Button
+            android:id="@+id/sendbutton_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notification_bg_button"
+            android:text="Send to this device only"
+            android:textAllCaps="false"
+            android:textColor="#517c87"
+            android:enabled="false" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/id_6"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/id_5" />
+
+    <Button
+        android:id="@+id/sendbutton_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/notification_bg_button"
+        android:text="Send to all"
+        android:textAllCaps="false"
+        android:textColor="#517c87"
+        android:enabled="false"
+        android:layout_below="@id/id_6" />
+
+</RelativeLayout>

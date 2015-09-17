@@ -18,6 +18,7 @@ import com.gdo.android.example.foldinghorizontallayout.FoldingHorizontalLayoutAc
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.gdo.android.example.gcm.GcmActivity;
 import ru.gdo.android.example.pagecurl.PageCurlActivity;
 import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
 import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
@@ -61,6 +62,9 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("Page curl",
                 "A simple demonstration of the page curl.",
                 PageCurlActivity.class));
+        objects.add(new ContentItem("Page Google Cloud Messaging",
+                "A simple demonstration of the Google Cloud Messaging.",
+                GcmActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

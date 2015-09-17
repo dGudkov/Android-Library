@@ -26,7 +26,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:22.2.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':HorizontalScrollViewExample')
     compile project(':FoldingVerticalLayoutExample')
@@ -35,4 +34,5 @@ dependencies {
     compile project(':VerticalSlidingExample')
     compile project(':InfiniteViewPagerExample')
     compile project(':PageCurlExample')
+    compile project(':GCMExample')
 }
