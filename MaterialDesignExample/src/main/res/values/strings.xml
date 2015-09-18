@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Android library example - MaterialDesign</string>
+    <string name="material_design">Material Design</string>
+
+    <!-- ========================================== -->
+    <!-- =                    Menu                = -->
+    <!-- ========================================== -->
+    <string name="menu_open">Menu open</string>
+    <string name="menu_close">Menu close</string>
+
+    <string-array name="menu_title">
+        <item>Today</item>
+        <item>Notifications</item>
+        <item>More Apps</item>
+        <item>Donate</item>
+        <item>About</item>
+        <item>Send test Push Notification</item>
+    </string-array>
+
+
+</resources>

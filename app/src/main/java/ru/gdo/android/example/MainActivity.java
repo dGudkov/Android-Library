@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.gdo.android.example.gcm.GcmActivity;
+import ru.gdo.android.example.materialdesign.MaterialDesignActivity;
 import ru.gdo.android.example.notifications.NotificationActivity;
 import ru.gdo.android.example.pagecurl.PageCurlActivity;
 import ru.gdo.android.example.foldingverticallayout.FoldingVerticalLayoutActivity;
@@ -73,6 +74,9 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("WebView",
                 "A simple demonstration of the WebView.",
                 WebViewActivity.class));
+        objects.add(new ContentItem("Material design",
+                "A simple demonstration of the Material design.",
+                MaterialDesignActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

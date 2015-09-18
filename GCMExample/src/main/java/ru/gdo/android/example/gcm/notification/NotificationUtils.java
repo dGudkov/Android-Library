@@ -50,14 +50,9 @@ public final class NotificationUtils {
 //            RemoteViews expandedView = new RemoteViews(context.getPackageName(),
 //                R.layout.notification_custom_remote);
 
-            Notification notification;
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                notification = builder.build();
-            } else {
-                notification = builder.getNotification();
-            }
+            Notification notification = builder.build();
 //            notification.bigContentView = expandedView;
+
             ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE)).notify(data.getNotificationId(), notification);
         }
 

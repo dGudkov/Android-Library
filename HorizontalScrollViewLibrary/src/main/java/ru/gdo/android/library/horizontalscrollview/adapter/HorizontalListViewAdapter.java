@@ -69,6 +69,7 @@ public class HorizontalListViewAdapter<T extends IScrollViewData>
 		return view;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onClick(View view) {
 		T data = (T) view.getTag();
