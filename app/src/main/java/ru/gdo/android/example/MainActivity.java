@@ -26,6 +26,7 @@ import ru.gdo.android.example.horizontalscrollview.HorizontalScrollViewActivity;
 import ru.gdo.android.example.horizontalsliding.HorizontalSlidingLayoutActivity;
 import ru.gdo.android.example.infiniteviewpager.InfiniteViewPagerActivity;
 import ru.gdo.android.example.verticalsliding.VerticalSlidingLayoutActivity;
+import ru.gdo.android.example.webview.WebViewActivity;
 
 /**
  * @author Danil Gudkov <d_n_l@mail.ru>
@@ -69,6 +70,9 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("Notification",
                 "A simple demonstration of the notifications.",
                 NotificationActivity.class));
+        objects.add(new ContentItem("WebView",
+                "A simple demonstration of the WebView.",
+                WebViewActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

@@ -36,4 +36,5 @@ dependencies {
     compile project(':PageCurlExample')
     compile project(':GCMExample')
     compile project(':NotificationsExample')
+    compile project(':WebViewExample')
 }
