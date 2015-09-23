@@ -12,6 +12,7 @@
         android:id="@+id/titlemenu"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        style="@style/MenuItem.Text" />
+        style="@style/MenuItem.Text"
+        android:textSize="24sp"/>
 
 </RelativeLayout>

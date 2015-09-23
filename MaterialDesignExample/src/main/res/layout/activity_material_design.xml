@@ -28,9 +28,11 @@
                 app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
                 app:theme="@style/Toolbar">
 
-                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <RelativeLayout
                     style="@style/ActionBar.Background"
                     android:layout_width="fill_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
                     android:layout_height="?android:actionBarSize">
 
                     <RelativeLayout
@@ -49,6 +51,10 @@
                             android:background="?android:selectableItemBackground"
                             android:filterTouchesWhenObscured="true"
                             android:src="@drawable/status_bar_menu"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginRight="32dp"
+                            android:layout_marginEnd="32dp"
                             android:contentDescription="Menu"/>
                     </RelativeLayout>
 
@@ -75,7 +81,11 @@
                             android:filterTouchesWhenObscured="true"
                             android:src="@drawable/status_bar_calendar"
                             android:contentDescription="Calendar"
-                            android:visibility="invisible" />
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginStart="32dp"
+                            android:visibility="visible" />
 
                     </RelativeLayout>
 
@@ -101,4 +111,5 @@
         android:layout_gravity="start"
         app:layout="@layout/menu_layout"
         tools:layout="@layout/menu_layout" />
+
 </android.support.v4.widget.DrawerLayout>
