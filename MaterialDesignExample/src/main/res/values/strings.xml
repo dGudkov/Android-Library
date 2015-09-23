@@ -3,6 +3,16 @@
     <string name="material_design">Material Design</string>
 
     <!-- ========================================== -->
+    <!-- =               Action bar               = -->
+    <!-- ========================================== -->
+    <string name="str_actionbar_title">
+        <![CDATA[
+         <i><b>Material Design</b></i>
+        ]]>
+    </string>
+
+
+    <!-- ========================================== -->
     <!-- =                    Menu                = -->
     <!-- ========================================== -->
     <string name="menu_open">Menu open</string>

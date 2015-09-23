@@ -4,8 +4,7 @@
 
     <application android:allowBackup="true" android:label="@string/app_name">
         <activity android:name=".MaterialDesignActivity"
+            android:theme="@style/AppTheme.Toolbar"
             android:screenOrientation="portrait" />
     </application>
-<!--            android:theme="@style/AppTheme.Toolbar"
--->
 </manifest>

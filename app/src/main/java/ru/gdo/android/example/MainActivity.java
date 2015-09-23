@@ -18,6 +18,7 @@ import com.gdo.android.example.foldinghorizontallayout.FoldingHorizontalLayoutAc
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.gdo.android.example.crashapplication.CrashActivity;
 import ru.gdo.android.example.gcm.GcmActivity;
 import ru.gdo.android.example.materialdesign.MaterialDesignActivity;
 import ru.gdo.android.example.notifications.NotificationActivity;
@@ -77,6 +78,9 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("Material design",
                 "A simple demonstration of the Material design.",
                 MaterialDesignActivity.class));
+        objects.add(new ContentItem("Crash application",
+                "A simple demonstration of the сrash application.",
+                CrashActivity.class));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 

@@ -18,4 +18,26 @@ allprojects {
     repositories {
         jcenter()
     }
+
+
+//    dependencies {
+//        //......
+//        compile supportDependencies.appCompat
+//        compile supportDependencies.design
+//    }
+//
+    //    ext {
+    //Version
+//        supportLibrary = '23.0.1'
+
+    //Support Libraries dependencies
+//        supportDependencies = [
+//                appCompat        :    "com.android.support:appcompat-v7:${supportLibrary}",
+//                recyclerView     :    "com.android.support:recyclerview-v7:21.0.0",
+//                design           :    "com.android.support:design:${supportLibrary}",
+//                cardView         :    "com.android.support:cardview-v7:${supportLibrary}",
+//                supportAnnotation:    "com.android.support:support-annotations:${supportLibrary}",
+//        ]
+//    }
+
 }

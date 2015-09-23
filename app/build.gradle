@@ -38,4 +38,5 @@ dependencies {
     compile project(':NotificationsExample')
     compile project(':WebViewExample')
     compile project(':MaterialDesignExample')
+    compile project(':CrashApplicationExample')
 }
