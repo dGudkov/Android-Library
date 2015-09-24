@@ -1,159 +1,160 @@
 package ru.gdo.android.example.webview;
 
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
-import android.widget.ViewAnimator;
 
-import ru.gdo.android.example.webview.R;
+import ru.gdo.android.library.materialdesign.widget.BaseFragment;
+import ru.gdo.android.library.materialdesign.widget.ToolBarFragmentActivity;
 
-public class WebViewActivity extends FragmentActivity {
+public class WebViewActivity extends ToolBarFragmentActivity {
 
-    private static final String CURRENT_VIEW = "view";
-    private static final String CURRENT_LINK = "link";
-
-    private static final int UNINITIALIZED = -1;
-    private static final int BUTTON_VIEW = 0;
-    private static final int WEB_VIEW = 1;
-
-    private ViewAnimator mViewAnimator;
-    private int mCurrentView = UNINITIALIZED;
-    private ProgressBar mProgressBar;
-    private WebView mWebView;
-    private String mLink;
+    public static final int HOME_FRAGMENT = 0;
+    public static final int GOOGLE_FRAGMENT = 1;
+    public static final int YANDEX_FRAGMENT = 2;
+    public static final int BING_FRAGMENT = 3;
+    public static final int YAHOO_FRAGMENT = 4;
+    public static final int HOTBOT_FRAGMENT = 5;
+    public static final int WEB_VIEW_FRAGMENT = 6;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
-
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-
-        this.mViewAnimator = (ViewAnimator) findViewById(R.id.animator);
-        this.mViewAnimator.addView(getButtonView(layoutInflater));
-        this.mViewAnimator.addView(getWebView(layoutInflater));
-
-        int viewId = BUTTON_VIEW;
-
-        if (savedInstanceState != null) {
-            viewId = savedInstanceState.getInt(CURRENT_VIEW);
-            this.mLink = savedInstanceState.getString(CURRENT_LINK);
-        }
-
-        this.setCurrentView(viewId);
-
+    protected int getContentViewId() {
+        return R.layout.activity_web_view;
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(CURRENT_VIEW, this.mCurrentView);
-        outState.putString(CURRENT_LINK, this.mLink);
-        super.onSaveInstanceState(outState);
+    protected int getToolbarId() {
+        return R.id.toolbar;
     }
 
-    private View getButtonView(LayoutInflater layoutInflater) {
-        View view = layoutInflater.inflate(R.layout.buttonview_layout, null, false);
-
-        view.findViewById(R.id.googlebutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebViewActivity.this.mLink = "https://www.google.ru/?#newwindow=1&q=android";
-                setCurrentView(WEB_VIEW);
-            }
-        });
-
-        view.findViewById(R.id.yandexbutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebViewActivity.this.mLink = "http://yandex.ru/search/?text=adnroid";
-                setCurrentView(WEB_VIEW);
-            }
-        });
-
-        view.findViewById(R.id.bingbutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebViewActivity.this.mLink = "http://www.bing.com/search?q=android";
-                setCurrentView(WEB_VIEW);
-            }
-        });
-
-        view.findViewById(R.id.yahoobutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebViewActivity.this.mLink = "https://search.yahoo.com/search;?p=android";
-                setCurrentView(WEB_VIEW);
-            }
-        });
-
-        view.findViewById(R.id.hotbotbutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebViewActivity.this.mLink = "http://www.hotbot.com/search/web?q=android";
-                setCurrentView(WEB_VIEW);
-            }
-        });
-        return view;
+    @Override
+    protected int getMenuLayoutId() {
+        return R.id.status_bar_menu_layout;
     }
 
-    private View getWebView(LayoutInflater layoutInflater) {
-        View view = layoutInflater.inflate(R.layout.webview_layout, null, false);
-
-        this.mProgressBar = (ProgressBar) view.findViewById(R.id.progressbar);
-
-        this.mWebView = (WebView) view.findViewById(R.id.webView);
-        this.mWebView.getSettings().setJavaScriptEnabled(true);
-        this.mWebView.setWebViewClient(new WebViewClient() {
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                WebViewActivity.this.mProgressBar.setVisibility(View.VISIBLE);
-                WebViewActivity.this.mWebView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                WebViewActivity.this.mProgressBar.setVisibility(View.GONE);
-                WebViewActivity.this.mWebView.setVisibility(View.VISIBLE);
-            }
-        });
-        return view;
+    @Override
+    protected int getMenuId() {
+        return R.id.status_bar_menu;
     }
 
-    private void setCurrentView(int currentView) {
-        if (this.mCurrentView != currentView) {
-            switch (currentView) {
-                case BUTTON_VIEW:
-                    this.mViewAnimator.setDisplayedChild(BUTTON_VIEW);
-                    this.mCurrentView = currentView;
-                    break;
-                case WEB_VIEW:
-                    this.mViewAnimator.setDisplayedChild(WEB_VIEW);
-                    if (this.mLink != null) {
-                        this.mWebView.loadUrl(this.mLink);
-                    }
-                    this.mCurrentView = currentView;
-                    break;
-            }
+    @Override
+    protected int getTitleId() {
+        return R.id.header_title;
+    }
+
+    @Override
+    protected int getNavigationDrawerId() {
+        return R.id.fragment_navigation_drawer;
+    }
+
+    @Override
+    protected int getDrawerLayoutId() {
+        return R.id.drawer_layout;
+    }
+
+    @Override
+    protected int getContainerId() {
+        return R.id.container_body;
+    }
+
+    @Override
+    protected boolean isMainFragment() {
+        return (mContent instanceof HomeFragment);
+    }
+
+    @Override
+    protected int getHomeFragmentId() {
+        return HOME_FRAGMENT;
+    }
+
+    @Override
+    protected Class<MenuTextItem> getMenuItenClass() {
+        return MenuTextItem.class;
+    }
+
+    @Override
+    protected BaseFragment getFragment(int position) {
+        BaseFragment fragment = null;
+        switch (position) {
+            case HOME_FRAGMENT:
+                fragment = BaseFragment.newInstance(HomeFragment.class, this, this.mToolBar, this);
+                break;
+            case GOOGLE_FRAGMENT:
+                fragment = WebViewFragment.newInstance(
+                        this,
+                        this.mToolBar,
+                        this,
+                        R.string.str_google_fragment_title,
+                        "https://www.google.com/?#newwindow=1&q=android");
+                break;
+            case YANDEX_FRAGMENT:
+                fragment = WebViewFragment.newInstance(
+                        this,
+                        this.mToolBar,
+                        this,
+                        R.string.str_yandex_fragment_title,
+                        "http://yandex.ru/search/?text=adnroid");
+                break;
+            case BING_FRAGMENT:
+                fragment = WebViewFragment.newInstance(
+                        this,
+                        this.mToolBar,
+                        this,
+                        R.string.str_bing_fragment_title,
+                        "http://www.bing.com/search?q=android"
+                );
+                break;
+            case YAHOO_FRAGMENT:
+                fragment = WebViewFragment.newInstance(
+                        this,
+                        this.mToolBar,
+                        this,
+                        R.string.str_yahoo_fragment_title,
+                        "https://search.yahoo.com/search;?p=android"
+                );
+                break;
+            case HOTBOT_FRAGMENT:
+                fragment = WebViewFragment.newInstance(
+                        this,
+                        this.mToolBar,
+                        this,
+                        R.string.str_hotbot_fragment_title,
+                        "http://www.hotbot.com/search/web?q=android"
+                );
+                break;
+            case WEB_VIEW_FRAGMENT:
+                fragment = WebViewFragment.newInstance(
+                        this,
+                        this.mToolBar,
+                        this,
+                        R.string.str_webview_fragment_title,
+                        null
+                );
+                break;
         }
+        return fragment;
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) { // если нажата кнопка "Назад"
-            if (this.mCurrentView == WEB_VIEW) {
-                setCurrentView(BUTTON_VIEW);
-                return false;
-            }
+    protected void displayView(int fragmentId, String url) {
+        BaseFragment fragment = getFragment(fragmentId);
+        if (fragment instanceof WebViewFragment) {
+            ((WebViewFragment)fragment).setUrl(url);
         }
-        return super.onKeyDown(keyCode, event);
+        this.switchView(fragment);
+    }
+
+    @Override
+    public void onToolBarClick(View v) {
+        if ((v.getId() == R.id.status_bar_webview_layout) || (v.getId() == R.id.status_bar_webview)) {
+            if (mContent instanceof  WebViewFragment) {
+                WebViewFragment webViewFragment = (WebViewFragment) mContent;
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(webViewFragment.getUrl()));
+                startActivity(intent);
+            }
+        } else {
+            super.onToolBarClick(v);
+        }
     }
 
 }

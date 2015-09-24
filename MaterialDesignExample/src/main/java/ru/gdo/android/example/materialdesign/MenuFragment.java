@@ -10,15 +10,15 @@ import ru.gdo.android.library.materialdesign.widget.BaseMenuFragment;
  * @since 23.09.15.
  */
 
-public class MenuFragment extends BaseMenuFragment<MenuItem> {
+public class MenuFragment extends BaseMenuFragment<MenuTextItem> {
 
     @Override
-    public ArrayList<MenuItem> getMenItems() {
-        ArrayList<MenuItem> objects = super.getMenItems();
+    public ArrayList<MenuTextItem> getMenItems() {
+        ArrayList<MenuTextItem> objects = super.getMenItems();
 
-        objects.add(new MenuItem("Home"));
-        objects.add(new MenuItem("Friends"));
-        objects.add(new MenuItem("Messages"));
+        objects.add(new MenuTextItem("Home"));
+        objects.add(new MenuTextItem("Friends"));
+        objects.add(new MenuTextItem("Messages"));
 
         return objects;
     }

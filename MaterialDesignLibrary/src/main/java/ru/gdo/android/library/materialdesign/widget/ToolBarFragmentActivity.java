@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import ru.gdo.android.library.materialdesign.exception.ToolBarActivityException;
 import ru.gdo.android.library.materialdesign.interfaces.IMenuItem;
-import ru.gdo.android.library.materialdesign.interfaces.IOnToolBarClickListener;
+import ru.gdo.android.library.materialdesign.interfaces.IToolBarInterface;
 
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
@@ -25,7 +25,7 @@ public abstract class ToolBarFragmentActivity<I extends IMenuItem> extends AppCo
         implements
         View.OnClickListener,
         BaseMenuFragment.FragmentDrawerListener,
-        IOnToolBarClickListener {
+        IToolBarInterface {
 
     protected Toolbar mToolBar;
     protected TextView mTitle;
@@ -80,7 +80,7 @@ public abstract class ToolBarFragmentActivity<I extends IMenuItem> extends AppCo
                     BaseFragment baseFragment = (BaseFragment) fragment;
                     baseFragment.init(this, this.mToolBar, this);
                     this.mContent = baseFragment;
-                    this.mTitle.setText(Html.fromHtml(baseFragment.getTitleText()));
+//                    this.mTitle.setText(Html.fromHtml(baseFragment.getTitleText()));
                 }
             }
         } else {
@@ -118,9 +118,11 @@ public abstract class ToolBarFragmentActivity<I extends IMenuItem> extends AppCo
     }
 
     protected void displayView(int position) {
-        BaseFragment fragment = getFragment(position);
+        switchView(getFragment(position));
+    }
+
+    protected void switchView(BaseFragment fragment) {
         if (fragment != null) {
-            this.mTitle.setText(Html.fromHtml(fragment.getTitleText()));
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(getContainerId(), fragment, "mContent")
@@ -132,6 +134,13 @@ public abstract class ToolBarFragmentActivity<I extends IMenuItem> extends AppCo
     @Override
     public void onToolBarClick(View v) {
         Toast.makeText(this, "ToolBar component clicked.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setToolBarTitle(String title) {
+        if (title != null) {
+            this.mTitle.setText(Html.fromHtml(title));
+        }
     }
 
     protected abstract int getContentViewId();

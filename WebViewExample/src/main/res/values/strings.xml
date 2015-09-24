@@ -1,3 +1,51 @@
 <resources>
     <string name="app_name">Android library example - WebView</string>
+
+    <string name="str_web_view">WebView</string>
+
+    <!-- ========================================== -->
+    <!-- =                  Fragments             = -->
+    <!-- ========================================== -->
+    <string name="str_home_fragment_title">
+        <![CDATA[
+          <i><b>Home</b></i>
+        ]]>
+    </string>
+
+    <string name="str_google_fragment_title">
+        <![CDATA[
+          <i><b>Google</b></i>
+        ]]>
+    </string>
+
+    <string name="str_yandex_fragment_title">
+        <![CDATA[
+          <i><b>Yandex</b></i>
+        ]]>
+    </string>
+
+    <string name="str_bing_fragment_title">
+        <![CDATA[
+          <i><b>Bing</b></i>
+        ]]>
+    </string>
+
+    <string name="str_yahoo_fragment_title">
+        <![CDATA[
+          <i><b>Yahoo</b></i>
+        ]]>
+    </string>
+
+    <string name="str_hotbot_fragment_title">
+        <![CDATA[
+          <i><b>HotBot</b></i>
+        ]]>
+    </string>
+
+    <string name="str_webview_fragment_title">
+        <![CDATA[
+          <i><b>Webview</b></i>
+        ]]>
+    </string>
+
 </resources>

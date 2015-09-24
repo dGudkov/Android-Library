@@ -1,11 +1,10 @@
-package ru.gdo.android.example.materialdesign.fragments;
+package ru.gdo.android.example.webview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ru.gdo.android.example.materialdesign.R;
 import ru.gdo.android.library.materialdesign.widget.BaseFragment;
 
 /**
@@ -14,11 +13,11 @@ import ru.gdo.android.library.materialdesign.widget.BaseFragment;
  * @since 23.09.15.
  */
 
-public class MessagesFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment {
 
-    public MessagesFragment() {
-        this.mLayoutId = R.layout.fragment_messages;
-        this.mTitleTextId = R.string.str_messages_fragment_title;
+    public HomeFragment() {
+        this.mLayoutId = R.layout.fragment_home;
+        this.mTitleTextId = R.string.str_home_fragment_title;
     }
 
     @Override
@@ -26,8 +25,8 @@ public class MessagesFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
-        this.mToolBar.findViewById(R.id.status_bar_calendar_layout).setVisibility(View.VISIBLE);
-        this.mToolBar.findViewById(R.id.status_bar_calendar).setVisibility(View.VISIBLE);
+        this.mToolBar.findViewById(R.id.status_bar_webview_layout).setVisibility(View.INVISIBLE);
+        this.mToolBar.findViewById(R.id.status_bar_webview).setVisibility(View.INVISIBLE);
 
         return rootView;
     }

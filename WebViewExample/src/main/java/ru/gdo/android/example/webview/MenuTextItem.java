@@ -1,11 +1,10 @@
-package ru.gdo.android.example.materialdesign;
+package ru.gdo.android.example.webview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import ru.gdo.android.example.materialdesign.R;
 import ru.gdo.android.library.materialdesign.interfaces.IMenuItem;
 
 /**
@@ -14,11 +13,11 @@ import ru.gdo.android.library.materialdesign.interfaces.IMenuItem;
  * @since 05.08.15.
  */
 
-public class MenuItem implements IMenuItem {
+public class MenuTextItem implements IMenuItem {
 
     private String title;
 
-    public MenuItem(String title) {
+    public MenuTextItem(String title) {
         this.title = title;
     }
 

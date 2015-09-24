@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.gdo.android.library.materialdesign.exception.ToolBarActivityException;
-import ru.gdo.android.library.materialdesign.interfaces.IOnToolBarClickListener;
+import ru.gdo.android.library.materialdesign.interfaces.IToolBarInterface;
 
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
@@ -19,19 +19,23 @@ import ru.gdo.android.library.materialdesign.interfaces.IOnToolBarClickListener;
 
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
+    protected final String TITLE_ID = "titleId";
+
+    protected int mLayoutId = -1;
     protected Context mContext;
-    protected String mTitleText;
+    protected int mTitleTextId = -1;
     protected Toolbar mToolBar;
-    protected IOnToolBarClickListener mOnToolBarClickListener;
+    protected IToolBarInterface mToolBarInterface;
 
     public BaseFragment() {
-        // Required empty public constructor
+        this.mLayoutId = -1;
+        this.mTitleTextId = -1;
     }
 
     public static BaseFragment newInstance(Class<? extends BaseFragment> clazz,
                                            Context context,
                                            Toolbar toolBar,
-                                           IOnToolBarClickListener onToolBarClickListener) throws ToolBarActivityException {
+                                           IToolBarInterface onToolBarClickListener) throws ToolBarActivityException {
         try {
             BaseFragment fragment = clazz.newInstance();
             fragment.init(context, toolBar, onToolBarClickListener);
@@ -41,38 +45,56 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    public void init(Context context, Toolbar toolBar, IOnToolBarClickListener onToolBarClickListener) {
+    public void init(Context context, Toolbar toolBar, IToolBarInterface onToolBarClickListener) {
         this.setContext(context);
         this.setToolBar(toolBar);
-        this.setOnToolBarClickListener(onToolBarClickListener);
-        this.setTitleText();
+        this.setToolBarInterface(onToolBarClickListener);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        if (this.mLayoutId == -1) {
+            throw new ToolBarActivityException("Invalid layoutId");
+        }
+        View rootView = inflater.inflate(this.mLayoutId, container, false);
+
+        if (savedInstanceState != null) {
+            this.mTitleTextId = savedInstanceState.getInt(TITLE_ID);
+        }
+
+        this.setTitleText();
+
+        return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(TITLE_ID, this.mTitleTextId);
     }
 
     public void setContext(Context context) {
         this.mContext = context;
     }
 
-    public String getTitleText() {
-        return mTitleText;
-    }
-
     public void setToolBar(Toolbar toolBar) {
         this.mToolBar = toolBar;
     }
 
-    public void setOnToolBarClickListener(IOnToolBarClickListener onToolBarClickListener) {
-        this.mOnToolBarClickListener = onToolBarClickListener;
+    public void setToolBarInterface(IToolBarInterface toolBarInterface) {
+        this.mToolBarInterface = toolBarInterface;
     }
 
     protected void onToolBarClick(View view) {
-        if (this.mOnToolBarClickListener != null) {
-            this.mOnToolBarClickListener.onToolBarClick(view);
+        if (this.mToolBarInterface != null) {
+            this.mToolBarInterface.onToolBarClick(view);
+        }
+    }
+
+    protected void setToolBarTitle(String title) {
+        if (this.mToolBarInterface != null) {
+            this.mToolBarInterface.setToolBarTitle(title);
         }
     }
 
@@ -87,6 +109,14 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return false;
     }
 
-    public abstract void setTitleText();
+    protected void setTitleText() {
+        if (this.mTitleTextId != -1) {
+            this.setToolBarTitle(this.mContext.getString(this.mTitleTextId));
+        }
+    }
+
+    public void setTitleTextId(int resourceId) {
+        this.mTitleTextId = resourceId;
+    }
 
 }

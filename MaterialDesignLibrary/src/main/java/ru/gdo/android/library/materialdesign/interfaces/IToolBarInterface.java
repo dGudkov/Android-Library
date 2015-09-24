@@ -8,11 +8,14 @@ import android.view.View;
  * @since 23.09.15.
  */
 
-public interface IOnToolBarClickListener {
+public interface IToolBarInterface {
     /**
      * Called when a view has been clicked.
      *
      * @param v The view that was clicked.
      */
     void onToolBarClick(View v);
+
+    void setToolBarTitle(String title);
+
 }

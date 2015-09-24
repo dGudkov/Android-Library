@@ -16,10 +16,15 @@ import ru.gdo.android.library.materialdesign.widget.BaseFragment;
 
 public class HomeFragment extends BaseFragment {
 
+    public HomeFragment() {
+        this.mLayoutId = R.layout.fragment_home;
+        this.mTitleTextId = R.string.str_home_fragment_title;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
         this.mToolBar.findViewById(R.id.status_bar_calendar_layout).setVisibility(View.INVISIBLE);
         this.mToolBar.findViewById(R.id.status_bar_calendar_layout).setOnClickListener(this);
@@ -27,11 +32,6 @@ public class HomeFragment extends BaseFragment {
         this.mToolBar.findViewById(R.id.status_bar_calendar).setOnClickListener(this);
 
         return rootView;
-    }
-
-    @Override
-    public void setTitleText() {
-        this.mTitleText = this.mContext.getResources().getString(R.string.str_home_fragment_title);
     }
 
     @Override

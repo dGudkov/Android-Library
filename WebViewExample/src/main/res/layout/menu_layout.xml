@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/Menu.Background">
+
+    <RelativeLayout
+        android:id="@+id/menu_account_section"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="16dp"
+        android:background="@color/clr_dark_menu_background" >
+
+        <LinearLayout
+            android:id="@+id/menu_account_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/menu_title"
+                android:text="Author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                style="@style/Menu.Text" />
+
+            <TextView
+                android:id="@+id/feedback"
+                android:text="www.author.ru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                style="@style/Menu.Text" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/menu_account_picture_profile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@id/menu_account_information"
+            android:src="@drawable/ic_profile"
+            android:scaleType="fitCenter" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/menu_delimiter"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/menu_account_section"
+        android:background="@color/clr_actionbar_dark_background" />
+
+    <ListView
+        android:id="@+id/drawerList"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/menu_delimiter"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="16dp"
+        style="@style/MenuItem.Background"/>
+
+</RelativeLayout>

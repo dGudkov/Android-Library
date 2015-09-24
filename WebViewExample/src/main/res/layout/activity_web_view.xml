@@ -1,8 +1,115 @@
-<ViewAnimator
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/animator"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-</ViewAnimator>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:id="@+id/container_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+                app:theme="@style/Toolbar">
+
+                <RelativeLayout
+                    style="@style/ActionBar.Background"
+                    android:layout_width="fill_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:layout_height="?android:actionBarSize">
+
+                    <RelativeLayout
+                        android:id="@+id/status_bar_menu_layout"
+                        style="@style/ActionBar.Background"
+                        android:layout_width="?android:actionBarSize"
+                        android:layout_height="?android:actionBarSize"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical|left"
+                        android:clickable="true">
+
+                        <ImageButton
+                            android:id="@+id/status_bar_menu"
+                            style="@style/ActionBar.Image"
+                            android:background="?android:selectableItemBackground"
+                            android:filterTouchesWhenObscured="true"
+                            android:src="@drawable/status_bar_menu"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginRight="32dp"
+                            android:layout_marginEnd="32dp"
+                            android:contentDescription="Menu"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/header_title"
+                        style="@style/ActionBar.Title"
+                        android:layout_centerInParent="true"
+                        android:text="@string/str_web_view" />
+
+                    <RelativeLayout
+                        android:id="@+id/status_bar_webview_layout"
+                        style="@style/ActionBar.Background"
+                        android:layout_width="?android:actionBarSize"
+                        android:layout_height="?android:actionBarSize"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical|end"
+                        android:clickable="true">
+
+                        <ImageButton
+                            android:id="@+id/status_bar_webview"
+                            style="@style/ActionBar.Image"
+                            android:background="?android:selectableItemBackground"
+                            android:filterTouchesWhenObscured="true"
+                            android:src="@drawable/status_bar_webview"
+                            android:contentDescription="Calendar"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginStart="32dp"
+                            android:visibility="visible" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/container_body"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/fragment_navigation_drawer"
+        android:name="ru.gdo.android.example.webview.MenuFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/menu_layout"
+        tools:layout="@layout/menu_layout" />
+
+</android.support.v4.widget.DrawerLayout>

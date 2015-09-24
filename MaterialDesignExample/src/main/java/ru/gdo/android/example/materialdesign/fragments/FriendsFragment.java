@@ -16,10 +16,15 @@ import ru.gdo.android.library.materialdesign.widget.BaseFragment;
 
 public class FriendsFragment extends BaseFragment {
 
+    public FriendsFragment() {
+        this.mLayoutId = R.layout.fragment_friends;
+        this.mTitleTextId = R.string.str_friends_fragment_title;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
         this.mToolBar.findViewById(R.id.status_bar_calendar_layout).setVisibility(View.VISIBLE);
         this.mToolBar.findViewById(R.id.status_bar_calendar_layout).setOnClickListener(this);
@@ -33,11 +38,6 @@ public class FriendsFragment extends BaseFragment {
     protected boolean isToolBarComponent(View v) {
         int id = v.getId();
         return ((id == R.id.status_bar_calendar_layout) || (id == R.id.status_bar_calendar));
-    }
-
-    @Override
-    public void setTitleText() {
-        this.mTitleText = this.mContext.getResources().getString(R.string.str_friends_fragment_title);
     }
 
 }

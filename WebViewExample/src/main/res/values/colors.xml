@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ========================================== -->
+    <!-- =               Action bar               = -->
+    <!-- ========================================== -->
+    <color name="clr_actionbar_background">#5bd9a6</color>
+    <color name="clr_actionbar_dark_background">#5bc9a6</color>
+    <color name="clr_actionbar_accent_background">#5bd9a6</color>
+    <color name="clr_actionbar_title">#FFFFFF</color>
+    <color name="clr_actionbar_shadow">#3c000000</color>
+
+    <!-- ========================================== -->
+    <!-- =                   Menu                 = -->
+    <!-- ========================================== -->
+    <color name="clr_menu_background">#5bd9a6</color>
+    <color name="clr_dark_menu_background">#5bc9a6</color>
+    <color name="clr_menu_item_text">#FFFFFF</color>
+
+</resources>
