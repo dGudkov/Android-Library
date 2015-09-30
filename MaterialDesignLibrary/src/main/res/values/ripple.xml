@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RippleLayout">
+        <attr name="rl_Duration" format="integer" localization="suggested" />
+        <attr name="rl_FadeDuration" format="integer" localization="suggested" />
+        <attr name="rl_Dimension" format="dimension" localization="suggested" />
+        <attr name="rl_Alpha" format="float" localization="suggested" />
+        <attr name="rl_Color" format="color" localization="suggested" />
+        <attr name="rl_Background" format="color" localization="suggested" />
+        <attr name="rl_Hover" format="boolean" localization="suggested" />
+        <attr name="rl_DelayClick" format="boolean" localization="suggested" />
+        <attr name="rl_Persistent" format="boolean" localization="suggested" />
+        <attr name="rl_InAdapter" format="boolean" localization="suggested" />
+        <attr name="rl_Overlay" format="boolean" localization="suggested" />
+        <attr name="rl_RoundedCorners" format="dimension" localization="suggested" />
+        <attr name="rl_cornerRadius" format="dimension"/>
+        <attr name="rl_shadowRadius" format="dimension"/>
+        <attr name="rl_shadowColor" format="color"/>
+        <attr name="rl_dx" format="dimension"/>
+        <attr name="rl_dy" format="dimension"/>
+    </declare-styleable>
+
+</resources>

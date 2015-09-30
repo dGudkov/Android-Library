@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ========================================== -->
+    <!-- =       Material Design Buttons            = -->
+    <!-- ========================================== -->
+
+    <style name="MDButtonStyle">
+        <item name="android:padding">@dimen/md_button_padding</item>
+        <item name="android:textColor">@drawable/md_button_selector_color</item>
+    </style>
+
+    <style name="SingleGradient" parent="MDButtonStyle">
+        <item name="android:background">@drawable/md_button_selector_single_gradient</item>
+    </style>
+
+    <style name="MultiGradient" parent="MDButtonStyle">
+        <item name="android:background">@drawable/button_selector_multi_gradients</item>
+    </style>
+
+</resources>

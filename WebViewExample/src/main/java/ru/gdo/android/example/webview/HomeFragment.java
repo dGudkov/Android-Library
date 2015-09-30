@@ -16,7 +16,7 @@ import ru.gdo.android.library.materialdesign.widget.BaseFragment;
 public class HomeFragment extends BaseFragment {
 
     public HomeFragment() {
-        this.mLayoutId = R.layout.fragment_home;
+        this.mLayoutId = R.layout.webview_fragment_home;
         this.mTitleTextId = R.string.str_home_fragment_title;
     }
 
