@@ -36,7 +36,7 @@ public class MDShadowButton extends FrameLayout {
     private static final int DEFAULT_CORNER_RADIUS = 4;
     private static final int DEFAULT_SHADOW_DX = 2;
     private static final int DEFAULT_SHADOW_DY = 2;
-    private static final int DEFAULT_FILL_COLOR = 0xFFFFFFFF;
+    private static final int DEFAULT_FILL_COLOR = 0x88757575;
 
     private int mShadowColor;
     private float mShadowRadius;
@@ -304,6 +304,5 @@ public class MDShadowButton extends FrameLayout {
 
         return output;
     }
-
 
 }
