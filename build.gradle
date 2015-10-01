@@ -1,7 +1,7 @@
 buildscript {
 
     String appVersion = "23"
-    String googleVersion = "7.8.0"
+    String googleVersion = "8.1.0"
     String apacheVersion = "1.3.2"
 
     String supportLibrary = "${appVersion}.0.1"

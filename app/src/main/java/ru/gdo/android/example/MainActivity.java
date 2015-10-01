@@ -13,8 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.gdo.android.example.foldinghorizontallayout.FoldingHorizontalLayoutActivity;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class MainActivity extends Activity implements OnItemClickListener  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
         ArrayList<ContentItem> objects = new ArrayList<>();
@@ -66,7 +69,7 @@ public class MainActivity extends Activity implements OnItemClickListener  {
         objects.add(new ContentItem("Page curl",
                 "A simple demonstration of the page curl.",
                 PageCurlActivity.class));
-        objects.add(new ContentItem("Page Google Cloud Messaging",
+        objects.add(new ContentItem("Google Cloud Messaging",
                 "A simple demonstration of the Google Cloud Messaging.",
                 GcmActivity.class));
         objects.add(new ContentItem("Notification",

@@ -14,7 +14,7 @@
     </style>
 
     <style name="MultiGradient" parent="MDButtonStyle">
-        <item name="android:background">@drawable/button_selector_multi_gradients</item>
+        <item name="android:background">@drawable/md_button_selector_multi_gradient</item>
     </style>
 
 </resources>
