@@ -638,7 +638,7 @@ public class MDRippleButton extends Button implements OnTouchListener {
 
         @Override
         public void run() {
-            MDRippleButton.this.mPrepressed = false;
+            MDRippleButton.this.mPrepressed = true;
 //            MDButton.this.mChildView.setLongClickable(false);//prevent the child's long click,let's the ripple layout call it's performLongClick
 //            MDButton.this.mChildView.onTouchEvent(event);
             MDRippleButton.this.setPressed(true);
