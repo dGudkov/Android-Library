@@ -46,26 +46,6 @@
     <!--android:text="New Button" />-->
     <!--</ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout>-->
 
-    <!--<CheckBox-->
-    <!--android:id="@+id/checkBox1"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/view"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:checked="false"-->
-    <!--android:text="Pressed" />-->
-
-    <!--<CheckBox-->
-    <!--android:id="@+id/checkBox2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/checkBox1"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:checked="false"-->
-    <!--android:text="Enabled" />-->
-
-    <!--android:layout_below="@+id/checkBox2"-->
-
     <ru.gdo.android.library.materialdesign.widget.MDShadowButton
         android:id="@+id/button_1"
 
@@ -83,6 +63,7 @@
         app:sl_dx='3dp'
         app:sl_dy='3dp'
         app:sl_duration="50"
+        app:sl_shadow="@drawable/frame_shadow"
         style="@style/SingleGradient"/>
 
     <ru.gdo.android.library.materialdesign.widget.MDShadowButton
@@ -100,17 +81,8 @@
         app:sl_cornerRadius="5dp"
         app:sl_dx='3dp'
         app:sl_dy='3dp'
-        app:sl_duration="-50"
+        app:sl_duration="50"
         style="@style/MultiGradient"/>
-    <!--app:rl_Alpha="0.2"-->
-    <!--app:rl_Color="#585858"-->
-    <!--app:rl_Hover="true"-->
-    <!--app:rl_Overlay="true"-->
-    <!--app:rl_cornerRadius="5dp"-->
-    <!--app:rl_dx='25dp'-->
-    <!--app:rl_dy='25dp'-->
-    <!--app:rl_shadowColor="@color/default_shadow_color">-->
-
 
     <!--<ru.gdo.android.library.materialdesign.widget.MDButton xmlns:app="http://schemas.android.com/apk/res-auto"-->
     <!--android:id="@+id/button0"-->

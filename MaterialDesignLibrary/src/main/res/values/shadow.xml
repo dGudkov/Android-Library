@@ -4,7 +4,7 @@
     <declare-styleable name="MDShadowLayout">
         <attr name="sl_cornerRadius" format="dimension"/>
         <attr name="sl_shadowRadius" format="dimension"/>
-        <attr name="sl_shadowColor" format="color"/>
+        <attr name="sl_shadow" format="integer"/>
         <attr name="sl_dx" format="dimension"/>
         <attr name="sl_dy" format="dimension"/>
         <attr name="sl_animEnabled" format="boolean"/>

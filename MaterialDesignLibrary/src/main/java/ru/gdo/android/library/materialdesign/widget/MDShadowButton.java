@@ -1,8 +1,10 @@
 package ru.gdo.android.library.materialdesign.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -10,8 +12,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,11 +40,12 @@ public class MDShadowButton extends FrameLayout {
     private static final int DEFAULT_CORNER_RADIUS = 4;
     private static final int DEFAULT_SHADOW_DX = 2;
     private static final int DEFAULT_SHADOW_DY = 2;
-    private static final int DEFAULT_FILL_COLOR = 0x88757575;
+    private static final String DEFAULT_FILL_COLOR = "#88757575";
     private static final int DEFAULT_DURATION = 30;
     private static final boolean DEFAULT_ANIMATION_ENABLED = true;
+    private static final int DEFAULT_NULL_RESOURCES_ID = -1;
 
-    private int mShadowColor;
+    private int mShadow;
     private float mShadowRadius;
     private float mCornerRadius;
     private float mDx;
@@ -101,7 +106,8 @@ public class MDShadowButton extends FrameLayout {
         return !findClickableViewInChild(this, (int) event.getX(), (int) event.getY());
     }
 
-
+    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         boolean superOnTouchEvent = super.onTouchEvent(event);
@@ -218,16 +224,6 @@ public class MDShadowButton extends FrameLayout {
         }
     }
 
-    public void setInvalidateShadowOnSizeChanged(boolean invalidateShadowOnSizeChanged) {
-        mInvalidateShadowOnSizeChanged = invalidateShadowOnSizeChanged;
-    }
-
-    public void invalidateShadow() {
-        mForceInvalidateShadow = true;
-        requestLayout();
-        invalidate();
-    }
-
     private void initView(Context context, AttributeSet attrs) {
 
         this.mChildButton = new MDRippleButton(context, attrs);
@@ -242,9 +238,10 @@ public class MDShadowButton extends FrameLayout {
         setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
     }
 
+    @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private void setBackgroundCompat(int w, int h) {
-        Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, Color.TRANSPARENT);
+        Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, Color.TRANSPARENT);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             setBackgroundDrawable(drawable);
@@ -265,7 +262,7 @@ public class MDShadowButton extends FrameLayout {
             this.mShadowRadius = attr.getDimension(R.styleable.MDShadowLayout_sl_shadowRadius, DEFAULT_SHADOW_RADIUS);
             this.mDx = attr.getDimension(R.styleable.MDShadowLayout_sl_dx, DEFAULT_SHADOW_DX);
             this.mDy = attr.getDimension(R.styleable.MDShadowLayout_sl_dy, DEFAULT_SHADOW_DY);
-            this.mShadowColor = attr.getColor(R.styleable.MDShadowLayout_sl_shadowColor, DEFAULT_FILL_COLOR);
+            this.mShadow = attr.getResourceId(R.styleable.MDShadowLayout_sl_shadow, DEFAULT_NULL_RESOURCES_ID);
             this.mAnimationEnabled = attr.getBoolean(R.styleable.MDShadowLayout_sl_animEnabled, DEFAULT_ANIMATION_ENABLED);
             this.mDuration = attr.getInt(R.styleable.MDShadowLayout_sl_duration, DEFAULT_DURATION);
             if (this.mDuration < 0) {
@@ -282,18 +279,25 @@ public class MDShadowButton extends FrameLayout {
     }
 
     private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight, float cornerRadius, float shadowRadius,
-                                      float dx, float dy, int shadowColor, int fillColor) {
-
-        Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ALPHA_8);
+                                      float dx, float dy, int fillColor) {
+        Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
-        RectF shadowRect = new RectF(
-                shadowRadius,
-                shadowRadius,
-                shadowWidth - shadowRadius - Math.abs(dx),
-                shadowHeight - shadowRadius - Math.abs(dy));
+        if ((this.mShadow == DEFAULT_NULL_RESOURCES_ID) || ("color".equals(getResources().getResourceTypeName(this.mShadow)))) {
 
-        if ((dx != 0) && (dy != 0)) {
+            int shadowColor;
+
+            if (this.mShadow == DEFAULT_NULL_RESOURCES_ID) {
+                shadowColor = Color.parseColor(DEFAULT_FILL_COLOR);
+            } else {
+                shadowColor = ContextCompat.getColor(getContext(), this.mShadow);
+            }
+            RectF shadowRect = new RectF(
+                    shadowRadius,
+                    shadowRadius,
+                    shadowWidth - shadowRadius - Math.abs(dx),
+                    shadowHeight - shadowRadius - Math.abs(dy));
+
             Paint shadowPaint = new Paint();
             shadowPaint.setAntiAlias(true);
             shadowPaint.setColor(fillColor);
@@ -306,9 +310,51 @@ public class MDShadowButton extends FrameLayout {
             }
 
             canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
+        } else if ("drawable".equals(getResources().getResourceTypeName(this.mShadow))) {
+            output.eraseColor(fillColor);
+
+            if (dx < 0) dx = 0;
+            if (dy < 0) dy = 0;
+            canvas.drawBitmap(
+                    get_ninepatch(
+                            this.mShadow,
+                            (int) (shadowWidth - shadowRadius - Math.abs(dx)),
+                            (int) (shadowHeight - shadowRadius - Math.abs(dy)),
+                            getContext()
+                    ),
+                    dx,
+                    dy,
+                    new Paint());
+        } else {
+            output.eraseColor(fillColor);
         }
 
         return output;
+    }
+
+    public static Bitmap get_ninepatch(int resourceId, int x, int y, Context context){
+
+        Bitmap output_bitmap = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output_bitmap);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(
+                context.getResources(), resourceId);
+
+        NinePatchDrawable np_drawable = new NinePatchDrawable(
+                context.getResources(),
+                bitmap,
+                bitmap.getNinePatchChunk(), new Rect(), null);
+        np_drawable.setBounds(0, 0,x, y);
+
+        np_drawable.draw(canvas);
+
+        return output_bitmap;
+    }
+
+    public void invalidateShadow() {
+        mForceInvalidateShadow = true;
+        requestLayout();
+        invalidate();
     }
 
     public void setAnimationEnabled(boolean animationEnabled) {
@@ -327,6 +373,10 @@ public class MDShadowButton extends FrameLayout {
             this.mAnimationEnabled = true;
         }
         this.mDuration = duration;
+    }
+
+    public void setInvalidateShadowOnSizeChanged(boolean invalidateShadowOnSizeChanged) {
+        mInvalidateShadowOnSizeChanged = invalidateShadowOnSizeChanged;
     }
 
 }

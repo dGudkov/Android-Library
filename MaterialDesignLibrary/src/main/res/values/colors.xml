@@ -26,4 +26,9 @@
     <color name="md_button_normal_end_multi">#E68E15</color>
     <color name="md_button_normal_border">#862501</color>
 
+    <!-- ========================================== -->
+    <!-- =        Material Design Shadow            = -->
+    <!-- ========================================== -->
+    <color name="md_shadow_default_color">#85757575</color>
+
 </resources>
