@@ -36,12 +36,16 @@ public class MDShadowLayout extends FrameLayout {
     private static final int DEFAULT_SHADOW_DX = 2;
     private static final int DEFAULT_SHADOW_DY = 2;
     private static final int DEFAULT_FILL_COLOR = 0x88757575;
+    private static final int DEFAULT_DURATION = 30;
+    private static final boolean DEFAULT_ANIMATION_ENABLED = true;
 
     private int mShadowColor;
     private float mShadowRadius;
     private float mCornerRadius;
     private float mDx;
     private float mDy;
+    private int mDuration;
+    private boolean mAnimationEnabled;
 
     private boolean mInvalidateShadowOnSizeChanged = true;
     private boolean mForceInvalidateShadow = false;
@@ -91,83 +95,78 @@ public class MDShadowLayout extends FrameLayout {
         int action = event.getActionMasked();
         switch (action) {
             case MotionEvent.ACTION_UP:
-                Float xTraveled = mDx;
-                Float yTraveled = mDy;
-                if (anim1 != null) {
-                    Transformation trans = new Transformation();
-                    long endTime = anim1.getStartTime() + System.currentTimeMillis() - startTime;
-                    anim1.getTransformation(endTime, trans);
+            case MotionEvent.ACTION_CANCEL:
+                if (this.mAnimationEnabled) {
+                    Float xTraveled = mDx;
+                    Float yTraveled = mDy;
+                    if (anim1 != null) {
+                        Transformation trans = new Transformation();
+                        long endTime = anim1.getStartTime() + System.currentTimeMillis() - startTime;
+                        anim1.getTransformation(endTime, trans);
 
-                    this.clearAnimation();
+                        this.clearAnimation();
 
-                    Matrix transformationMatrix = trans.getMatrix();
-                    float[] matrixVals = new float[9];
-                    transformationMatrix.getValues(matrixVals);
-                    xTraveled = matrixVals[2];
-                    yTraveled = matrixVals[5];
+                        Matrix transformationMatrix = trans.getMatrix();
+                        float[] matrixVals = new float[9];
+                        transformationMatrix.getValues(matrixVals);
+                        xTraveled = matrixVals[2];
+                        yTraveled = matrixVals[5];
+                    }
+
+                    TranslateAnimation anim = new TranslateAnimation(xTraveled.floatValue(), 0, yTraveled.floatValue(), 0);
+                    anim.setDuration(50);
+                    anim.setFillAfter(true);
+                    anim.setAnimationListener(new TranslateAnimation.AnimationListener() {
+
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            setBackgroundCompat(MDShadowLayout.this.bounds.width(), MDShadowLayout.this.bounds.height());
+                        }
+                    });
+                    this.startAnimation(anim);
                 }
-
-                TranslateAnimation anim = new TranslateAnimation(xTraveled.floatValue(), 0, yTraveled.floatValue(), 0);
-                anim.setDuration(50);
-                anim.setFillAfter(true);
-                anim.setAnimationListener(new TranslateAnimation.AnimationListener() {
-
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        setBackgroundCompat(MDShadowLayout.this.bounds.width(), MDShadowLayout.this.bounds.height());
-                    }
-                });
-                this.startAnimation(anim);
 
                 return true;
             case MotionEvent.ACTION_DOWN:
                 this.clearAnimation();
-                anim1 = new TranslateAnimation(0, mDx, 0, mDy);
-                anim1.setDuration(50);
-                anim1.setFillAfter(true);
+                if (this.mAnimationEnabled) {
+                    anim1 = new TranslateAnimation(0, mDx, 0, mDy);
+                    anim1.setDuration(50);
+                    anim1.setFillAfter(true);
 
-                anim1.setAnimationListener(new TranslateAnimation.AnimationListener() {
+                    anim1.setAnimationListener(new TranslateAnimation.AnimationListener() {
 
-                    @Override
-                    public void onAnimationStart(Animation animation) {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            anim1 = null;
+                        }
+                    });
+
+                    this.startAnimation(anim1);
+                    startTime = System.currentTimeMillis();
+                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+                        setBackgroundDrawable(null);
+                    } else {
+                        setBackground(null);
                     }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        anim1 = null;
-                    }
-                });
-
-                this.startAnimation(anim1);
-                startTime = System.currentTimeMillis();
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-                    setBackgroundDrawable(null);
-                } else {
-                    setBackground(null);
-                }
-                return true;
-            case MotionEvent.ACTION_CANCEL:
-                setBackgroundCompat(this.bounds.width(), this.bounds.height());
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-                    setBackgroundDrawable(null);
-                } else {
-                    setBackground(null);
                 }
                 return true;
         }
@@ -240,11 +239,17 @@ public class MDShadowLayout extends FrameLayout {
         }
 
         try {
-            mCornerRadius = attr.getDimension(R.styleable.MDShadowLayout_sl_cornerRadius, DEFAULT_CORNER_RADIUS);
-            mShadowRadius = attr.getDimension(R.styleable.MDShadowLayout_sl_shadowRadius, DEFAULT_SHADOW_RADIUS);
-            mDx = attr.getDimension(R.styleable.MDShadowLayout_sl_dx, DEFAULT_SHADOW_DX);
-            mDy = attr.getDimension(R.styleable.MDShadowLayout_sl_dy, DEFAULT_SHADOW_DY);
-            mShadowColor = attr.getColor(R.styleable.MDShadowLayout_sl_shadowColor, DEFAULT_FILL_COLOR);
+            this.mCornerRadius = attr.getDimension(R.styleable.MDShadowLayout_sl_cornerRadius, DEFAULT_CORNER_RADIUS);
+            this.mShadowRadius = attr.getDimension(R.styleable.MDShadowLayout_sl_shadowRadius, DEFAULT_SHADOW_RADIUS);
+            this.mDx = attr.getDimension(R.styleable.MDShadowLayout_sl_dx, DEFAULT_SHADOW_DX);
+            this.mDy = attr.getDimension(R.styleable.MDShadowLayout_sl_dy, DEFAULT_SHADOW_DY);
+            this.mShadowColor = attr.getColor(R.styleable.MDShadowLayout_sl_shadowColor, DEFAULT_FILL_COLOR);
+            this.mAnimationEnabled = attr.getBoolean(R.styleable.MDShadowLayout_sl_animEnabled, DEFAULT_ANIMATION_ENABLED);
+            this.mDuration = attr.getInt(R.styleable.MDShadowLayout_sl_duration, DEFAULT_DURATION);
+            if (this.mDuration < 0) {
+                this.mDuration = -1;
+                this.mAnimationEnabled = false;
+            }
         } finally {
             attr.recycle();
         }
@@ -298,5 +303,22 @@ public class MDShadowLayout extends FrameLayout {
         return output;
     }
 
+    public void setAnimationEnabled(boolean animationEnabled) {
+        if (animationEnabled) {
+            setDuration(DEFAULT_DURATION);
+        } else {
+            setDuration(-1);
+        }
+    }
+
+    public void setDuration(int duration) {
+        if (duration < 0) {
+            duration = -1;
+            this.mAnimationEnabled = false;
+        } else {
+            this.mAnimationEnabled = true;
+        }
+        this.mDuration = duration;
+    }
 
 }

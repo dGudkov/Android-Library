@@ -82,6 +82,7 @@
         app:sl_cornerRadius="5dp"
         app:sl_dx='3dp'
         app:sl_dy='3dp'
+        app:sl_duration="50"
         style="@style/SingleGradient"/>
 
     <ru.gdo.android.library.materialdesign.widget.MDShadowButton
@@ -99,6 +100,7 @@
         app:sl_cornerRadius="5dp"
         app:sl_dx='3dp'
         app:sl_dy='3dp'
+        app:sl_duration="-50"
         style="@style/MultiGradient"/>
     <!--app:rl_Alpha="0.2"-->
     <!--app:rl_Color="#585858"-->
