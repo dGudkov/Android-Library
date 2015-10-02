@@ -55,5 +55,10 @@
     <string name="str_lime">Lime</string>
     <string name="str_yellow">Yellow</string>
     <string name="str_amber">Amber</string>
+    <string name="str_orange">Orange</string>
+    <string name="str_deeporange">Deep Orange</string>
+    <string name="str_brown">Brown</string>
+    <string name="str_grey">Grey</string>
+    <string name="str_bluegrey">Blue Grey</string>
 
 </resources>
