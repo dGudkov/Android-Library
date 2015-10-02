@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="info.androidhive.materialdesign.activity.HomeFragment">
+    tools:context="ru.gdo.android.example.materialdesign.fragments.HomeFragment">
 
     <TextView
         android:id="@+id/label"
@@ -26,114 +26,5 @@
         android:gravity="center_horizontal"
         android:text="Edit fragment_home.xml to change the appearance"
         android:textSize="12dp" />
-
-    <!--<ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:id="@+id/view"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--app:mrl_rippleAlpha="0.2"-->
-    <!--app:mrl_rippleColor="#585858"-->
-    <!--app:mrl_rippleHover="true"-->
-    <!--app:mrl_rippleOverlay="true">-->
-
-    <!--<Button-->
-    <!--android:id="@+id/button1"-->
-    <!--style="@style/SingleGradient"-->
-    <!--android:layout_width="120dp"-->
-    <!--android:layout_height="55dp"-->
-    <!--android:text="New Button" />-->
-    <!--</ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout>-->
-
-    <ru.gdo.android.library.materialdesign.widget.MDShadowButton
-        android:id="@+id/button_1"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="New Button 1"
-        app:rl_Alpha="0.2"
-        app:rl_Color="#585858"
-        app:rl_Hover="true"
-        app:rl_Overlay="true"
-        app:sl_cornerRadius="5dp"
-        app:sl_dx='3dp'
-        app:sl_dy='3dp'
-        app:sl_duration="50"
-        app:sl_shadow="@drawable/frame_shadow"
-        style="@style/SingleGradient"/>
-
-    <ru.gdo.android.library.materialdesign.widget.MDShadowButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_below="@id/button_1"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="New Button 2"
-        app:rl_Alpha="0.2"
-        app:rl_Color="#585858"
-        app:rl_Hover="true"
-        app:rl_Overlay="true"
-        app:sl_cornerRadius="5dp"
-        app:sl_dx='3dp'
-        app:sl_dy='3dp'
-        app:sl_duration="50"
-        style="@style/MultiGradient"/>
-
-    <!--<ru.gdo.android.library.materialdesign.widget.MDButton xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:id="@+id/button0"-->
-    <!--style="@style/SingleGradient"-->
-    <!--android:layout_width="120dp"-->
-    <!--android:layout_height="55dp"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:gravity="center_vertical|center_horizontal"-->
-    <!--android:text="New Button"-->
-    <!--app:rl_Alpha="0.2"-->
-    <!--app:rl_Color="#585858"-->
-    <!--app:rl_Hover="true"-->
-    <!--app:rl_Overlay="true"-->
-    <!--app:rl_cornerRadius="5dp"-->
-    <!--app:rl_dx='25dp'-->
-    <!--app:rl_dy='25dp'-->
-    <!--app:rl_shadowColor="@color/default_shadow_color">-->
-
-    <!--</ru.gdo.android.library.materialdesign.widget.MDButton>-->
-
-    <!--</ru.gdo.android.library.materialdesign.widget.MDShadowButton>-->
-
-
-    <!--<ru.gdo.android.library.materialdesign.widget.ShadowLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/button0"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginTop="16dp"-->
-    <!--app:sl_cornerRadius="5dp"-->
-    <!--app:sl_dx='5dp'-->
-    <!--app:sl_dy='5dp'-->
-    <!--app:sl_shadowColor="@color/default_shadow_color">-->
-
-    <!--<ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:id="@+id/view2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--app:mrl_rippleAlpha="0.2"-->
-    <!--app:mrl_rippleColor="#72727272"-->
-    <!--app:mrl_rippleHover="true"-->
-    <!--app:mrl_rippleOverlay="true">-->
-
-    <!--<Button-->
-    <!--android:id="@+id/button2"-->
-    <!--style="@style/MultiGradient"-->
-    <!--android:layout_width="120dp"-->
-    <!--android:layout_height="55dp"-->
-    <!--android:text="New Button" />-->
-    <!--</ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout>-->
-    <!--</ru.gdo.android.library.materialdesign.widget.ShadowLayout>-->
 
 </RelativeLayout>

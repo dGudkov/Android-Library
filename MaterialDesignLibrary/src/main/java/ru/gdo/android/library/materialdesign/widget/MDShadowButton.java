@@ -80,7 +80,7 @@ public class MDShadowButton extends FrameLayout {
             this.removeAllViews();
         }
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         this.addView(this.mChildButton, lp);
     }
@@ -111,6 +111,8 @@ public class MDShadowButton extends FrameLayout {
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         boolean superOnTouchEvent = super.onTouchEvent(event);
+
+        if (!isEnabled() || !this.mChildButton.isEnabled()) return superOnTouchEvent;
 
         int action = event.getActionMasked();
         switch (action) {
@@ -283,7 +285,9 @@ public class MDShadowButton extends FrameLayout {
         Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
-        if ((this.mShadow == DEFAULT_NULL_RESOURCES_ID) || ("color".equals(getResources().getResourceTypeName(this.mShadow)))) {
+        if (!isEnabled() || !this.mChildButton.isEnabled()) {
+            output.eraseColor(fillColor);
+        } else if ((this.mShadow == DEFAULT_NULL_RESOURCES_ID) || ("color".equals(getResources().getResourceTypeName(this.mShadow)))) {
 
             int shadowColor;
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import ru.gdo.android.example.materialdesign.R;
 import ru.gdo.android.library.materialdesign.widget.BaseFragment;
@@ -12,14 +11,14 @@ import ru.gdo.android.library.materialdesign.widget.BaseFragment;
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
  * @copyrights ProgForce, 2015
- * @since 23.09.15.
+ * @since 01.10.15.
  */
 
-public class HomeFragment extends BaseFragment {
+public class ButtonFragment extends BaseFragment {
 
-    public HomeFragment() {
-        this.mLayoutId = R.layout.fragment_home;
-        this.mTitleTextId = R.string.str_home_fragment_title;
+    public ButtonFragment() {
+        this.mLayoutId = R.layout.fragment_button;
+        this.mTitleTextId = R.string.str_button_fragment_title;
     }
 
     @Override

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowButton
+            style="@style/LinearGradientIndigo"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:enabled="false"
+            android:text="@string/str_indigo"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_cornerRadius="5dp"
+            app:sl_duration="50"
+            app:sl_dx='3dp'
+            app:sl_dy='3dp'
+            app:sl_shadow="@drawable/md_button_shadow" />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowButton
+            style="@style/LinearGradientIndigo"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/str_indigo"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_animEnabled="false"
+            app:sl_cornerRadius="5dp"
+            app:sl_dx='3dp'
+            app:sl_dy='3dp' />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowButton
+            style="@style/LinearGradientIndigo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/str_indigo"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_cornerRadius="5dp"
+            app:sl_duration="50"
+            app:sl_dx='3dp'
+            app:sl_dy='3dp'
+            app:sl_shadow="@drawable/md_button_shadow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowButton
+            style="@style/RadiusGradientIndigo"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:enabled="false"
+            android:text="@string/str_indigo"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_animEnabled="false"
+            app:sl_cornerRadius="5dp"
+            app:sl_dx='0dp'
+            app:sl_dy='0dp'
+            app:sl_shadow="@drawable/md_button_shadow" />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowButton
+            style="@style/RadiusGradientIndigo"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/str_indigo"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_animEnabled="false"
+            app:sl_cornerRadius="5dp"
+            app:sl_dx='3dp'
+            app:sl_dy='3dp' />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowButton
+            style="@style/RadiusGradientIndigo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/str_indigo"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_cornerRadius="5dp"
+            app:sl_duration="50"
+            app:sl_dx='3dp'
+            app:sl_dy='3dp'
+            app:sl_shadow="@color/md_indigo_shadow" />
+
+    </LinearLayout>
+
+</LinearLayout>

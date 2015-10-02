@@ -1,5 +1,6 @@
 package ru.gdo.android.example.materialdesign;
 
+import ru.gdo.android.example.materialdesign.fragments.ButtonFragment;
 import ru.gdo.android.example.materialdesign.fragments.FriendsFragment;
 import ru.gdo.android.example.materialdesign.fragments.HomeFragment;
 import ru.gdo.android.example.materialdesign.fragments.MessagesFragment;
@@ -11,6 +12,7 @@ public class MaterialDesignActivity extends ToolBarFragmentActivity {
     public static final int HOME_FRAGMENT = 0;
     public static final int FRIENDS_FRAGMENT = 1;
     public static final int MESSAGE_FRAGMENT = 2;
+    public static final int BUTTON_FRAGMENT = 3;
 
     @Override
     protected int getContentViewId() {
@@ -79,6 +81,9 @@ public class MaterialDesignActivity extends ToolBarFragmentActivity {
                 break;
             case MESSAGE_FRAGMENT:
                 fragment = BaseFragment.newInstance(MessagesFragment.class, this, this.mToolBar, this);
+                break;
+            case BUTTON_FRAGMENT:
+                fragment = BaseFragment.newInstance(ButtonFragment.class, this, this.mToolBar, this);
                 break;
         }
         return fragment;

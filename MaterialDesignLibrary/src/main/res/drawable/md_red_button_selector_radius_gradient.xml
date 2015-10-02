@@ -9,15 +9,15 @@
         <shape android:shape="rectangle">
 
             <gradient
-                android:startColor="@color/md_button_disabled_start_multi"
-                android:endColor="@color/md_button_disabled_end_multi"
+                android:startColor="@color/md_red_button_disabled_start"
+                android:endColor="@color/md_red_button_disabled_end"
                 android:gradientRadius="50"
-                android:centerY="0"
+                android:centerY="1"
                 android:type="radial"/>
 
             <corners android:radius="@dimen/md_button_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_button_disabled_border" />
+            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_red_button_disabled_border" />
 
         </shape>
     </item>
@@ -27,15 +27,15 @@
 
             <gradient
                 android:angle="270"
-                android:startColor="@color/md_button_pressed_start"
-                android:endColor="@color/md_button_pressed_end"
+                android:startColor="@color/md_red_button_pressed_end"
+                android:endColor="@color/md_red_button_pressed_start"
                 android:gradientRadius="50"
                 android:centerY="0"
                 android:type="radial" />
 
             <corners android:radius="@dimen/md_button_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_button_pressed_border" />
+            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_red_button_pressed_border" />
 
         </shape>
 
@@ -46,15 +46,15 @@
 
             <gradient
                 android:angle="270"
-                android:startColor="@color/md_button_normal_start_multi"
-                android:endColor="@color/md_button_normal_end_multi"
+                android:startColor="@color/md_red_button_normal_end"
+                android:endColor="@color/md_red_button_normal_start"
                 android:gradientRadius="50"
                 android:centerY="1"
                 android:type="radial" />
 
             <corners android:radius="@dimen/md_button_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_button_normal_border" />
+            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_red_button_normal_border" />
 
         </shape>
     </item>

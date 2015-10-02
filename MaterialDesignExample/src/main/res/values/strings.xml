@@ -32,4 +32,21 @@
         ]]>
     </string>
 
+    <string name="str_button_fragment_title">
+        <![CDATA[
+          <i><b>Buttons</b></i>
+        ]]>
+    </string>
+
+    <!-- ========================================== -->
+    <!-- =                 Buttons                = -->
+    <!-- ========================================== -->
+    <string name="str_red">Red</string>
+    <string name="str_pink">Pink</string>
+    <string name="str_purple">Purple</string>
+    <string name="str_deeppurple">Deep Purple</string>
+    <string name="str_indigo">Indigo</string>
+    <string name="str_blue">Blue</string>
+    <string name="str_lightblue">Light Blue</string>
+
 </resources>

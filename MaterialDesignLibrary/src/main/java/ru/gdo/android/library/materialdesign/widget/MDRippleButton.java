@@ -222,11 +222,9 @@ public class MDRippleButton extends Button implements OnTouchListener {
                     break;
                 case MotionEvent.ACTION_CANCEL:
                     if (this.mRippleInAdapter) {
-                        // dont use current coords in adapter since they tend to jump drastically on scroll
                         this.mCurrentCoords.set(this.mPreviousCoords.x, this.mPreviousCoords.y);
                         this.mPreviousCoords = new Point();
                     }
-//                    childView.onTouchEvent(event);
                     if (this.mRippleHover) {
                         if (!this.mPrepressed) {
                             startRipple(null);
@@ -250,7 +248,6 @@ public class MDRippleButton extends Button implements OnTouchListener {
                         if (this.mHoverAnimator != null) {
                             this.mHoverAnimator.cancel();
                         }
-//                        childView.onTouchEvent(event);
                         this.mEventCancelled = true;
                     }
                     break;
@@ -504,9 +501,10 @@ public class MDRippleButton extends Button implements OnTouchListener {
 
     /*
     * Accessor
-     */
+    */
 
     private final Paint mPaint  = new Paint(Paint.ANTI_ALIAS_FLAG);
+
 
     private Point mCurrentCoords  = new Point();
 

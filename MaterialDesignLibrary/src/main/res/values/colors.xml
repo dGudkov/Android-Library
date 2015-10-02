@@ -5,8 +5,8 @@
     <!-- ========================================== -->
 
     <color name="md_button_disabled_text">#EBC7BE</color>
-    <color name="md_button_pressed_text">#FFFFFF</color>
-    <color name="md_button_normal_text">#000000</color>
+    <color name="md_button_pressed_text">#000000</color>
+    <color name="md_button_normal_text">#FFFFFF</color>
 
     <color name="md_button_pressed_start">#822300</color>
     <color name="md_button_pressed_end">#D7530F</color>
@@ -27,8 +27,158 @@
     <color name="md_button_normal_border">#862501</color>
 
     <!-- ========================================== -->
-    <!-- =        Material Design Shadow            = -->
+    <!-- =       Red palette                      = -->
     <!-- ========================================== -->
-    <color name="md_shadow_default_color">#85757575</color>
+
+    <color name="md_red_button_disabled_text">#541713</color>
+    <color name="md_red_button_pressed_text">#000000</color>
+    <color name="md_red_button_normal_text">#FFFFFF</color>
+
+    <color name="md_red_button_pressed_start">#6E1E18</color>
+    <color name="md_red_button_pressed_end">#E03D31</color>
+    <color name="md_red_button_pressed_border">#3B100D</color>
+
+    <color name="md_red_button_disabled_start">#FFCDD2</color>
+    <color name="md_red_button_disabled_end">#EBBCC0</color>
+    <color name="md_red_button_disabled_border">#FFCDD2</color>
+
+    <color name="md_red_button_normal_start">#E03D31</color>
+    <color name="md_red_button_normal_end">#6E1E18</color>
+    <color name="md_red_button_normal_border">#3B100D</color>
+
+    <color name="md_red_shadow">#85EBBCC0</color>
+
+    <!-- ========================================== -->
+    <!-- =       Pink palette                     = -->
+    <!-- ========================================== -->
+
+    <color name="md_pink_button_disabled_text">#690E2C</color>
+    <color name="md_pink_button_pressed_text">#000000</color>
+    <color name="md_pink_button_normal_text">#FFFFFF</color>
+
+    <color name="md_pink_button_pressed_start">#821137</color>
+    <color name="md_pink_button_pressed_end">#E91E63</color>
+    <color name="md_pink_button_pressed_border">#690E2C</color>
+
+    <color name="md_pink_button_disabled_start">#F8BBD0</color>
+    <color name="md_pink_button_disabled_end">#AB808F</color>
+    <color name="md_pink_button_disabled_border">#F8BBD0</color>
+
+    <color name="md_pink_button_normal_start">#E91E63</color>
+    <color name="md_pink_button_normal_end">#821137</color>
+    <color name="md_pink_button_normal_border">#690E2C</color>
+
+    <color name="md_pink_shadow">#85AB808F</color>
+
+    <!-- ========================================== -->
+    <!-- =       Purple palette                   = -->
+    <!-- ========================================== -->
+
+    <color name="md_purple_button_disabled_text">#4D1357</color>
+    <color name="md_purple_button_pressed_text">#000000</color>
+    <color name="md_purple_button_normal_text">#FFFFFF</color>
+
+    <color name="md_purple_button_pressed_start">#631970</color>
+    <color name="md_purple_button_pressed_end">#9C27B0</color>
+    <color name="md_purple_button_pressed_border">#41104A</color>
+
+    <color name="md_purple_button_disabled_start">#E1BEE7</color>
+    <color name="md_purple_button_disabled_end">#B094B5</color>
+    <color name="md_purple_button_disabled_border">#E1BEE7</color>
+
+    <color name="md_purple_button_normal_start">#9C27B0</color>
+    <color name="md_purple_button_normal_end">#631970</color>
+    <color name="md_purple_button_normal_border">#41104A</color>
+
+    <color name="md_purple_shadow">#85B094B5</color>
+
+    <!-- ========================================== -->
+    <!-- =       Deep Purple palette              = -->
+    <!-- ========================================== -->
+
+    <color name="md_deeppurple_button_disabled_text">#3D226B</color>
+    <color name="md_deeppurple_button_pressed_text">#000000</color>
+    <color name="md_deeppurple_button_normal_text">#FFFFFF</color>
+
+    <color name="md_deeppurple_button_pressed_start">#4B2A85</color>
+    <color name="md_deeppurple_button_pressed_end">#673AB7</color>
+    <color name="md_deeppurple_button_pressed_border">#3D226B</color>
+
+    <color name="md_deeppurple_button_disabled_start">#D1C4E9</color>
+    <color name="md_deeppurple_button_disabled_end">#A298B5</color>
+    <color name="md_deeppurple_button_disabled_border">#D1C4E9</color>
+
+    <color name="md_deeppurple_button_normal_start">#673AB7</color>
+    <color name="md_deeppurple_button_normal_end">#4B2A85</color>
+    <color name="md_deeppurple_button_normal_border">#3D226B</color>
+
+    <color name="md_deeppurple_shadow">#85A298B5</color>
+
+    <!-- ========================================== -->
+    <!-- =       Indigo palette                   = -->
+    <!-- ========================================== -->
+
+    <color name="md_indigo_button_disabled_text">#1C234F</color>
+    <color name="md_indigo_button_pressed_text">#000000</color>
+    <color name="md_indigo_button_normal_text">#FFFFFF</color>
+
+    <color name="md_indigo_button_pressed_start">#252F69</color>
+    <color name="md_indigo_button_pressed_end">#3F51B5</color>
+    <color name="md_indigo_button_pressed_border">#1C234F</color>
+
+    <color name="md_indigo_button_disabled_start">#C5CAE9</color>
+    <color name="md_indigo_button_disabled_end">#9A9EB5</color>
+    <color name="md_indigo_button_disabled_border">#C5CAE9</color>
+
+    <color name="md_indigo_button_normal_start">#3F51B5</color>
+    <color name="md_indigo_button_normal_end">#252F69</color>
+    <color name="md_indigo_button_normal_border">#1C234F</color>
+
+    <color name="md_indigo_shadow">#859A9EB5</color>
+
+    <!-- ========================================== -->
+    <!-- =       Blue palette                   = -->
+    <!-- ========================================== -->
+
+    <color name="md_blue_button_disabled_text">#14568C</color>
+    <color name="md_blue_button_pressed_text">#000000</color>
+    <color name="md_blue_button_normal_text">#FFFFFF</color>
+
+    <color name="md_blue_button_pressed_start">#1766A6</color>
+    <color name="md_blue_button_pressed_end">#2196F3</color>
+    <color name="md_blue_button_pressed_border">#104673</color>
+
+    <color name="md_blue_button_disabled_start">#BBDEFB</color>
+    <color name="md_blue_button_disabled_end">#829AAD</color>
+    <color name="md_blue_button_disabled_border">#BBDEFB</color>
+
+    <color name="md_blue_button_normal_start">#2196F3</color>
+    <color name="md_blue_button_normal_end">#1766A6</color>
+    <color name="md_blue_button_normal_border">#104673</color>
+
+    <color name="md_blue_shadow">#85829AAD</color>
+
+    <!-- ========================================== -->
+    <!-- =       Light Blue palette               = -->
+    <!-- ========================================== -->
+
+    <color name="md_lightblue_button_disabled_text">#013F5C</color>
+    <color name="md_lightblue_button_pressed_text">#000000</color>
+    <color name="md_lightblue_button_normal_text">#FFFFFF</color>
+
+    <color name="md_lightblue_button_pressed_start">#01628F</color>
+    <color name="md_lightblue_button_pressed_end">#03A9F4</color>
+    <color name="md_lightblue_button_pressed_border">#012E42</color>
+
+    <color name="md_lightblue_button_disabled_start">#B3E5FC</color>
+    <color name="md_lightblue_button_disabled_end">#8FB7C9</color>
+    <color name="md_lightblue_button_disabled_border">#B3E5FC</color>
+
+    <color name="md_lightblue_button_normal_start">#03A9F4</color>
+    <color name="md_lightblue_button_normal_end">#01628F</color>
+    <color name="md_lightblue_button_normal_border">#012E42</color>
+
+    <color name="md_lightblue_shadow">#858FB7C9</color>
+
 
 </resources>
