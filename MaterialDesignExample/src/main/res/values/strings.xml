@@ -48,5 +48,12 @@
     <string name="str_indigo">Indigo</string>
     <string name="str_blue">Blue</string>
     <string name="str_lightblue">Light Blue</string>
+    <string name="str_cyan">Cyan</string>
+    <string name="str_teal">Teal</string>
+    <string name="str_green">Green</string>
+    <string name="str_lightgreen">Light Green</string>
+    <string name="str_lime">Lime</string>
+    <string name="str_yellow">Yellow</string>
+    <string name="str_amber">Amber</string>
 
 </resources>

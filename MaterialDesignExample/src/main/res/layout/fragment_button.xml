@@ -25,6 +25,20 @@
 
         <include layout="@layout/fragment_button_lightblue" />
 
+        <include layout="@layout/fragment_button_cyan" />
+
+        <include layout="@layout/fragment_button_teal" />
+
+        <include layout="@layout/fragment_button_green" />
+
+        <include layout="@layout/fragment_button_lightgreen" />
+
+        <include layout="@layout/fragment_button_lime" />
+
+        <include layout="@layout/fragment_button_yellow" />
+
+        <include layout="@layout/fragment_button_amber" />
+
         <!--<ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
         <!--android:id="@+id/view"-->
         <!--android:layout_width="wrap_content"-->
