@@ -69,7 +69,7 @@ public class MDRippleButton extends Button implements OnTouchListener {
     private boolean mEventCancelled;
 
     private GestureDetector mGestureDetector;
-    private PressedEvent    mPendingPressEvent;
+    private PressedEvent mPendingPressEvent;
 
 //    private View mChildView;
 
@@ -162,14 +162,6 @@ public class MDRippleButton extends Button implements OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-//        return false;
-//    }
-//
-//
-//    @Override
-//    public boolean onTouchEvent(@NonNull MotionEvent event) {
-//        boolean superOnTouchEvent = super.onTouchEvent(event);
-
         if (!isEnabled()) return false;
 
         boolean isEventInBounds = this.mBounds.contains((int) event.getX(), (int) event.getY());
@@ -637,14 +629,13 @@ public class MDRippleButton extends Button implements OnTouchListener {
         @Override
         public void run() {
             MDRippleButton.this.mPrepressed = true;
-//            MDButton.this.mChildView.setLongClickable(false);//prevent the child's long click,let's the ripple layout call it's performLongClick
-//            MDButton.this.mChildView.onTouchEvent(event);
             MDRippleButton.this.setPressed(true);
             if (MDRippleButton.this.mRippleHover) {
                 startHover();
             }
         }
     }
+
 
     static float dpToPx(Resources resources, float dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());

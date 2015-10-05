@@ -3,6 +3,7 @@ package ru.gdo.android.example.materialdesign;
 import ru.gdo.android.example.materialdesign.fragments.ButtonFragment;
 import ru.gdo.android.example.materialdesign.fragments.FriendsFragment;
 import ru.gdo.android.example.materialdesign.fragments.HomeFragment;
+import ru.gdo.android.example.materialdesign.fragments.LayoutFragment;
 import ru.gdo.android.example.materialdesign.fragments.MessagesFragment;
 import ru.gdo.android.library.materialdesign.widget.BaseFragment;
 import ru.gdo.android.library.materialdesign.widget.ToolBarFragmentActivity;
@@ -13,6 +14,7 @@ public class MaterialDesignActivity extends ToolBarFragmentActivity {
     public static final int FRIENDS_FRAGMENT = 1;
     public static final int MESSAGE_FRAGMENT = 2;
     public static final int BUTTON_FRAGMENT = 3;
+    public static final int LAYOUTS_FRAGMENT = 4;
 
     @Override
     protected int getContentViewId() {
@@ -84,6 +86,9 @@ public class MaterialDesignActivity extends ToolBarFragmentActivity {
                 break;
             case BUTTON_FRAGMENT:
                 fragment = BaseFragment.newInstance(ButtonFragment.class, this, this.mToolBar, this);
+                break;
+            case LAYOUTS_FRAGMENT:
+                fragment = BaseFragment.newInstance(LayoutFragment.class, this, this.mToolBar, this);
                 break;
         }
         return fragment;

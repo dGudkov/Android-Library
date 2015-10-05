@@ -234,7 +234,7 @@ public class MDRippleLayout extends FrameLayout {
                         currentCoords.set(previousCoords.x, previousCoords.y);
                         previousCoords = new Point();
                     }
-                    childView.onTouchEvent(event);
+                    childView.dispatchTouchEvent(event);
                     if (rippleHover) {
                         if (!prepressed) {
                             startRipple(null);
@@ -258,7 +258,7 @@ public class MDRippleLayout extends FrameLayout {
                         if (hoverAnimator != null) {
                             hoverAnimator.cancel();
                         }
-                        childView.onTouchEvent(event);
+                        childView.dispatchTouchEvent(event);
                         eventCancelled = true;
                     }
                     break;
