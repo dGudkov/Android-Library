@@ -37,7 +37,7 @@ import ru.gdo.android.library.materialdesign.R;
 import static android.view.GestureDetector.SimpleOnGestureListener;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
-public class MDRippleLayout extends FrameLayout {
+public class MDRippleLayout_XX extends FrameLayout {
 
     private static final int     DEFAULT_DURATION        = 350;
     private static final int     DEFAULT_FADE_DURATION   = 75;
@@ -96,15 +96,15 @@ public class MDRippleLayout extends FrameLayout {
         return new RippleBuilder(view);
     }
 
-    public MDRippleLayout(Context context) {
+    public MDRippleLayout_XX(Context context) {
         this(context, null);
     }
 
-    public MDRippleLayout(Context context, AttributeSet attrs) {
+    public MDRippleLayout_XX(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MDRippleLayout(Context context, AttributeSet attrs, int defStyle) {
+    public MDRippleLayout_XX(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         setWillNotDraw(false);
@@ -403,13 +403,13 @@ public class MDRippleLayout extends FrameLayout {
 
     private void setPositionInAdapter() {
         if (rippleInAdapter) {
-            positionInAdapter = findParentAdapterView().getPositionForView(MDRippleLayout.this);
+            positionInAdapter = findParentAdapterView().getPositionForView(MDRippleLayout_XX.this);
         }
     }
 
     private boolean adapterPositionChanged() {
         if (rippleInAdapter) {
-            int newPosition = findParentAdapterView().getPositionForView(MDRippleLayout.this);
+            int newPosition = findParentAdapterView().getPositionForView(MDRippleLayout_XX.this);
             final boolean changed = newPosition != positionInAdapter;
             positionInAdapter = newPosition;
             if (changed) {
@@ -487,15 +487,15 @@ public class MDRippleLayout extends FrameLayout {
     /*
      * Animations
      */
-    private Property<MDRippleLayout, Float> radiusProperty
-        = new Property<MDRippleLayout, Float>(Float.class, "radius") {
+    private Property<MDRippleLayout_XX, Float> radiusProperty
+        = new Property<MDRippleLayout_XX, Float>(Float.class, "radius") {
         @Override
-        public Float get(MDRippleLayout object) {
+        public Float get(MDRippleLayout_XX object) {
             return object.getRadius();
         }
 
         @Override
-        public void set(MDRippleLayout object, Float value) {
+        public void set(MDRippleLayout_XX object, Float value) {
             object.setRadius(value);
         }
     };
@@ -510,15 +510,15 @@ public class MDRippleLayout extends FrameLayout {
         invalidate();
     }
 
-    private Property<MDRippleLayout, Integer> circleAlphaProperty
-        = new Property<MDRippleLayout, Integer>(Integer.class, "rippleAlpha") {
+    private Property<MDRippleLayout_XX, Integer> circleAlphaProperty
+        = new Property<MDRippleLayout_XX, Integer>(Integer.class, "rippleAlpha") {
         @Override
-        public Integer get(MDRippleLayout object) {
+        public Integer get(MDRippleLayout_XX object) {
             return object.getRippleAlpha();
         }
 
         @Override
-        public void set(MDRippleLayout object, Integer value) {
+        public void set(MDRippleLayout_XX object, Integer value) {
             object.setRippleAlpha(value);
         }
     };
@@ -640,12 +640,12 @@ public class MDRippleLayout extends FrameLayout {
         }
 
         private void clickAdapterView(AdapterView parent) {
-            final int position = parent.getPositionForView(MDRippleLayout.this);
+            final int position = parent.getPositionForView(MDRippleLayout_XX.this);
             final long itemId = parent.getAdapter() != null
                 ? parent.getAdapter().getItemId(position)
                 : 0;
             if (position != AdapterView.INVALID_POSITION) {
-                parent.performItemClick(MDRippleLayout.this, position, itemId);
+                parent.performItemClick(MDRippleLayout_XX.this, position, itemId);
             }
         }
     }
@@ -761,8 +761,8 @@ public class MDRippleLayout extends FrameLayout {
             return this;
         }
 
-        public MDRippleLayout create() {
-            MDRippleLayout layout = new MDRippleLayout(context);
+        public MDRippleLayout_XX create() {
+            MDRippleLayout_XX layout = new MDRippleLayout_XX(context);
             layout.setRippleColor(rippleColor);
             layout.setDefaultRippleAlpha((int) rippleAlpha);
             layout.setRippleDelayClick(rippleDelayClick);
@@ -780,7 +780,7 @@ public class MDRippleLayout extends FrameLayout {
             ViewGroup parent = (ViewGroup) child.getParent();
             int index = 0;
 
-            if (parent != null && parent instanceof MDRippleLayout) {
+            if (parent != null && parent instanceof MDRippleLayout_XX) {
                 throw new IllegalStateException("MaterialRippleLayout could not be created: parent of the view already is a MaterialRippleLayout");
             }
 

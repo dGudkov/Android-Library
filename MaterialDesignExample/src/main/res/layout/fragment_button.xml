@@ -103,23 +103,6 @@
         <!--app:sl_dy='5dp'-->
         <!--app:sl_shadowColor="@color/default_shadow_color">-->
 
-        <!--<ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/view2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:mrl_rippleAlpha="0.2"-->
-        <!--app:mrl_rippleColor="#72727272"-->
-        <!--app:mrl_rippleHover="true"-->
-        <!--app:mrl_rippleOverlay="true">-->
-
-        <!--<Button-->
-        <!--android:id="@+id/button2"-->
-        <!--style="@style/MultiGradient"-->
-        <!--android:layout_width="120dp"-->
-        <!--android:layout_height="55dp"-->
-        <!--android:text="New Button" />-->
-        <!--</ru.gdo.android.library.materialdesign.widget.MaterialRippleLayout>-->
-        <!--</ru.gdo.android.library.materialdesign.widget.ShadowLayout>-->
 
     </LinearLayout>
 </ScrollView>

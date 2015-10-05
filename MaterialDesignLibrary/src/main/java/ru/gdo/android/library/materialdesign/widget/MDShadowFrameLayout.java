@@ -13,13 +13,13 @@ import android.widget.LinearLayout;
  * @since 05.10.15.
  */
 
-public class MDShadowLayout extends MDShadow {
+public class MDShadowFrameLayout extends MDShadow {
 
 //    private LinearLayout mLayout;
     private FrameLayout mFrameLayout;
 
 
-    public MDShadowLayout(Context context, AttributeSet attrs) {
+    public MDShadowFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

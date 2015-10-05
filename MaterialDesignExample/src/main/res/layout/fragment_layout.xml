@@ -11,45 +11,69 @@
         android:orientation="vertical"
         tools:context="ru.gdo.android.example.materialdesign.fragments.LayoutFragment">
 
-        <ru.gdo.android.library.materialdesign.widget.MDShadowLayout
+        <ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/frame_shadow"
             android:orientation="vertical"
             app:sl_cornerRadius="5dp"
             app:sl_dx='5dp'
             app:sl_dy='5dp'
-            app:sl_shadow="@color/md_grey_shadow"
-            android:background="@drawable/frame_shadow"
-            android:layout_marginBottom="25dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp" >
+            app:sl_shadow="@color/md_grey_shadow">
 
             <include layout="@layout/fragment_button_amber" />
 
-        </ru.gdo.android.library.materialdesign.widget.MDShadowLayout>
+        </ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout>
 
-        <ru.gdo.android.library.materialdesign.widget.MDShadowLayout
+        <ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:sl_cornerRadius="5dp"
-            app:sl_dx='7dp'
-            app:sl_dy='7dp'
-            app:sl_shadow="@color/md_grey_shadow"
-            app:sl_animEnabled="false"
-            android:background="@drawable/frame_shadow"
+            android:layout_marginEnd="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp" >
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_shadow"
+            android:orientation="vertical"
+            app:sl_animEnabled="false"
+            app:sl_cornerRadius="5dp"
+            app:sl_dx='7dp'
+            app:sl_dy='7dp'
+            app:sl_shadow="@color/md_grey_shadow">
 
             <include layout="@layout/fragment_button_deeporange" />
 
-        </ru.gdo.android.library.materialdesign.widget.MDShadowLayout>
+        </ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout>
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowRippleFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_shadow"
+            android:orientation="vertical"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_animEnabled="true"
+            app:sl_cornerRadius="5dp"
+            app:sl_dx='7dp'
+            app:sl_dy='7dp'
+            app:sl_shadow="@color/md_grey_shadow">
+
+            <include layout="@layout/fragment_button_deeporange" />
+
+        </ru.gdo.android.library.materialdesign.widget.MDShadowRippleFrameLayout>
 
     </LinearLayout>
 

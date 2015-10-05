@@ -244,19 +244,19 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
     }
 
     private void initAttributes(Context context, AttributeSet attrs) {
-        TypedArray attr = getTypedArray(context, attrs, R.styleable.MDShadowLayout);
+        TypedArray attr = getTypedArray(context, attrs, R.styleable.MDShadowFrameLayout);
         if (attr == null) {
             return;
         }
 
         try {
-            this.mShadowAttributes.setCornerRadius(attr.getDimension(R.styleable.MDShadowLayout_sl_cornerRadius, MDShadowAttributes.DEFAULT_CORNER_RADIUS));
-            this.mShadowAttributes.setShadowRadius(attr.getDimension(R.styleable.MDShadowLayout_sl_shadowRadius, MDShadowAttributes.DEFAULT_SHADOW_RADIUS));
-            this.mShadowAttributes.setDx(attr.getDimension(R.styleable.MDShadowLayout_sl_dx, MDShadowAttributes.DEFAULT_SHADOW_DX));
-            this.mShadowAttributes.setDy(attr.getDimension(R.styleable.MDShadowLayout_sl_dy, MDShadowAttributes.DEFAULT_SHADOW_DY));
-            this.mShadowAttributes.setShadow(attr.getResourceId(R.styleable.MDShadowLayout_sl_shadow, MDShadowAttributes.DEFAULT_NULL_RESOURCES_ID));
-            this.mShadowAttributes.setAnimationEnabled(attr.getBoolean(R.styleable.MDShadowLayout_sl_animEnabled, MDShadowAttributes.DEFAULT_ANIMATION_ENABLED));
-            this.mShadowAttributes.setDuration(attr.getInt(R.styleable.MDShadowLayout_sl_duration, MDShadowAttributes.DEFAULT_DURATION));
+            this.mShadowAttributes.setCornerRadius(attr.getDimension(R.styleable.MDShadowFrameLayout_sl_cornerRadius, MDShadowAttributes.DEFAULT_CORNER_RADIUS));
+            this.mShadowAttributes.setShadowRadius(attr.getDimension(R.styleable.MDShadowFrameLayout_sl_shadowRadius, MDShadowAttributes.DEFAULT_SHADOW_RADIUS));
+            this.mShadowAttributes.setDx(attr.getDimension(R.styleable.MDShadowFrameLayout_sl_dx, MDShadowAttributes.DEFAULT_SHADOW_DX));
+            this.mShadowAttributes.setDy(attr.getDimension(R.styleable.MDShadowFrameLayout_sl_dy, MDShadowAttributes.DEFAULT_SHADOW_DY));
+            this.mShadowAttributes.setShadow(attr.getResourceId(R.styleable.MDShadowFrameLayout_sl_shadow, MDShadowAttributes.DEFAULT_NULL_RESOURCES_ID));
+            this.mShadowAttributes.setAnimationEnabled(attr.getBoolean(R.styleable.MDShadowFrameLayout_sl_animEnabled, MDShadowAttributes.DEFAULT_ANIMATION_ENABLED));
+            this.mShadowAttributes.setDuration(attr.getInt(R.styleable.MDShadowFrameLayout_sl_duration, MDShadowAttributes.DEFAULT_DURATION));
             if (this.mShadowAttributes.getDuration() < 0) {
                 this.mShadowAttributes.setDuration(1);
                 this.mShadowAttributes.setAnimationEnabled(false);

@@ -11,34 +11,33 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.widget.Button;
+import android.widget.FrameLayout;
 
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
  * @copyrights ProgForce, 2015
- * @since 30.09.15.
+ * @since 05.10.15.
  */
 
-public class MDRippleButton extends Button implements OnTouchListener {
+public class MDRippleFrameLayout extends FrameLayout implements View.OnTouchListener {
 
     private MDRipple mdRipple;
 
-    public MDRippleButton(Context context) {
+    public MDRippleFrameLayout(Context context) {
         this(context, null);
     }
 
-    public MDRippleButton(Context context, AttributeSet attrs) {
+    public MDRippleFrameLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MDRippleButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MDRippleFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MDRippleButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MDRippleFrameLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView(context, attrs);
     }
@@ -50,7 +49,6 @@ public class MDRippleButton extends Button implements OnTouchListener {
         this.setOnTouchListener(this);
         this.mdRipple.setLayerType();
     }
-
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -70,7 +68,7 @@ public class MDRippleButton extends Button implements OnTouchListener {
 
     @Override
     public CharSequence getAccessibilityClassName() {
-        return MDRippleButton.class.getName();
+        return MDRippleFrameLayout.class.getName();
     }
 
     /*

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="MDShadowLayout">
+    <declare-styleable name="MDShadowFrameLayout">
         <attr name="sl_cornerRadius" format="dimension"/>
         <attr name="sl_shadowRadius" format="dimension"/>
         <attr name="sl_shadow" format="integer"/>
