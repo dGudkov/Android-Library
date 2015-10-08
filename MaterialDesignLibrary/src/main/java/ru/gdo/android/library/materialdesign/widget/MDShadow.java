@@ -35,6 +35,11 @@ import ru.gdo.android.library.materialdesign.R;
 
 public abstract class MDShadow extends FrameLayout implements View.OnTouchListener {
 
+    private static final String ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android";
+    private static final String ATTRIBUTE_ENABLED = "enabled";
+
+    private static final boolean DEFAULT_ENABLED = true;
+
     protected TranslateAnimation mDownAnimation;
     protected long startTime;
 
@@ -53,6 +58,7 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
         initView(context, attrs);
     }
 
+    @SuppressWarnings("unused")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MDShadow(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -74,8 +80,8 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(int w, int h, int oldW, int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
 
         this.mShadowAttributes.getBounds().set(0, 0, w, h);
         if (w > 0 && h > 0 && (this.getBackground() == null ||
@@ -127,10 +133,10 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
                             this.clearAnimation();
 
                             Matrix transformationMatrix = trans.getMatrix();
-                            float[] matrixVals = new float[9];
-                            transformationMatrix.getValues(matrixVals);
-                            xTraveled = matrixVals[2];
-                            yTraveled = matrixVals[5];
+                            float[] matrixValues = new float[9];
+                            transformationMatrix.getValues(matrixValues);
+                            xTraveled = matrixValues[2];
+                            yTraveled = matrixValues[5];
                         }
 
                         TranslateAnimation upAnimation = new TranslateAnimation(xTraveled.floatValue(), 0, yTraveled.floatValue(), 0);
@@ -206,6 +212,7 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
         return 0;
     }
 
+    @SuppressWarnings("unused")
     public void setAnimationEnabled(boolean animationEnabled) {
         if (animationEnabled) {
             setDuration(MDShadowAttributes.DEFAULT_DURATION);
@@ -248,6 +255,8 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
         if (attr == null) {
             return;
         }
+
+        this.setEnabled(attrs.getAttributeBooleanValue(ANDROID_NAMESPACE, ATTRIBUTE_ENABLED, DEFAULT_ENABLED));
 
         try {
             this.mShadowAttributes.setCornerRadius(attr.getDimension(R.styleable.MDShadowFrameLayout_sl_cornerRadius, MDShadowAttributes.DEFAULT_CORNER_RADIUS));
@@ -292,7 +301,7 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
     }
 
     private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight,
-                                             int fillColor) {
+                                      int fillColor) {
         Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
@@ -374,12 +383,14 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
         return output_bitmap;
     }
 
+    @SuppressWarnings("unused")
     protected void invalidateShadow() {
         this.mShadowAttributes.setForceInvalidateShadow(true);
         requestLayout();
         invalidate();
     }
 
+    @SuppressWarnings("unused")
     protected void setInvalidateShadowOnSizeChanged(boolean invalidateShadowOnSizeChanged) {
         this.mShadowAttributes.setInvalidateShadowOnSizeChanged(invalidateShadowOnSizeChanged);
     }
@@ -499,4 +510,14 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
             this.mInvalidateShadowOnSizeChanged = invalidateShadowOnSizeChanged;
         }
     }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        for(int i = 0; i < this.getChildCount(); i++){
+            this.getChildAt(i).setEnabled(enabled);
+        }
+
+    }
+
 }

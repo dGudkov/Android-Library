@@ -67,8 +67,8 @@ public abstract class ToolBarFragmentActivity<I extends IMenuItem> extends AppCo
         }
         this.mMenuFragment.setUp(getNavigationDrawerId(),
                 (DrawerLayout) findViewById(getDrawerLayoutId()),
-                this.mToolBar,
-                getMenuItenClass()
+                this.mToolBar
+//                getMenuItenClass()
         );
 
         this.mMenuFragment.setDrawerListener(this);
@@ -165,5 +165,5 @@ public abstract class ToolBarFragmentActivity<I extends IMenuItem> extends AppCo
 
     protected abstract BaseFragment getFragment(int position);
 
-    protected abstract Class<I> getMenuItenClass();
+//    protected abstract Class<I> getMenuItenClass();
 }

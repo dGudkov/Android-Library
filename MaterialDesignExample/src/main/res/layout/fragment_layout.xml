@@ -13,8 +13,7 @@
 
         <ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_height="150dp"
             android:layout_marginEnd="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -22,18 +21,32 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/frame_shadow"
             android:orientation="vertical"
+            android:enabled="false"
             app:sl_cornerRadius="5dp"
             app:sl_dx='5dp'
             app:sl_dy='5dp'
             app:sl_shadow="@color/md_grey_shadow">
 
-            <include layout="@layout/fragment_button_amber" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Material design Frame layout disabled"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#000000" />
+
+            </RelativeLayout>
 
         </ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout>
 
         <ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="150dp"
             android:layout_marginEnd="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -43,17 +56,62 @@
             android:orientation="vertical"
             app:sl_animEnabled="false"
             app:sl_cornerRadius="5dp"
+            app:sl_dx='5dp'
+            app:sl_dy='5dp'
+            app:sl_shadow="@color/md_grey_shadow">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Material design Frame layout"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#000000" />
+
+            </RelativeLayout>
+
+        </ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout>
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_shadow"
+            android:orientation="vertical"
+            app:sl_cornerRadius="5dp"
             app:sl_dx='7dp'
             app:sl_dy='7dp'
             app:sl_shadow="@color/md_grey_shadow">
 
-            <include layout="@layout/fragment_button_deeporange" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Clickable material design Frame layout"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#000000" />
+
+            </RelativeLayout>
 
         </ru.gdo.android.library.materialdesign.widget.MDShadowFrameLayout>
 
-        <ru.gdo.android.library.materialdesign.widget.MDShadowRippleFrameLayout
+        <ru.gdo.android.library.materialdesign.widget.MDRippleShadowFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="150dp"
             android:layout_marginEnd="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -65,15 +123,101 @@
             app:rl_Color="#585858"
             app:rl_Hover="true"
             app:rl_Overlay="true"
-            app:sl_animEnabled="true"
+            app:sl_animEnabled="false"
             app:sl_cornerRadius="5dp"
             app:sl_dx='7dp'
             app:sl_dy='7dp'
             app:sl_shadow="@color/md_grey_shadow">
 
-            <include layout="@layout/fragment_button_deeporange" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </ru.gdo.android.library.materialdesign.widget.MDShadowRippleFrameLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Material design Frame layout with Ripple effect"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#000000" />
+
+            </RelativeLayout>
+        </ru.gdo.android.library.materialdesign.widget.MDRippleShadowFrameLayout>
+
+        <ru.gdo.android.library.materialdesign.widget.MDRippleShadowFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_shadow"
+            android:orientation="vertical"
+            app:rl_Alpha="0.2"
+            app:rl_Color="#585858"
+            app:rl_Hover="true"
+            app:rl_Overlay="true"
+            app:sl_cornerRadius="5dp"
+            app:sl_dx='7dp'
+            app:sl_dy='7dp'
+            app:sl_shadow="@color/md_grey_shadow">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Clickable Material design Frame layout with Ripple effect"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#000000" />
+
+            </RelativeLayout>
+        </ru.gdo.android.library.materialdesign.widget.MDRippleShadowFrameLayout>
+
+        <ru.gdo.android.library.materialdesign.widget.SlidingToggleSwitchView
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:clickable="false"
+            android:checked="false"
+            />
+
+        <ru.gdo.android.library.materialdesign.widget.SlidingToggleSwitchView
+            android:id="@+id/sliding_toggle_switch"
+            android:layout_width="350dp"
+            android:layout_height="75dp"
+            android:checked="true"
+            android:clickable="true"
+            android:duration="1500"
+            app:offBackground="@drawable/red_button_background"
+            app:offText="@string/str_sliding_touch_switch_right"
+            app:onBackground="@drawable/green_button_background"
+            app:onText="@string/str_sliding_touch_switch_left"
+            app:sliderBackground="@drawable/toggle_frame_blue" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <CheckBox
+            android:id="@+id/checkChecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true" />
+
+        <CheckBox
+            android:id="@+id/checkBoxEnabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true" />
 
     </LinearLayout>
 

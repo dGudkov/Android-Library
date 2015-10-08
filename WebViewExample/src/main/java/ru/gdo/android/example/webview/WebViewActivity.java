@@ -68,11 +68,6 @@ public class WebViewActivity extends ToolBarFragmentActivity {
     }
 
     @Override
-    protected Class<MenuTextItem> getMenuItenClass() {
-        return MenuTextItem.class;
-    }
-
-    @Override
     protected BaseFragment getFragment(int position) {
         BaseFragment fragment = null;
         switch (position) {
@@ -93,7 +88,7 @@ public class WebViewActivity extends ToolBarFragmentActivity {
                         this.mToolBar,
                         this,
                         R.string.str_yandex_fragment_title,
-                        "http://yandex.ru/search/?text=adnroid");
+                        "http://yandex.ru/search/?text=android");
                 break;
             case BING_FRAGMENT:
                 fragment = WebViewFragment.newInstance(

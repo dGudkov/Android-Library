@@ -9,8 +9,8 @@
         <shape android:shape="rectangle">
 
             <gradient
-                android:startColor="@color/md_purple_button_disabled_end"
-                android:endColor="@color/md_purple_button_disabled_start"
+                android:startColor="#8d000000"
+                android:endColor="#a4000000"
                 android:gradientRadius="50"
                 android:centerY="1"
                 android:type="radial"/>
@@ -27,8 +27,8 @@
 
             <gradient
                 android:angle="270"
-                android:startColor="@color/md_purple_button_pressed_start"
-                android:endColor="@color/md_purple_button_pressed_end"
+                android:startColor="#8d6b6b6b"
+                android:endColor="#8d2b2b2b"
                 android:gradientRadius="50"
                 android:centerY="0"
                 android:type="radial" />
@@ -46,8 +46,8 @@
 
             <gradient
                 android:angle="270"
-                android:startColor="@color/md_purple_button_normal_end"
-                android:endColor="@color/md_purple_button_normal_start"
+                android:startColor="#8d6b6b6b"
+                android:endColor="#8d2b2b2b"
                 android:gradientRadius="50"
                 android:centerY="1"
                 android:type="radial" />

@@ -34,8 +34,6 @@ public abstract class BaseMenuFragment<I extends IMenuItem> extends Fragment {
     private FragmentDrawerListener drawerListener;
 
     private boolean menuShowing = false;
-    private Class<I> mMenuItemClassModel;
-    private int menuLayoutId;
 
     public BaseMenuFragment() {
 
@@ -81,8 +79,8 @@ public abstract class BaseMenuFragment<I extends IMenuItem> extends Fragment {
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout,
-                      final Toolbar toolbar,
-                      final Class<I> mMenuItemClassModel) {
+                      final Toolbar toolbar
+    ) {
 
         this.containerView = getActivity().findViewById(fragmentId);
         this.mDrawerLayout = drawerLayout;
@@ -117,7 +115,6 @@ public abstract class BaseMenuFragment<I extends IMenuItem> extends Fragment {
         });
 
         this.mDrawerToggle.setDrawerIndicatorEnabled(false);
-        this.mMenuItemClassModel = mMenuItemClassModel;
 
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -125,10 +122,6 @@ public abstract class BaseMenuFragment<I extends IMenuItem> extends Fragment {
         if (getView() != null) {
             getView().getLayoutParams().width = (int) (metrics.widthPixels * 0.5);
         }
-    }
-
-    private I initMenuItem() throws Exception {
-        return mMenuItemClassModel.newInstance();
     }
 
     public interface FragmentDrawerListener {

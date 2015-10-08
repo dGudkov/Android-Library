@@ -76,10 +76,9 @@
             app:rl_Color="#585858"
             app:rl_Hover="true"
             app:rl_Overlay="true"
-            app:sl_animEnabled="false"
             app:sl_cornerRadius="5dp"
-            app:sl_dx='0dp'
-            app:sl_dy='0dp'
+            app:sl_dx='3dp'
+            app:sl_dy='3dp'
             app:sl_shadow="@drawable/md_button_shadow" />
 
         <ru.gdo.android.library.materialdesign.widget.MDShadowButton

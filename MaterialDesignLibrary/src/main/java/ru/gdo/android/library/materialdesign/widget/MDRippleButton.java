@@ -37,6 +37,7 @@ public class MDRippleButton extends Button implements OnTouchListener {
         initView(context, attrs);
     }
 
+    @SuppressWarnings("unused")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MDRippleButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -51,16 +52,15 @@ public class MDRippleButton extends Button implements OnTouchListener {
         this.mdRipple.setLayerType();
     }
 
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        return this.mdRipple.onTouch(v, event);
+        return this.mdRipple.onTouch(event);
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        this.mdRipple.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(int w, int h, int oldW, int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
+        this.mdRipple.onSizeChanged(w, h);
     }
 
     @Override
@@ -117,62 +117,75 @@ public class MDRippleButton extends Button implements OnTouchListener {
     /*
     * Accessor
     */
-
+    @SuppressWarnings("unused")
     public void setRippleColor(int rippleColor) {
         this.mdRipple.setRippleColor(rippleColor);
         invalidate();
     }
 
+    @SuppressWarnings("unused")
     public void setRippleOverlay(boolean rippleOverlay) {
         this.mdRipple.setRippleOverlay(rippleOverlay);
     }
 
+    @SuppressWarnings("unused")
     public void setRippleDiameter(int rippleDiameter) {
         this.mdRipple.setRippleDiameter(rippleDiameter);
     }
 
+    @SuppressWarnings("unused")
     public void setRippleDuration(int rippleDuration) {
         this.mdRipple.setRippleDuration(rippleDuration);
     }
 
+    @SuppressWarnings("unused")
     public void setRippleBackground(int color) {
         this.mdRipple.setRippleBackground(color);
         invalidate();
     }
 
+    @SuppressWarnings("unused")
     public void setRippleHover(boolean rippleHover) {
         this.mdRipple.setRippleHover(rippleHover);
     }
 
+    @SuppressWarnings("unused")
     public void setRippleDelayClick(boolean rippleDelayClick) {
         this.mdRipple.setRippleDelayClick(rippleDelayClick);
     }
 
+    @SuppressWarnings("unused")
     public void setRippleFadeDuration(int rippleFadeDuration) {
         this.mdRipple.setRippleFadeDuration(rippleFadeDuration);
     }
 
+    @SuppressWarnings("unused")
     public void setRipplePersistent(boolean ripplePersistent) {
         this.mdRipple.setRipplePersistent(ripplePersistent);
     }
 
+    @SuppressWarnings("unused")
     public void setRippleInAdapter(boolean rippleInAdapter) {
         this.mdRipple.setRippleInAdapter(rippleInAdapter);
     }
 
+    @SuppressWarnings("unused")
     public void setRippleRoundedCorners(int rippleRoundedCorner) {
         this.mdRipple.setRippleRoundedCorners(rippleRoundedCorner);
     }
 
+    @SuppressWarnings("unused")
     public void setDefaultRippleAlpha(int alpha) {
         this.mdRipple.setRippleAlpha(alpha);
         invalidate();
     }
 
+    @SuppressWarnings("unused")
     public void performRipple() {
         this.mdRipple.performRipple();
     }
 
+    @SuppressWarnings("unused")
     public void performRipple(Point anchor) {
         this.mdRipple.performRipple(anchor);
     }

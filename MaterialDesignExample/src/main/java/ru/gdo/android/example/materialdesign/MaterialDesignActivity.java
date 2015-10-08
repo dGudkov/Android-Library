@@ -67,11 +67,6 @@ public class MaterialDesignActivity extends ToolBarFragmentActivity {
     }
 
     @Override
-    protected Class<MenuTextItem> getMenuItenClass() {
-        return MenuTextItem.class;
-    }
-
-    @Override
     protected BaseFragment getFragment(int position) {
         BaseFragment fragment = null;
         switch (position) {

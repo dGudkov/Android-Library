@@ -4,4 +4,10 @@
     <string name="menu_open">Menu open</string>
     <string name="menu_close">Menu close</string>
 
+    <string name="str_sliding_touch_switch_on">On</string>
+    <string name="str_sliding_touch_switch_off">Off</string>
+
+    <string name="str_sliding_touch_switch_left">Left</string>
+    <string name="str_sliding_touch_switch_right">Right</string>
+
 </resources>

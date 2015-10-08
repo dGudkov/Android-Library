@@ -84,28 +84,27 @@ public class MDRipple {
 
     private View mView;
 
-    private GestureDetector.SimpleOnGestureListener mLongClickListener = new GestureDetector.SimpleOnGestureListener() {
-        public void onLongPress(MotionEvent e) {
-            mHasPerformedLongPress = MDRipple.this.mView.performLongClick();
-            if (mHasPerformedLongPress) {
-                if (mRippleHover) {
-                    startRipple(null);
-                }
-                cancelPressedEvent();
-            }
-        }
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            MDRipple.this.mHasPerformedLongPress = false;
-            return super.onDown(e);
-        }
-    };
-
     public MDRipple(View view, Context context, AttributeSet attrs) {
         this.mView = view;
 
-        this.mGestureDetector = new GestureDetector(context, this.mLongClickListener);
+        GestureDetector.SimpleOnGestureListener mLongClickListener = new GestureDetector.SimpleOnGestureListener() {
+            public void onLongPress(MotionEvent e) {
+                mHasPerformedLongPress = MDRipple.this.mView.performLongClick();
+                if (mHasPerformedLongPress) {
+                    if (mRippleHover) {
+                        startRipple(null);
+                    }
+                    cancelPressedEvent();
+                }
+            }
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                MDRipple.this.mHasPerformedLongPress = false;
+                return super.onDown(e);
+            }
+        };
+        this.mGestureDetector = new GestureDetector(context, mLongClickListener);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RippleLayout);
 
@@ -131,12 +130,12 @@ public class MDRipple {
         this.mPaint.setAlpha(this.mRippleAlpha);
     }
 
-    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+    public void onSizeChanged(int w, int h) {
         this.mBounds.set(0, 0, w, h);
         this.mRippleBackground.setBounds(this.mBounds);
     }
 
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(MotionEvent event) {
         if (!this.mView.isEnabled()) return false;
 
         boolean isEventInBounds = this.mBounds.contains((int) event.getX(), (int) event.getY());
@@ -178,7 +177,7 @@ public class MDRipple {
                 case MotionEvent.ACTION_DOWN:
                     setPositionInAdapter();
                     this.mEventCancelled = false;
-                    this.mPendingPressEvent = new PressedEvent(event);
+                    this.mPendingPressEvent = new PressedEvent();
                     if (this.isInScrollingContainer()) {
                         cancelPressedEvent();
                         this.mPrepressed = true;
@@ -223,7 +222,7 @@ public class MDRipple {
         }
     }
 
-        private void cancelPressedEvent() {
+    private void cancelPressedEvent() {
         if (this.mPendingPressEvent != null) {
             this.mView.removeCallbacks(this.mPendingPressEvent);
             mPrepressed = false;
@@ -256,12 +255,6 @@ public class MDRipple {
 
     private final class PressedEvent implements Runnable {
 
-        private final MotionEvent event;
-
-        public PressedEvent(MotionEvent event) {
-            this.event = event;
-        }
-
         @Override
         public void run() {
             MDRipple.this.mPrepressed = true;
@@ -273,38 +266,9 @@ public class MDRipple {
     }
 
     /*
-    * Accessor
-    */
-
-    private final Paint mPaint  = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-    private Point mCurrentCoords  = new Point();
-
-    private int mLayerType;
-
-    /**
-     * {@link Canvas#clipPath(Path)} is not supported in hardware accelerated layers
-     * before API 18. Use software layer instead
-     * <p/>
-     * https://developer.android.com/guide/topics/graphics/hardware-accel.html#unsupported
-     */
-    public void setLayerType() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            if (this.mRippleRoundedCorners != 0) {
-                this.mLayerType = this.mView.getLayerType();
-                this.mView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            } else {
-                this.mView.setLayerType(this.mLayerType, null);
-            }
-        }
-    }
-
-    /*
     * Adapters
     */
-
     private AdapterView mParentAdapter;
-
     private int mPositionInAdapter;
 
     private AdapterView findParentAdapterView() {
@@ -352,7 +316,6 @@ public class MDRipple {
     * Animations
     */
     private ObjectAnimator mHoverAnimator;
-
     private AnimatorSet mRippleAnimator;
 
     private Property<MDRipple, Float> mRadiusProperty
@@ -467,6 +430,26 @@ public class MDRipple {
     /*
     * Accessor
     */
+    private final Paint mPaint  = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Point mCurrentCoords  = new Point();
+    private int mLayerType;
+
+    /**
+     * {@link Canvas#clipPath(Path)} is not supported in hardware accelerated layers
+     * before API 18. Use software layer instead
+     * <p/>
+     * https://developer.android.com/guide/topics/graphics/hardware-accel.html#unsupported
+     */
+    public void setLayerType() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if (this.mRippleRoundedCorners != 0) {
+                this.mLayerType = this.mView.getLayerType();
+                this.mView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            } else {
+                this.mView.setLayerType(this.mLayerType, null);
+            }
+        }
+    }
 
     public void setRippleColor(int rippleColor) {
         this.mRippleColor = rippleColor;
@@ -528,6 +511,7 @@ public class MDRipple {
         return this.mRippleRoundedCorners;
     }
 
+    @SuppressWarnings("unused")
     public void setDefaultRippleAlpha(int alpha) {
         this.mRippleAlpha = alpha;
         this.mPaint.setAlpha(alpha);

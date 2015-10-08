@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 /**
@@ -13,13 +12,13 @@ import android.widget.LinearLayout;
  * @since 05.10.15.
  */
 
-public class MDShadowRippleFrameLayout extends MDShadow {
+public class MDRippleShadowFrameLayout extends MDShadow {
 
     //    private LinearLayout mLayout;
     private MDRippleFrameLayout mRippleFrameLayout;
 
 
-    public MDShadowRippleFrameLayout(Context context, AttributeSet attrs) {
+    public MDRippleShadowFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

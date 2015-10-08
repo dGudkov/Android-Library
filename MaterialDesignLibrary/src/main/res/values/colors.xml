@@ -4,27 +4,43 @@
     <!-- =       Material Design Buttons            = -->
     <!-- ========================================== -->
 
-    <color name="md_button_disabled_text">#EBC7BE</color>
-    <color name="md_button_pressed_text">#000000</color>
+    <!--<color name="md_button_disabled_text">#EBC7BE</color>-->
+    <!--<color name="md_button_pressed_text">#000000</color>-->
+    <!--<color name="md_button_normal_text">#FFFFFF</color>-->
+
+    <!--<color name="md_button_pressed_start">#822300</color>-->
+    <!--<color name="md_button_pressed_end">#D7530F</color>-->
+    <!--<color name="md_button_pressed_start_multi">#E68E15</color>-->
+    <!--<color name="md_button_pressed_end_multi">#FDD401</color>-->
+    <!--<color name="md_button_pressed_border">#862501</color>-->
+
+    <!--<color name="md_button_disabled_start">#EAB6A6</color>-->
+    <!--<color name="md_button_disabled_end">#C9AB9D</color>-->
+    <!--<color name="md_button_disabled_start_multi">#F2E08F</color>-->
+    <!--<color name="md_button_disabled_end_multi">#EAC896</color>-->
+    <!--<color name="md_button_disabled_border">#EBC7BE</color>-->
+
+    <!--<color name="md_button_normal_start">#DF5A20</color>-->
+    <!--<color name="md_button_normal_end">#904321</color>-->
+    <!--<color name="md_button_normal_start_multi">#FDD401</color>-->
+    <!--<color name="md_button_normal_end_multi">#E68E15</color>-->
+    <!--<color name="md_button_normal_border">#862501</color>-->
+
+    <color name="md_button_disabled_text">#614438</color>
+    <color name="md_button_pressed_text">#936855</color>
     <color name="md_button_normal_text">#FFFFFF</color>
 
-    <color name="md_button_pressed_start">#822300</color>
-    <color name="md_button_pressed_end">#D7530F</color>
-    <color name="md_button_pressed_start_multi">#E68E15</color>
-    <color name="md_button_pressed_end_multi">#FDD401</color>
-    <color name="md_button_pressed_border">#862501</color>
+    <color name="md_button_pressed_start">#AB924D</color>
+    <color name="md_button_pressed_end">#DEBD64</color>
+    <color name="md_button_pressed_border">#614438</color>
 
-    <color name="md_button_disabled_start">#EAB6A6</color>
-    <color name="md_button_disabled_end">#C9AB9D</color>
-    <color name="md_button_disabled_start_multi">#F2E08F</color>
-    <color name="md_button_disabled_end_multi">#EAC896</color>
-    <color name="md_button_disabled_border">#EBC7BE</color>
+    <color name="md_button_disabled_start">#DEBD64</color>
+    <color name="md_button_disabled_end">#AB924D</color>
+    <color name="md_button_disabled_border">#614438</color>
 
-    <color name="md_button_normal_start">#DF5A20</color>
-    <color name="md_button_normal_end">#904321</color>
-    <color name="md_button_normal_start_multi">#FDD401</color>
-    <color name="md_button_normal_end_multi">#E68E15</color>
-    <color name="md_button_normal_border">#862501</color>
+    <color name="md_button_normal_start">#DEBD64</color>
+    <color name="md_button_normal_end">#AB924D</color>
+    <color name="md_button_normal_border">#614438</color>
 
     <!-- ========================================== -->
     <!-- =       Red palette                      = -->

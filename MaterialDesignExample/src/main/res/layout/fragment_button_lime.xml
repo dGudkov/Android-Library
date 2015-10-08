@@ -54,7 +54,6 @@
             app:rl_Hover="true"
             app:rl_Overlay="true"
             app:sl_cornerRadius="5dp"
-            app:sl_duration="50"
             app:sl_dx='3dp'
             app:sl_dy='3dp'
             app:sl_shadow="@drawable/md_button_shadow" />
