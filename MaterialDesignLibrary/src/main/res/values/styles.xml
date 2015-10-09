@@ -36,33 +36,33 @@
     </style>
 
     <style name="LinearGradientPurple" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_purple_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_purple_button_selector_color</item>
+        <item name="android:background">@drawable/md_purple_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_purple_selector_color</item>
     </style>
 
     <style name="RadiusGradientPurple" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_purple_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_purple_button_selector_color</item>
+        <item name="android:background">@drawable/md_purple_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_purple_selector_color</item>
     </style>
 
     <style name="LinearGradientDeepPurple" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_deeppurple_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_deeppurple_button_selector_color</item>
+        <item name="android:background">@drawable/md_deeppurple_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_deeppurple_selector_color</item>
     </style>
 
     <style name="RadiusGradientDeepPurple" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_deeppurple_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_deeppurple_button_selector_color</item>
+        <item name="android:background">@drawable/md_deeppurple_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_deeppurple_selector_color</item>
     </style>
 
     <style name="LinearGradientIndigo" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_indigo_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_indigo_button_selector_color</item>
+        <item name="android:background">@drawable/md_indigo_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_indigo_selector_color</item>
     </style>
 
     <style name="RadiusGradientIndigo" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_indigo_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_indigo_button_selector_color</item>
+        <item name="android:background">@drawable/md_indigo_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_indigo_selector_color</item>
     </style>
 
     <style name="LinearGradientBlue" parent="MDButtonStyle">
@@ -76,133 +76,133 @@
     </style>
 
     <style name="LinearGradientLightBlue" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_lightblue_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_lightblue_button_selector_color</item>
+        <item name="android:background">@drawable/md_lightblue_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_lightblue_selector_color</item>
     </style>
 
     <style name="RadiusGradientLightBlue" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_lightblue_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_lightblue_button_selector_color</item>
+        <item name="android:background">@drawable/md_lightblue_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_lightblue_selector_color</item>
     </style>
 
     <style name="LinearGradientCyan" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_cyan_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_cyan_button_selector_color</item>
+        <item name="android:background">@drawable/md_cyan_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_cyan_selector_color</item>
     </style>
 
     <style name="RadiusGradientCyan" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_cyan_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_cyan_button_selector_color</item>
+        <item name="android:background">@drawable/md_cyan_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_cyan_selector_color</item>
     </style>
 
     <style name="LinearGradientTeal" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_teal_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_teal_button_selector_color</item>
+        <item name="android:background">@drawable/md_teal_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_teal_selector_color</item>
     </style>
 
     <style name="RadiusGradientTeal" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_teal_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_teal_button_selector_color</item>
+        <item name="android:background">@drawable/md_teal_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_teal_selector_color</item>
     </style>
 
     <style name="LinearGradientGreen" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_green_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_green_button_selector_color</item>
+        <item name="android:background">@drawable/md_green_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_green_selector_color</item>
     </style>
 
     <style name="RadiusGradientGreen" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_green_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_green_button_selector_color</item>
+        <item name="android:background">@drawable/md_green_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_green_selector_color</item>
     </style>
 
     <style name="LinearGradientLightGreen" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_lightgreen_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_lightgreen_button_selector_color</item>
+        <item name="android:background">@drawable/md_lightgreen_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_lightgreen_selector_color</item>
     </style>
 
     <style name="RadiusGradientLightGreen" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_lightgreen_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_lightgreen_button_selector_color</item>
+        <item name="android:background">@drawable/md_lightgreen_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_lightgreen_selector_color</item>
     </style>
 
     <style name="LinearGradientLime" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_lime_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_lime_button_selector_color</item>
+        <item name="android:background">@drawable/md_lime_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_lime_selector_color</item>
     </style>
 
     <style name="RadiusGradientLime" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_lime_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_lime_button_selector_color</item>
+        <item name="android:background">@drawable/md_lime_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_lime_selector_color</item>
     </style>
 
     <style name="LinearGradientYellow" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_yellow_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_yellow_button_selector_color</item>
+        <item name="android:background">@drawable/md_yellow_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_yellow_selector_color</item>
     </style>
 
     <style name="RadiusGradientYellow" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_yellow_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_yellow_button_selector_color</item>
+        <item name="android:background">@drawable/md_yellow_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_yellow_selector_color</item>
     </style>
 
     <style name="LinearGradientAmber" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_amber_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_amber_button_selector_color</item>
+        <item name="android:background">@drawable/md_amber_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_amber_selector_color</item>
     </style>
 
     <style name="RadiusGradientAmber" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_amber_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_amber_button_selector_color</item>
+        <item name="android:background">@drawable/md_amber_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_amber_selector_color</item>
     </style>
 
     <style name="LinearGradientOrange" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_orange_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_orange_button_selector_color</item>
+        <item name="android:background">@drawable/md_orange_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_orange_selector_color</item>
     </style>
 
     <style name="RadiusGradientOrange" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_orange_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_orange_button_selector_color</item>
+        <item name="android:background">@drawable/md_orange_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_orange_selector_color</item>
     </style>
 
     <style name="LinearGradientDeepOrange" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_deeporange_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_deeporange_button_selector_color</item>
+        <item name="android:background">@drawable/md_deeporange_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_deeporange_selector_color</item>
     </style>
 
     <style name="RadiusGradientDeepOrange" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_deeporange_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_deeporange_button_selector_color</item>
+        <item name="android:background">@drawable/md_deeporange_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_deeporange_selector_color</item>
     </style>
 
     <style name="LinearGradientBrown" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_brown_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_brown_button_selector_color</item>
+        <item name="android:background">@drawable/md_brown_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_brown_selector_color</item>
     </style>
 
     <style name="RadiusGradientBrown" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_brown_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_brown_button_selector_color</item>
+        <item name="android:background">@drawable/md_brown_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_brown_selector_color</item>
     </style>
 
     <style name="LinearGradientGrey" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_grey_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_grey_button_selector_color</item>
+        <item name="android:background">@drawable/md_grey_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_grey_selector_color</item>
     </style>
 
     <style name="RadiusGradientGrey" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_grey_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_grey_button_selector_color</item>
+        <item name="android:background">@drawable/md_grey_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_grey_selector_color</item>
     </style>
 
     <style name="LinearGradientBlueGrey" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_bluegrey_button_selector_linear_gradient</item>
-        <item name="android:textColor">@drawable/md_bluegrey_button_selector_color</item>
+        <item name="android:background">@drawable/md_bluegrey_selector_linear_gradient</item>
+        <item name="android:textColor">@drawable/md_bluegrey_selector_color</item>
     </style>
 
     <style name="RadiusGradientBlueGrey" parent="MDButtonStyle">
-        <item name="android:background">@drawable/md_bluegrey_button_selector_radius_gradient</item>
-        <item name="android:textColor">@drawable/md_bluegrey_button_selector_color</item>
+        <item name="android:background">@drawable/md_bluegrey_selector_radius_gradient</item>
+        <item name="android:textColor">@drawable/md_bluegrey_selector_color</item>
     </style>
 
 </resources>

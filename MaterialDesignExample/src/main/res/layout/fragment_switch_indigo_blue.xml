@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            app:offBackground="@drawable/md_indigo_selector_linear_gradient"
+            app:onBackground="@drawable/md_indigo_selector_linear_gradient"
+            app:offText="@string/str_sliding_touch_switch_right"
+            app:onText="@string/str_sliding_touch_switch_left"
+            app:sl_duration="50"
+            app:sl_dx='5dp'
+            app:sl_dy='5dp'
+            app:sl_shadow="@color/md_indigo_shadow" />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            app:offBackground="@drawable/md_indigo_selector_linear_gradient"
+            app:onBackground="@drawable/md_blue_selector_linear_gradient"
+            app:offText="@string/str_indigo"
+            app:onText="@string/str_blue"
+            app:sl_animEnabled="false"
+            app:sl_duration="50"
+            app:sl_dx='5dp'
+            app:sl_dy='5dp'
+            app:sl_shadow="@color/md_indigo_shadow" />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:duration="1000"
+            android:checked="false"
+            app:offBackground="@drawable/md_blue_selector_linear_gradient"
+            app:onBackground="@drawable/md_indigo_selector_linear_gradient"
+            app:offText="@string/str_blue"
+            app:onText="@string/str_indigo"
+            app:sl_duration="50"
+            app:sl_dx='5dp'
+            app:sl_dy='5dp'
+            app:sl_shadow="@color/md_blue_shadow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            app:sliderBackground="@drawable/md_indigo_selector_linear_gradient"
+            android:checked="false"
+            android:enabled="false"
+            app:sl_duration="50"
+            app:sl_dx='5dp'
+            app:sl_dy='5dp'
+            app:sl_shadow="@color/md_indigo_shadow" />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            app:sliderBackground="@drawable/md_indigo_selector_linear_gradient"
+            app:sl_animEnabled="false"
+            app:sl_dx='5dp'
+            app:sl_dy='5dp'
+            app:sl_shadow="@color/md_indigo_shadow" />
+
+        <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:duration="1000"
+            app:offBackground="@drawable/md_indigo_selector_linear_gradient"
+            app:onBackground="@drawable/md_indigo_selector_linear_gradient"
+            app:sliderBackground="@drawable/md_blue_selector_linear_gradient"
+            app:sl_duration="50"
+            app:sl_dx='5dp'
+            app:sl_dy='5dp'
+            app:sl_shadow="@color/md_blue_shadow" />
+
+    </LinearLayout>
+
+</LinearLayout>

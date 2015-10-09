@@ -21,7 +21,7 @@ import ru.gdo.android.library.materialdesign.widget.MDToggle;
  * @since 08.10.15.
  */
 
-public class SwitchFragment extends BaseFragment implements OnToggleListener {
+public class SwitchFragment extends BaseFragment {
 
     private TextView tvSelected;
     private CompoundButton.OnCheckedChangeListener checkListener;
@@ -43,52 +43,11 @@ public class SwitchFragment extends BaseFragment implements OnToggleListener {
             this.mToolBar.findViewById(R.id.status_bar_calendar_layout).setVisibility(View.INVISIBLE);
             this.mToolBar.findViewById(R.id.status_bar_calendar).setVisibility(View.INVISIBLE);
 
-            sw = (MDShadowToggle) rootView.findViewById(R.id.sliding_toggle_switch);
-
-            cbChecked = (CheckBox) rootView.findViewById(R.id.checkChecked);
-            cbChecked.setChecked(sw.isChecked());
-            checkListener = new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    sw.setChecked(isChecked, 2000);
-                }
-            };
-            cbChecked.setOnCheckedChangeListener(checkListener);
-
-            CheckBox cbEnabled = (CheckBox) rootView.findViewById(R.id.checkBoxEnabled);
-            cbEnabled.setChecked(sw.isEnabled());
-            cbEnabled.setOnCheckedChangeListener(
-                    new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            sw.setEnabled(isChecked);
-                        }
-                    }
-            );
-
-            tvSelected = (TextView) rootView.findViewById(R.id.textView1);
-            tvSelected.setText(sw.getText(MDToggle.SWITCH_ON));
-
-            sw.setOnToggleListener(this);
-            sw.setTextSize(25);
-
             return rootView;
         } else {
             throw new ToolBarActivityException("Error fragment initialization");
         }
 
-    }
-
-    @Override
-    public void onToggle(int result) {
-
-//        try {
-//            cbChecked.setOnCheckedChangeListener(null);
-//            cbChecked.setChecked(result == MDToggle.SWITCH_ON);
-//        } finally {
-//            cbChecked.setOnCheckedChangeListener(checkListener);
-//        }
-//        tvSelected.setText(sw.getText());
     }
 
 }

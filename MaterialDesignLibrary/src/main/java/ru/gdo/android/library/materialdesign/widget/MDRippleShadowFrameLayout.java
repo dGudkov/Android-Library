@@ -14,10 +14,6 @@ import android.widget.LinearLayout;
 
 public class MDRippleShadowFrameLayout extends MDShadow {
 
-    //    private LinearLayout mLayout;
-    private MDRippleFrameLayout mRippleFrameLayout;
-
-
     public MDRippleShadowFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -25,28 +21,25 @@ public class MDRippleShadowFrameLayout extends MDShadow {
     @Override
     public void initView(Context context, AttributeSet attrs) {
         super.initView(context, attrs);
-        this.mRippleFrameLayout = new MDRippleFrameLayout(context, attrs);
     }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-
-        this.mRippleFrameLayout.removeAllViews();
+    protected void initLayout() {
+        ViewGroup vGroup = (ViewGroup) this.mChildView;
+        vGroup.removeAllViews();
         while (this.getChildCount() > 0) {
             View child = this.getChildAt(0);
             this.removeView(child);
-            this.mRippleFrameLayout.addView(child);
+            vGroup.addView(child);
         }
         this.addView(
-                this.mRippleFrameLayout,
+                vGroup,
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     @Override
-    public boolean isViewEnabled() {
-        return (isEnabled() &&
-                this.mRippleFrameLayout.isEnabled());
+    public View getChildView(Context context, AttributeSet attrs) {
+        return new MDRippleFrameLayout(context, attrs);
     }
 
 }

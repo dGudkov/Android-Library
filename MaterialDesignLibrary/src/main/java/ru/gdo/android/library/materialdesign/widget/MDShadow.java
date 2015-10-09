@@ -15,8 +15,10 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,8 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import ru.gdo.android.library.materialdesign.R;
 
@@ -42,6 +46,9 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
 
     protected TranslateAnimation mDownAnimation;
     protected long startTime;
+    protected View mChildView;
+
+    private GestureDetector mGestureDetector;
 
     private MDShadowAttributes mShadowAttributes = new MDShadowAttributes();
 
@@ -67,6 +74,7 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
 
     protected void initView(Context context, AttributeSet attrs) {
 
+        this.mChildView = getChildView(context, attrs);
         initAttributes(context, attrs);
 
         this.setPadding(
@@ -77,6 +85,14 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
         );
 
         setOnTouchListener(this);
+
+        GestureDetector.SimpleOnGestureListener mLongClickListener = new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public void onLongPress(MotionEvent e) {
+                MDShadow.this.performLongClick();
+            }
+        };
+        this.mGestureDetector = new GestureDetector(context, mLongClickListener);
     }
 
     @Override
@@ -93,6 +109,17 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        this.initLayout();
+        {
+            for (int i = 0; i < this.getChildCount(); i++) {
+                this.getChildAt(i).setEnabled(this.isEnabled());
+            }
+        }
+    }
+
+    @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
@@ -100,7 +127,6 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
             this.mShadowAttributes.setForceInvalidateShadow(false);
             this.setBackgroundCompat(right - left, bottom - top);
         }
-
     }
 
     @Override
@@ -115,88 +141,93 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
 
         if (!isEnabled()) return superOnTouchEvent;
 
-        try {
-            int action = event.getActionMasked();
-            switch (action) {
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    if (this.mShadowAttributes.isAnimationEnabled()) {
-                        Float xTraveled = this.mShadowAttributes.getDx();
-                        Float yTraveled = this.mShadowAttributes.getDy();
-                        if (mDownAnimation != null) {
-                            Transformation trans = new Transformation();
-                            long endTime = mDownAnimation.getStartTime() + System.currentTimeMillis() - startTime;
-                            mDownAnimation.getTransformation(endTime, trans);
+        boolean gestureResult = this.mGestureDetector.onTouchEvent(event);
+        if (gestureResult) {
+            return true;
+        } else {
+            try {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (this.mShadowAttributes.isAnimationEnabled()) {
+                            Float xTraveled = this.mShadowAttributes.getDx();
+                            Float yTraveled = this.mShadowAttributes.getDy();
+                            if (mDownAnimation != null) {
+                                Transformation trans = new Transformation();
+                                long endTime = mDownAnimation.getStartTime() + System.currentTimeMillis() - startTime;
+                                mDownAnimation.getTransformation(endTime, trans);
 
-                            this.clearAnimation();
+                                this.clearAnimation();
 
-                            Matrix transformationMatrix = trans.getMatrix();
-                            float[] matrixValues = new float[9];
-                            transformationMatrix.getValues(matrixValues);
-                            xTraveled = matrixValues[2];
-                            yTraveled = matrixValues[5];
+                                Matrix transformationMatrix = trans.getMatrix();
+                                float[] matrixValues = new float[9];
+                                transformationMatrix.getValues(matrixValues);
+                                xTraveled = matrixValues[2];
+                                yTraveled = matrixValues[5];
+                            }
+
+                            TranslateAnimation upAnimation = new TranslateAnimation(xTraveled.floatValue(), 0, yTraveled.floatValue(), 0);
+                            upAnimation.setDuration(this.mShadowAttributes.getDuration());
+                            upAnimation.setFillAfter(true);
+                            upAnimation.setAnimationListener(new TranslateAnimation.AnimationListener() {
+
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    MDShadow.this.setBackgroundCompat(
+                                            MDShadow.this.mShadowAttributes.getBounds().width(),
+                                            MDShadow.this.mShadowAttributes.getBounds().height());
+                                }
+                            });
+                            this.startAnimation(upAnimation);
+                        }
+                        return true;
+                    case MotionEvent.ACTION_DOWN:
+                        this.clearAnimation();
+                        if (this.mShadowAttributes.isAnimationEnabled()) {
+                            mDownAnimation = new TranslateAnimation(0, this.mShadowAttributes.getDx(), 0, this.mShadowAttributes.getDy());
+                            mDownAnimation.setDuration(this.mShadowAttributes.getDuration());
+                            mDownAnimation.setFillAfter(true);
+
+                            mDownAnimation.setAnimationListener(new TranslateAnimation.AnimationListener() {
+
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    mDownAnimation = null;
+                                }
+                            });
+
+                            this.startAnimation(mDownAnimation);
+                            startTime = System.currentTimeMillis();
+                            this.setNullableDrawable();
                         }
 
-                        TranslateAnimation upAnimation = new TranslateAnimation(xTraveled.floatValue(), 0, yTraveled.floatValue(), 0);
-                        upAnimation.setDuration(this.mShadowAttributes.getDuration());
-                        upAnimation.setFillAfter(true);
-                        upAnimation.setAnimationListener(new TranslateAnimation.AnimationListener() {
-
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                MDShadow.this.setBackgroundCompat(
-                                        MDShadow.this.mShadowAttributes.getBounds().width(),
-                                        MDShadow.this.mShadowAttributes.getBounds().height());
-                            }
-                        });
-                        this.startAnimation(upAnimation);
-                    }
-                    return true;
-                case MotionEvent.ACTION_DOWN:
-                    this.clearAnimation();
-                    if (this.mShadowAttributes.isAnimationEnabled()) {
-                        mDownAnimation = new TranslateAnimation(0, this.mShadowAttributes.getDx(), 0, this.mShadowAttributes.getDy());
-                        mDownAnimation.setDuration(this.mShadowAttributes.getDuration());
-                        mDownAnimation.setFillAfter(true);
-
-                        mDownAnimation.setAnimationListener(new TranslateAnimation.AnimationListener() {
-
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                mDownAnimation = null;
-                            }
-                        });
-
-                        this.startAnimation(mDownAnimation);
-                        startTime = System.currentTimeMillis();
-                        this.setNullableDrawable();
-                    }
-
-                    return true;
-                case MotionEvent.ACTION_MOVE:
-                    return true;
-            }
-        } finally {
-            for(int i = 0; i < this.getChildCount(); i++){
-                this.getChildAt(i).dispatchTouchEvent(event);
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        return true;
+                }
+            } finally {
+                for (int i = 0; i < this.getChildCount(); i++) {
+                    this.getChildAt(i).dispatchTouchEvent(event);
+                }
             }
         }
         return superOnTouchEvent;
@@ -211,6 +242,18 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
     protected int getSuggestedMinimumHeight() {
         return 0;
     }
+
+    @Override
+    public boolean performLongClick() {
+        Boolean result = super.performLongClick();
+
+        if (this.mChildView != null) {
+            this.mChildView.performLongClick();
+        }
+
+        return result;
+    }
+
 
     @SuppressWarnings("unused")
     public void setAnimationEnabled(boolean animationEnabled) {
@@ -232,7 +275,22 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
     }
 
 
-    public abstract boolean isViewEnabled();
+    public boolean isViewEnabled() {
+        return (isEnabled() && (this.mChildView != null) && (this.mChildView.isEnabled()));
+    }
+
+    public abstract View getChildView(Context context, AttributeSet attrs);
+
+    protected void initLayout() {
+        if (this.mChildView != null) {
+            if (this.getChildCount() > 0) {
+                this.removeAllViews();
+            }
+            this.addView(
+                    this.mChildView,
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+    }
 
     private boolean findClickableViewInChild(View view, int x, int y) {
         if (view instanceof ViewGroup) {
@@ -519,6 +577,55 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
                 this.getChildAt(i).setEnabled(enabled);
             }
             invalidateShadow();
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void setTextSize(int unit, float size) {
+        if ((this.mChildView != null) && (this.mChildView instanceof TextView)) {
+            ((TextView) this.mChildView).setTextSize(unit, size);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void setTextSize(float size) {
+        if ((this.mChildView != null) && (this.mChildView instanceof TextView)) {
+            ((TextView) this.mChildView).setTextSize(size);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void setText(CharSequence text) {
+        if ((this.mChildView != null) && (this.mChildView instanceof TextView)) {
+            ((TextView) this.mChildView).setText(text);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void setText(CharSequence text, TextView.BufferType type) {
+        if ((this.mChildView != null) && (this.mChildView instanceof TextView)) {
+            ((TextView) this.mChildView).setText(text, type);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void setText(char[] text, int start, int len) {
+        if ((this.mChildView != null) && (this.mChildView instanceof TextView)) {
+            ((TextView) this.mChildView).setText(text, start, len);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void setText(@StringRes int resId) {
+        if ((this.mChildView != null) && (this.mChildView instanceof TextView)) {
+            ((TextView) this.mChildView).setText(resId);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void setText(@StringRes int resId, TextView.BufferType type) {
+        if ((this.mChildView != null) && (this.mChildView instanceof TextView)) {
+            ((TextView) this.mChildView).setText(resId, type);
         }
     }
 

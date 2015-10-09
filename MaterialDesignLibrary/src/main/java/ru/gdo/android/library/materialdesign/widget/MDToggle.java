@@ -12,9 +12,7 @@ import android.os.Build;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -161,11 +159,6 @@ public class MDToggle extends FrameLayout implements
 
         this.mBtnMovable.setBackgroundDrawable(this.movableButtonBackground[this.mPosition]);
 
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
     }
 
     @Override

@@ -26,7 +26,7 @@
             app:sl_duration="50"
             app:sl_dx='3dp'
             app:sl_dy='3dp'
-            app:sl_shadow="@drawable/md_button_shadow" />
+            app:sl_shadow="@drawable/md_shadow" />
 
         <ru.gdo.android.library.materialdesign.widget.MDShadowButton
             style="@style/LinearGradientCyan"
@@ -57,7 +57,7 @@
             app:sl_duration="50"
             app:sl_dx='3dp'
             app:sl_dy='3dp'
-            app:sl_shadow="@drawable/md_button_shadow" />
+            app:sl_shadow="@drawable/md_shadow" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,7 +79,7 @@
             app:sl_cornerRadius="5dp"
             app:sl_dx='3dp'
             app:sl_dy='3dp'
-            app:sl_shadow="@drawable/md_button_shadow" />
+            app:sl_shadow="@drawable/md_shadow" />
 
         <ru.gdo.android.library.materialdesign.widget.MDShadowButton
             style="@style/RadiusGradientCyan"

@@ -2,9 +2,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ru.gdo.android.example.materialdesign.fragments.SwitchFragment">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,94 +18,23 @@
 
         <include layout="@layout/fragment_switch_red_pink" />
 
-        <!--<include layout="@layout/fragment_button_purple" />-->
+        <include layout="@layout/fragment_switch_purple_deeppurple" />
 
-        <!--<include layout="@layout/fragment_button_deeppurple" />-->
+        <include layout="@layout/fragment_switch_indigo_blue" />
 
-        <!--<include layout="@layout/fragment_button_indigo" />-->
+        <include layout="@layout/fragment_switch_lightblue_cyan" />
 
-        <!--<include layout="@layout/fragment_button_blue" />-->
+        <include layout="@layout/fragment_switch_teal_green" />
 
-        <!--<include layout="@layout/fragment_button_lightblue" />-->
+        <include layout="@layout/fragment_switch_lightgreen_lime" />
 
-        <!--<include layout="@layout/fragment_button_cyan" />-->
+        <include layout="@layout/fragment_switch_yellow_amber" />
 
-        <!--<include layout="@layout/fragment_button_teal" />-->
+        <include layout="@layout/fragment_switch_orange_deeporange" />
 
-        <!--<include layout="@layout/fragment_button_green" />-->
+        <include layout="@layout/fragment_switch_brown_grey" />
 
-        <!--<include layout="@layout/fragment_button_lightgreen" />-->
-
-        <!--<include layout="@layout/fragment_button_lime" />-->
-
-        <!--<include layout="@layout/fragment_button_yellow" />-->
-
-        <!--<include layout="@layout/fragment_button_amber" />-->
-
-        <!--<include layout="@layout/fragment_button_orange" />-->
-
-        <!--<include layout="@layout/fragment_button_deeporange" />-->
-
-        <!--<include layout="@layout/fragment_button_brown" />-->
-
-        <!--<include layout="@layout/fragment_button_grey" />-->
-
-        <!--<include layout="@layout/fragment_button_bluegrey" />        -->
-
-        <ru.gdo.android.library.materialdesign.widget.MDToggle
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:clickable="false"
-            android:checked="false" />
-
-        <ru.gdo.android.library.materialdesign.widget.MDToggle
-            android:layout_width="350dp"
-            android:layout_height="75dp"
-            android:checked="true"
-            android:clickable="true"
-            android:duration="1500"
-            android:enabled="false"
-            app:offBackground="@drawable/md_red_selector_linear_gradient"
-            app:onBackground="@drawable/md_pink_selector_linear_gradient"
-            app:offText="@string/str_sliding_touch_switch_right"
-            app:onText="@string/str_sliding_touch_switch_left"
-            app:sliderBackground="@drawable/md_blue_selector_linear_gradient" />
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <CheckBox
-            android:id="@+id/checkChecked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true" />
-
-        <CheckBox
-            android:id="@+id/checkBoxEnabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true" />
-
-        <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
-            android:id="@+id/sliding_toggle_switch"
-            android:layout_width="350dp"
-            android:layout_height="75dp"
-            android:checked="true"
-            android:enabled="false"
-            android:duration="1500"
-            app:offText="@string/str_sliding_touch_switch_right"
-            app:onText="@string/str_sliding_touch_switch_left"
-            app:sliderBackground="@drawable/md_blue_selector_linear_gradient"
-            app:offBackground="@drawable/md_pink_selector_linear_gradient"
-            app:onBackground="@drawable/md_red_selector_linear_gradient"
-            app:sl_duration="50"
-            app:sl_dx='5dp'
-            app:sl_dy='5dp'
-            app:sl_shadow="@color/md_indigo_shadow"/>
+        <include layout="@layout/fragment_button_bluegrey_orange" />
 
     </LinearLayout>
 
