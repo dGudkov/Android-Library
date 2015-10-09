@@ -5,8 +5,8 @@
     <!-- ========================================== -->
 
     <dimen name="md_button_padding">8dp</dimen>
-    <dimen name="md_button_corner_radius">8dp</dimen>
-    <dimen name="md_button_stroke_width">2dp</dimen>
+    <dimen name="md_corner_radius">8dp</dimen>
+    <dimen name="md_stroke_width">2dp</dimen>
     <dimen name="md_button_layer_padding">1dp</dimen>
     <dimen name="md_button_button_height">50dp</dimen>
     <dimen name="md_button_half_button_height">25dp</dimen>

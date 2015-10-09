@@ -21,8 +21,8 @@ public class MDShadowButton extends MDShadow {
 
     @Override
     public void initView(Context context, AttributeSet attrs) {
-        super.initView(context, attrs);
         this.mChildButton = new MDRippleButton(context, attrs);
+        super.initView(context, attrs);
     }
 
     @Override
@@ -37,12 +37,14 @@ public class MDShadowButton extends MDShadow {
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
+    @SuppressWarnings("unused")
     public void setTextSize(int unit, float size) {
         if (this.mChildButton != null) {
             this.mChildButton.setTextSize(unit, size);
         }
     }
 
+    @SuppressWarnings("unused")
     public void setTextSize(float size) {
         if (this.mChildButton != null) {
             this.mChildButton.setTextSize(size);

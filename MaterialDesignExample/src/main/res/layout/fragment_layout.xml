@@ -180,45 +180,6 @@
             </RelativeLayout>
         </ru.gdo.android.library.materialdesign.widget.MDRippleShadowFrameLayout>
 
-        <ru.gdo.android.library.materialdesign.widget.SlidingToggleSwitchView
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:clickable="false"
-            android:checked="false"
-            />
-
-        <ru.gdo.android.library.materialdesign.widget.SlidingToggleSwitchView
-            android:id="@+id/sliding_toggle_switch"
-            android:layout_width="350dp"
-            android:layout_height="75dp"
-            android:checked="true"
-            android:clickable="true"
-            android:duration="1500"
-            app:offBackground="@drawable/red_button_background"
-            app:offText="@string/str_sliding_touch_switch_right"
-            app:onBackground="@drawable/green_button_background"
-            app:onText="@string/str_sliding_touch_switch_left"
-            app:sliderBackground="@drawable/toggle_frame_blue" />
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <CheckBox
-            android:id="@+id/checkChecked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true" />
-
-        <CheckBox
-            android:id="@+id/checkBoxEnabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true" />
-
     </LinearLayout>
 
 </ScrollView>

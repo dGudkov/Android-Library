@@ -13,7 +13,6 @@
         <Button
             android:id="@+id/movable_button"
             android:layout_width="0.0dip"
-            android:background="@drawable/light_button_background"
             android:layout_height="match_parent"
             android:layout_weight="1.0" />
 
@@ -38,14 +37,14 @@
             android:layout_width="0.0dip"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/transparent_button_background" />
+            android:background="@drawable/md_transparent_background" />
 
         <Button
             android:id="@+id/button_right"
             android:layout_width="0.0dip"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/transparent_button_background" />
+            android:background="@drawable/md_transparent_background" />
     </LinearLayout>
 
 </merge>

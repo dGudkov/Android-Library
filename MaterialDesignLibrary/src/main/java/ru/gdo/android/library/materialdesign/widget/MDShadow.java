@@ -103,12 +103,10 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
 
     }
 
-
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         return !findClickableViewInChild(this, (int) event.getX(), (int) event.getY());
     }
-
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -192,6 +190,8 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
                         this.setNullableDrawable();
                     }
 
+                    return true;
+                case MotionEvent.ACTION_MOVE:
                     return true;
             }
         } finally {
@@ -513,11 +513,13 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
 
     @Override
     public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        for(int i = 0; i < this.getChildCount(); i++){
-            this.getChildAt(i).setEnabled(enabled);
+        if (isEnabled() != enabled) {
+            super.setEnabled(enabled);
+            for (int i = 0; i < this.getChildCount(); i++) {
+                this.getChildAt(i).setEnabled(enabled);
+            }
+            invalidateShadow();
         }
-
     }
 
 }

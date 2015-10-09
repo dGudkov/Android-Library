@@ -2,6 +2,7 @@ package ru.gdo.android.library.materialdesign.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -25,8 +26,8 @@ public class MDShadowFrameLayout extends MDShadow {
 
     @Override
     public void initView(Context context, AttributeSet attrs) {
-        super.initView(context, attrs);
         this.mFrameLayout = new FrameLayout(context, attrs);
+        super.initView(context, attrs);
     }
 
     @Override

@@ -6,9 +6,9 @@
 
             <gradient android:angle="270" android:endColor="@color/md_deeppurple_button_disabled_end" android:startColor="@color/md_deeppurple_button_disabled_start" />
 
-            <corners android:radius="@dimen/md_button_corner_radius" />
+            <corners android:radius="@dimen/md_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_deeppurple_button_disabled_border" />
+            <stroke android:width="@dimen/md_stroke_width" android:color="@color/md_deeppurple_button_disabled_border" />
 
         </shape>
     </item>
@@ -18,9 +18,9 @@
 
             <gradient android:angle="270" android:endColor="@color/md_deeppurple_button_pressed_end" android:startColor="@color/md_deeppurple_button_pressed_start" />
 
-            <corners android:radius="@dimen/md_button_corner_radius" />
+            <corners android:radius="@dimen/md_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_deeppurple_button_pressed_border" />
+            <stroke android:width="@dimen/md_stroke_width" android:color="@color/md_deeppurple_button_pressed_border" />
 
         </shape>
     </item>
@@ -30,9 +30,9 @@
 
             <gradient android:angle="270" android:endColor="@color/md_deeppurple_button_normal_end" android:startColor="@color/md_deeppurple_button_normal_start" />
 
-            <corners android:radius="@dimen/md_button_corner_radius" />
+            <corners android:radius="@dimen/md_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_deeppurple_button_normal_border" />
+            <stroke android:width="@dimen/md_stroke_width" android:color="@color/md_deeppurple_button_normal_border" />
 
         </shape>
     </item>

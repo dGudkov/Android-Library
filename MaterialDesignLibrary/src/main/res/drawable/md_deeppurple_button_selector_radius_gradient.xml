@@ -15,9 +15,9 @@
                 android:centerY="1"
                 android:type="radial"/>
 
-            <corners android:radius="@dimen/md_button_corner_radius" />
+            <corners android:radius="@dimen/md_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_deeppurple_button_disabled_border" />
+            <stroke android:width="@dimen/md_stroke_width" android:color="@color/md_deeppurple_button_disabled_border" />
 
         </shape>
     </item>
@@ -33,9 +33,9 @@
                 android:centerY="0"
                 android:type="radial" />
 
-            <corners android:radius="@dimen/md_button_corner_radius" />
+            <corners android:radius="@dimen/md_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_deeppurple_button_pressed_border" />
+            <stroke android:width="@dimen/md_stroke_width" android:color="@color/md_deeppurple_button_pressed_border" />
 
         </shape>
 
@@ -52,9 +52,9 @@
                 android:centerY="1"
                 android:type="radial" />
 
-            <corners android:radius="@dimen/md_button_corner_radius" />
+            <corners android:radius="@dimen/md_corner_radius" />
 
-            <stroke android:width="@dimen/md_button_stroke_width" android:color="@color/md_deeppurple_button_normal_border" />
+            <stroke android:width="@dimen/md_stroke_width" android:color="@color/md_deeppurple_button_normal_border" />
 
         </shape>
     </item>
