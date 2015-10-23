@@ -33,10 +33,26 @@ public class MDToggle extends FrameLayout implements
 
     private static final String ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android";
     private static final String ATTRIBUTE_DURATION = "duration";
-    private static final String ATTRIBUTE_CHECKED  = "checked";
+    private static final String ATTRIBUTE_CHECKED = "checked";
 
     public static final int SWITCH_ON = 0;
     public static final int SWITCH_OFF = 1;
+
+    private enum Mode {
+        switch_slider(0), switch_background(1);
+        int value;
+
+        Mode(int value) {
+            this.value = value;
+        }
+
+        static Mode fromId(int value) {
+            for (Mode f : values()) {
+                if (f.value == value) return f;
+            }
+            throw new IllegalArgumentException();
+        }
+    }
 
     private static final int DEFAULT_SLIDER_BACKGROUND_ID = R.drawable.md_default_selector_linear_gradient;
     private static final int DEFAULT_BUTTON_BACKGROUND_ID = R.drawable.md_default_selector_linear_gradient;
@@ -44,6 +60,7 @@ public class MDToggle extends FrameLayout implements
     private static final int DEFAULT_SLIDER_OFF_TEXT_ID = R.string.str_sliding_touch_switch_off;
     private static final int DEFAULT_TEXT_COLOR_ID = Color.BLACK;
     private static final int DEFAULT_DURATION = 100;
+    private static final Mode DEFAULT_MODE = Mode.switch_slider;
     private static final boolean DEFAULT_CHECKED = true;
 
     private Button mBtnMovable;
@@ -61,6 +78,7 @@ public class MDToggle extends FrameLayout implements
     private Drawable[] movableButtonBackground = new Drawable[2];
     private ObjectAnimator mAnimator;
     private float mFraction;
+    private Mode mMode;
 
     public MDToggle(Context context) {
         this(context, null);
@@ -103,7 +121,7 @@ public class MDToggle extends FrameLayout implements
         this.mBtnOff.setOnLongClickListener(this);
 
         this.mDuration = attrs.getAttributeIntValue(ANDROID_NAMESPACE, ATTRIBUTE_DURATION, DEFAULT_DURATION);
-        this.mPosition  = attrs.getAttributeBooleanValue(ANDROID_NAMESPACE, ATTRIBUTE_CHECKED, DEFAULT_CHECKED) ?
+        this.mPosition = attrs.getAttributeBooleanValue(ANDROID_NAMESPACE, ATTRIBUTE_CHECKED, DEFAULT_CHECKED) ?
                 SWITCH_ON : SWITCH_OFF;
 
         TypedArray attr = context.obtainStyledAttributes(attrs,
@@ -112,42 +130,37 @@ public class MDToggle extends FrameLayout implements
         try {
             this.mBtnOn.setTextColor(
                     attr.getColor(
-                            R.styleable.ToggleSwitch_onTextColor,
+                            R.styleable.ToggleSwitch_tg_onTextColor,
                             DEFAULT_TEXT_COLOR_ID
                     )
             );
 
             this.mBtnOff.setTextColor(
                     attr.getColor(
-                            R.styleable.ToggleSwitch_offTextColor,
+                            R.styleable.ToggleSwitch_tg_offTextColor,
                             DEFAULT_TEXT_COLOR_ID
                     )
             );
 
             this.mBtnOn.setText(
                     attr.getResourceId(
-                            R.styleable.ToggleSwitch_onText,
+                            R.styleable.ToggleSwitch_tg_onText,
                             DEFAULT_SLIDER_ON_TEXT_ID
                     )
             );
             this.mBtnOff.setText(
                     attr.getResourceId(
-                            R.styleable.ToggleSwitch_offText,
+                            R.styleable.ToggleSwitch_tg_offText,
                             DEFAULT_SLIDER_OFF_TEXT_ID
                     )
             );
 
-            this.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
-                            attr.getResourceId(
-                                    R.styleable.ToggleSwitch_sliderBackground, DEFAULT_SLIDER_BACKGROUND_ID
-                            )
-                    )
-            );
-
             this.mMovableButtonBackgroundId[SWITCH_ON] = attr
-                    .getResourceId(R.styleable.ToggleSwitch_onBackground, DEFAULT_BUTTON_BACKGROUND_ID);
+                    .getResourceId(R.styleable.ToggleSwitch_tg_onBackground, DEFAULT_BUTTON_BACKGROUND_ID);
             this.mMovableButtonBackgroundId[SWITCH_OFF] = attr
-                    .getResourceId(R.styleable.ToggleSwitch_offBackground, DEFAULT_BUTTON_BACKGROUND_ID);
+                    .getResourceId(R.styleable.ToggleSwitch_tg_offBackground, DEFAULT_BUTTON_BACKGROUND_ID);
+
+            this.mMode = Mode.fromId(attr.getInt(R.styleable.ToggleSwitch_tg_mode, DEFAULT_MODE.value));
 
         } finally {
             attr.recycle();
@@ -156,8 +169,21 @@ public class MDToggle extends FrameLayout implements
         for (int i = 0; i < this.mMovableButtonBackgroundId.length; i++) {
             this.movableButtonBackground[i] = ContextCompat.getDrawable(getContext(), this.mMovableButtonBackgroundId[i]);
         }
+        if (this.mMode == Mode.switch_slider) {
+            this.mBtnMovable.setBackgroundDrawable(this.movableButtonBackground[this.mPosition]);
+            this.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
+                            attr.getResourceId(
+                                    R.styleable.ToggleSwitch_tg_sliderBackground, DEFAULT_SLIDER_BACKGROUND_ID
+                            )
+                    )
+            );
+        } else {
+            this.mBtnMovable.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
+                    attr.getResourceId(
+                            R.styleable.ToggleSwitch_tg_sliderBackground, DEFAULT_SLIDER_BACKGROUND_ID)));
 
-        this.mBtnMovable.setBackgroundDrawable(this.movableButtonBackground[this.mPosition]);
+            this.setBackgroundDrawable(this.movableButtonBackground[this.mPosition]);
+        }
 
     }
 
@@ -235,9 +261,16 @@ public class MDToggle extends FrameLayout implements
                 if (MDToggle.this.mPosition != position) {
                     if (MDToggle.this.mFraction > 0.5) {
                         MDToggle.this.mPosition = position;
-                        MDToggle.this.mBtnMovable.setBackgroundDrawable(
-                                MDToggle.this.movableButtonBackground[position]
-                        );
+
+                        if (MDToggle.this.mMode == Mode.switch_slider) {
+                            MDToggle.this.mBtnMovable.setBackgroundDrawable(
+                                    MDToggle.this.movableButtonBackground[position]
+                            );
+                        } else {
+                            MDToggle.this.setBackgroundDrawable(
+                                    MDToggle.this.movableButtonBackground[position]
+                            );
+                        }
                         if (MDToggle.this.mOnToggleListener != null) {
                             MDToggle.this.mOnToggleListener.onToggle(MDToggle.this.mPosition);
                         }
@@ -406,10 +439,9 @@ public class MDToggle extends FrameLayout implements
                     animateButton(SWITCH_OFF, this.mBtnOff, duration);
                 }
             }
-        } else {
-            if (MDToggle.this.mOnToggleListener != null) {
-                MDToggle.this.mOnToggleListener.onToggle(MDToggle.this.mPosition);
-            }
+        }
+        if (MDToggle.this.mOnToggleListener != null) {
+            MDToggle.this.mOnToggleListener.onToggle(MDToggle.this.mPosition);
         }
     }
 

@@ -8,6 +8,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import ru.gdo.android.example.materialdesign.R;
 import ru.gdo.android.library.materialdesign.exception.ToolBarActivityException;
 import ru.gdo.android.library.materialdesign.interfaces.OnToggleListener;
@@ -42,6 +44,19 @@ public class SwitchFragment extends BaseFragment {
 
             this.mToolBar.findViewById(R.id.status_bar_calendar_layout).setVisibility(View.INVISIBLE);
             this.mToolBar.findViewById(R.id.status_bar_calendar).setVisibility(View.INVISIBLE);
+
+            final TextView tv = (TextView) rootView.findViewById(R.id.switchstate);
+
+            final MDShadowToggle mdShadowToggle = (MDShadowToggle) rootView.findViewById(R.id.defswitch);
+
+            mdShadowToggle.setOnToggleListener(new OnToggleListener() {
+                @Override
+                public void onToggle(int result) {
+                    tv.setText(mdShadowToggle.getText());
+                }
+            });
+
+            mdShadowToggle.setChecked(true);
 
             return rootView;
         } else {

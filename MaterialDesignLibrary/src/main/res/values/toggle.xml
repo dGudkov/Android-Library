@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ToggleSwitch">
+        <attr name="tg_onText" format="integer" />
+        <attr name="tg_offText" format="color" />
+        <attr name="tg_onTextColor" format="color" />
+        <attr name="tg_offTextColor" format="color" />
+        <attr name="tg_sliderBackground" format="integer" />
+        <attr name="tg_onBackground" format="integer" />
+        <attr name="tg_offBackground" format="integer" />
+        <attr name="tg_mode" format="enum">
+            <enum name="switch_slider" value="0" />
+            <enum name="switch_background" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

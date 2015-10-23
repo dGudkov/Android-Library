@@ -13,7 +13,7 @@ import ru.gdo.android.library.materialdesign.interfaces.OnToggleListener;
  * @since 09.10.15.
  */
 
-public class MDShadowToggle extends MDShadow {
+public class MDShadowToggle extends MDShadow<MDToggle> {
 
     public MDShadowToggle(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -47,41 +47,42 @@ public class MDShadowToggle extends MDShadow {
 
     @SuppressWarnings("unused")
     public CharSequence getText(int buttonIndex) {
-        return (this.mChildView != null) ? ((MDToggle) this.mChildView).getText() : null;
+        return (this.mChildView != null) ? this.mChildView.getText() : null;
     }
 
     @SuppressWarnings("unused")
     public CharSequence getText() {
-        return (this.mChildView != null) ? ((MDToggle) this.mChildView).getText() : null;
+        return (this.mChildView != null) ? this.mChildView.getText() : null;
     }
 
     @SuppressWarnings("unused")
     public void setChecked(boolean checked) {
         if (this.mChildView != null) {
-            ((MDToggle) this.mChildView).setChecked(checked);
+            this.mChildView.setChecked(checked);
         }
     }
 
     @SuppressWarnings("unused")
     public void setChecked(boolean checked, int duration) {
         if (this.mChildView != null) {
-            ((MDToggle) this.mChildView).setChecked(checked, duration);
+            this.mChildView.setChecked(checked, duration);
         }
     }
 
     @SuppressWarnings("unused")
     public boolean isChecked() {
-        return this.mChildView != null && ((MDToggle) this.mChildView).isChecked();
+        return (this.mChildView != null) && (this.mChildView.isChecked());
     }
 
+    @SuppressWarnings("unused")
     public void setOnToggleListener(OnToggleListener onToggleListener) {
         if (this.mChildView != null) {
-            ((MDToggle) this.mChildView).setOnToggleListener(onToggleListener);
+            this.mChildView.setOnToggleListener(onToggleListener);
         }
     }
 
     @Override
-    public View getChildView(Context context, AttributeSet attrs) {
+    public MDToggle getChildView(Context context, AttributeSet attrs) {
         return new MDToggle(context, attrs);
     }
 

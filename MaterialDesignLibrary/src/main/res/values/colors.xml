@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ========================================== -->
-    <!-- =       Material Design Buttons            = -->
+    <!-- =       Material Design Colors           = -->
     <!-- ========================================== -->
 
     <color name="md_default_disabled_text">#614438</color>

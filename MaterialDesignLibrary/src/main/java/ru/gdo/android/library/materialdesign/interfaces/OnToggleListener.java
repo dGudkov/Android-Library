@@ -8,6 +8,6 @@ package ru.gdo.android.library.materialdesign.interfaces;
 
 public interface OnToggleListener {
 
-    public void onToggle(int result);
+    void onToggle(int result);
 
 }

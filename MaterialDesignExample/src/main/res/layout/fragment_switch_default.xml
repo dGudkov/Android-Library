@@ -20,6 +20,7 @@
             android:enabled="false"/>
 
         <ru.gdo.android.library.materialdesign.widget.MDShadowToggle
+            android:id="@+id/defswitch"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -27,5 +28,11 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/switchstate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
 
 </LinearLayout>

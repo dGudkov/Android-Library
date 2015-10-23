@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
  * @since 05.10.15.
  */
 
-public class MDRippleShadowFrameLayout extends MDShadow {
+public class MDRippleShadowFrameLayout extends MDShadow<MDRippleFrameLayout> {
 
     public MDRippleShadowFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,7 +38,7 @@ public class MDRippleShadowFrameLayout extends MDShadow {
     }
 
     @Override
-    public View getChildView(Context context, AttributeSet attrs) {
+    public MDRippleFrameLayout getChildView(Context context, AttributeSet attrs) {
         return new MDRippleFrameLayout(context, attrs);
     }
 

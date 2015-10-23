@@ -12,14 +12,14 @@ import android.widget.LinearLayout;
  * @since 30.09.15.
  */
 
-public class MDShadowButton extends MDShadow {
+public class MDShadowButton extends MDShadow<MDRippleButton> {
 
     public MDShadowButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
-    public View getChildView(Context context, AttributeSet attrs) {
+    public MDRippleButton getChildView(Context context, AttributeSet attrs) {
         return new MDRippleButton(context, attrs);
     }
 

@@ -37,7 +37,7 @@ import ru.gdo.android.library.materialdesign.R;
  * @since 05.10.15.
  */
 
-public abstract class MDShadow extends FrameLayout implements View.OnTouchListener {
+public abstract class MDShadow<T extends View> extends FrameLayout implements View.OnTouchListener {
 
     private static final String ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android";
     private static final String ATTRIBUTE_ENABLED = "enabled";
@@ -46,7 +46,7 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
 
     protected TranslateAnimation mDownAnimation;
     protected long startTime;
-    protected View mChildView;
+    protected T mChildView;
 
     private GestureDetector mGestureDetector;
 
@@ -279,7 +279,7 @@ public abstract class MDShadow extends FrameLayout implements View.OnTouchListen
         return (isEnabled() && (this.mChildView != null) && (this.mChildView.isEnabled()));
     }
 
-    public abstract View getChildView(Context context, AttributeSet attrs);
+    public abstract T getChildView(Context context, AttributeSet attrs);
 
     protected void initLayout() {
         if (this.mChildView != null) {

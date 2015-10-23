@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ========================================== -->
-    <!-- =       Material Design Buttons            = -->
+    <!-- =       Material Design                  = -->
     <!-- ========================================== -->
 
     <dimen name="md_button_padding">8dp</dimen>
