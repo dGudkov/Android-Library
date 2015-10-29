@@ -1,6 +1,7 @@
 package ru.gdo.android.example.materialdesign;
 
 import ru.gdo.android.example.materialdesign.fragments.ButtonFragment;
+import ru.gdo.android.example.materialdesign.fragments.CheckBoxFragment;
 import ru.gdo.android.example.materialdesign.fragments.FriendsFragment;
 import ru.gdo.android.example.materialdesign.fragments.HomeFragment;
 import ru.gdo.android.example.materialdesign.fragments.LayoutFragment;
@@ -17,6 +18,7 @@ public class MaterialDesignActivity extends ToolBarFragmentActivity {
     public static final int BUTTON_FRAGMENT = 3;
     public static final int LAYOUTS_FRAGMENT = 4;
     public static final int SWITCH_FRAGMENT = 5;
+    public static final int CHECKBOX_FRAGMENT = 6;
 
     @Override
     protected int getContentViewId() {
@@ -89,6 +91,9 @@ public class MaterialDesignActivity extends ToolBarFragmentActivity {
                 break;
             case SWITCH_FRAGMENT:
                 fragment = BaseFragment.newInstance(SwitchFragment.class, this, this.mToolBar, this);
+                break;
+            case CHECKBOX_FRAGMENT:
+                fragment = BaseFragment.newInstance(CheckBoxFragment.class, this, this.mToolBar, this);
                 break;
         }
         return fragment;

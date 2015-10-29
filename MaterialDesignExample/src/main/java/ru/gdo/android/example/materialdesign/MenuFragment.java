@@ -22,6 +22,7 @@ public class MenuFragment extends BaseMenuFragment<MenuTextItem> {
         objects.add(new MenuTextItem("Buttons"));
         objects.add(new MenuTextItem("Layouts"));
         objects.add(new MenuTextItem("Switches"));
+        objects.add(new MenuTextItem("CheckBoxes"));
 
         return objects;
     }

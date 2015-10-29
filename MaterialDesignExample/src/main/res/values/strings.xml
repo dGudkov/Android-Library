@@ -50,6 +50,12 @@
         ]]>
     </string>
 
+    <string name="str_checkboxes_fragment_title">
+        <![CDATA[
+          <i><b>CheckBoxes</b></i>
+        ]]>
+    </string>
+
     <!-- ========================================== -->
     <!-- =                 Buttons                = -->
     <!-- ========================================== -->
