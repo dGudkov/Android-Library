@@ -7,13 +7,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
+import android.graphics.Path;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.Checkable;
 
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
@@ -21,22 +21,29 @@ import android.view.animation.LinearInterpolator;
  * @since 29.10.15.
  */
 
-public class MDTouchCheckBox extends View {
+public class MDTouchCheckBox extends View implements Checkable {
 
-    private Paint mCirclePaint;
+    private Paint mPaint;
+    private Paint mBorderPaint;
     private Paint mFlagPaint;
-    private int mRadius;                    // Radius of the circle
-    private int width, height;             // Control width and height
-    private int cx, cy;                    // x, y coordinates of the center
-    private float[] points = new float[6]; // Coordinate checkmark three points
-    private float flagProgress;
-    private boolean mChecked;
-    private boolean isAnim;
-    private int mAnimDuration = 1000;
+    private Path mPath = new Path();
+    private int mWidth, mHeight;            // Control width and mHeight
+    private int mCx, mCy;                  // x, y coordinates of the center
+    private float[] mFlagPoints = new float[6]; // Coordinate checkmark three mFlagPoints
+    private boolean mChecked = true;
+    private boolean mInAnimation;
 
-    private OnCheckedChangeListener listener;
-    private int mUnCheckedColor = Color.GRAY;
-    private int mCheckedColor = Color.BLUE;
+    private int mAnimDuration = 1000;
+    private float mAnimationProgress = 1;
+
+    private OnCheckedChangeListener mCheckedChangeListener;
+    private int mCheckedColor = Color.GREEN;
+    private int mCheckedBorderColor = Color.RED;
+    private int mUnCheckedColor = Color.BLUE;
+    private int mUnCheckedBorderColor = Color.YELLOW;
+    private ValueAnimator mAnimator;
+    private boolean mBroadCasting = false;
+    private float mRadius;
 
     public MDTouchCheckBox(Context context) {
         this(context, null);
@@ -65,30 +72,28 @@ public class MDTouchCheckBox extends View {
      */
     private void init(Context context) {
 
-        mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mCirclePaint.setColor(Color.RED);
-        mCirclePaint.setStyle(Paint.Style.FILL);
+        this.mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        this.mPaint.setStyle(Paint.Style.FILL);
 
-        mFlagPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mFlagPaint.setColor(Color.WHITE);
-        mFlagPaint.setStyle(Paint.Style.FILL);
-        mFlagPaint.setStrokeWidth(dip2px(context, 2));
+        this.mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        this.mBorderPaint.setStyle(Paint.Style.STROKE);
+        this.mBorderPaint.setStrokeWidth(MDTools.dip2px(context, 3));
+
+        this.mFlagPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        this.mFlagPaint.setColor(Color.WHITE);
+        this.mFlagPaint.setStyle(Paint.Style.STROKE);
+        this.mFlagPaint.setStrokeWidth(MDTools.dip2px(context, 5));
+
+        this.mAnimator = ValueAnimator.ofFloat(0, 1).
+                setDuration(this.mAnimDuration);
+        this.mAnimator.setInterpolator(new LinearInterpolator());
 
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_UP:
-                        if (mChecked) {
-                            showFlag(false);
-                        } else {
-                            showAsChecked(true);
-                        }
+                        toggle();
                         break;
                 }
                 return true;
@@ -96,26 +101,8 @@ public class MDTouchCheckBox extends View {
         });
     }
 
-    /**
-     * Set the current selected
-     *
-     * @param checked boolean
-     */
-    public void setChecked(boolean checked) {
-        if (this.mChecked && !checked) {
-            showFlag(false);
-        } else if (!this.mChecked && checked) {
-            showAsChecked(true);
-        }
-    }
-
-    /**
-     * Returns the current selected
-     *
-     * @return boolean
-     */
-    public boolean ismChecked() {
-        return mChecked;
+    public void toggle() {
+        setChecked(!this.mChecked);
     }
 
     /**
@@ -129,172 +116,177 @@ public class MDTouchCheckBox extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        height = width = Math.min(w - getPaddingLeft() - getPaddingRight(), h - getPaddingBottom() - getPaddingTop());
-        cx = width / 2;
-        cy = height / 2;
+//        this.mHeight = this.mWidth = Math.min(
+//                w - getPaddingLeft() - getPaddingRight(),
+//                h - getPaddingBottom() - getPaddingTop());
 
-        float r = height / 2f;
-        points[0] = r / 2f + getPaddingLeft();
-        points[1] = r + getPaddingTop();
+        this.mHeight = h - getPaddingBottom() - getPaddingTop();
 
-        points[2] = r * 5f / 6f + getPaddingLeft();
-        points[3] = r + r / 3f + getPaddingTop();
+        this.mWidth = w - getPaddingLeft() - getPaddingRight();
 
-        points[4] = r * 1.5f + getPaddingLeft();
-        points[5] = r - r / 3f + getPaddingTop();
-        mRadius = (int) (height * 0.125f);
+        this.mCx = this.mWidth / 2 + getPaddingLeft();
+        this.mCy = this.mHeight / 2 + getPaddingTop();
+
+        if (this.mHeight < this.mWidth) {
+            this.mRadius = this.mHeight / 2.0f;
+        } else {
+            this.mRadius = this.mWidth / 2.0f;
+        }
+
+        this.mFlagPoints[0] = this.mCx - this.mRadius * 0.58f;
+        this.mFlagPoints[1] = this.mCy - this.mRadius * 0.10f;
+
+        this.mFlagPoints[2] = this.mCx;
+        this.mFlagPoints[3] = this.mCy + this.mRadius / 2.0f;
+
+        this.mFlagPoints[4] = this.mCx + this.mRadius * 0.70f;
+        this.mFlagPoints[5] = this.mCy - this.mRadius * 0.45f;
+
     }
 
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
 
-        float f = (mRadius - height * 0.125f) / (height * 0.5f); // Current progress
-        if (f < 0) {
-            f = 0.0f;
-        }
-        Log.d("onDraw()", "f = " + f);
-        mCirclePaint.setColor(evaluateColor(f, mUnCheckedColor, mCheckedColor));
-//        canvas.drawCircle(cx, cy, mRadius, mCirclePaint); // Circle
-        canvas.drawRoundRect(
-                new RectF(cx - mRadius , cy - mRadius , cx + mRadius, cy + mRadius),
-                25 * f,
-                25 * f,
-                mCirclePaint);
+        this.mPaint.setColor(MDTools.evaluateColor(this.mAnimationProgress, this.mUnCheckedColor, this.mCheckedColor));
+        this.mBorderPaint.setColor(MDTools.evaluateColor(this.mAnimationProgress, this.mUnCheckedBorderColor, this.mCheckedBorderColor));
 
-        if (flagProgress > 0) {
-            if (flagProgress < 1 / 3f) {
-                float x = points[0] + (points[2] - points[0]) * flagProgress;
-                float y = points[1] + (points[3] - points[1]) * flagProgress;
-                canvas.drawLine(points[0], points[1], x, y, mFlagPaint);
+        canvas.drawCircle(mCx, mCy, this.mRadius, mPaint); // Circle
+        canvas.drawCircle(mCx, mCy, this.mRadius, mBorderPaint); // Circle border
+//        canvas.drawRoundRect(
+//                new RectF(
+//                        this.mCx - (this.mWidth * 0.5f),
+//                        this.mCy - (this.mHeight * 0.5f),
+//                        this.mCx + (this.mWidth * 0.5f),
+//                        this.mCy + (this.mHeight * 0.5f)
+//                ),
+//                25,
+//                25,
+//                this.mPaint);
+//
+        if (this.mAnimationProgress > 0) {
+            float x, y;
+            this.mPath.reset();
+            this.mPath.moveTo(this.mFlagPoints[0], this.mFlagPoints[1]);
+            if (this.mAnimationProgress < 0.33f) {
+                x = this.mFlagPoints[0] + (this.mFlagPoints[2] - this.mFlagPoints[0]) * this.mAnimationProgress * 3.33f;
+                y = this.mFlagPoints[1] + (this.mFlagPoints[3] - this.mFlagPoints[1]) * this.mAnimationProgress * 3.33f;
             } else {
-                float x = points[2] + (points[4] - points[2]) * flagProgress;
-                float y = points[3] + (points[5] - points[3]) * flagProgress;
-                canvas.drawLine(points[0], points[1], points[2], points[3], mFlagPaint);
-                canvas.drawLine(points[2], points[3], x, y, mFlagPaint);
+                x = this.mFlagPoints[2] + (this.mFlagPoints[4] - this.mFlagPoints[2]) * (this.mAnimationProgress - 0.33f) * 1.5f;
+                y = this.mFlagPoints[3] + (this.mFlagPoints[5] - this.mFlagPoints[3]) * (this.mAnimationProgress - 0.33f) * 1.5f;
+                this.mPath.lineTo(this.mFlagPoints[2], this.mFlagPoints[3]);
             }
+            this.mPath.lineTo(x, y);
+            canvas.drawPath(this.mPath, this.mFlagPaint);
+        }
+    }
+
+    private void showAsChecked() {
+        if (this.mInAnimation) {
+            return;
+        }
+        this.mInAnimation = true;
+        this.mAnimator.setFloatValues(0, 1);
+        this.mAnimator.start();
+        this.mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue(); // 0f ~ 1f
+                MDTouchCheckBox.this.mAnimationProgress = (MDTouchCheckBox.this.mChecked ? value : 1 - value);
+                if (MDTouchCheckBox.this.mAnimationProgress < 0) { // Current progress
+                    MDTouchCheckBox.this.mAnimationProgress = 0.0f;
+                }
+                invalidate();
+                if (value >= 1) {
+                    MDTouchCheckBox.this.mInAnimation = false;
+                    if (!MDTouchCheckBox.this.mBroadCasting) {
+                        if (MDTouchCheckBox.this.mCheckedChangeListener != null) {
+                            MDTouchCheckBox.this.mBroadCasting = true;
+                            MDTouchCheckBox.this.mCheckedChangeListener.onCheckedChanged(
+                                    MDTouchCheckBox.this,
+                                    MDTouchCheckBox.this.mChecked
+                            );
+                            MDTouchCheckBox.this.mBroadCasting = false;
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Set the current selected
+     *
+     * @param checked boolean
+     */
+    public void setChecked(boolean checked) {
+        if (this.mChecked != checked) {
+            this.mChecked = checked;
+            showAsChecked();
         }
     }
 
     /**
-     * Set round color
+     * Returns the current selected
      *
-     * @param color color
+     * @return boolean
      */
-    public void setCheckedColor(int color) {
-        this.mCheckedColor = color;
+    public boolean isChecked() {
+        return this.mChecked;
     }
 
     /**
-     * Set the color when not selected
+     * Set the color when selected or not selected
      *
      * @param color color
      */
-    public void setUnCheckedColor(int color) {
-        this.mUnCheckedColor = color;
+    public void setColor(boolean checked, int color) {
+        if (checked) {
+            this.mCheckedColor = color;
+        } else {
+            this.mUnCheckedColor = color;
+        }
+        invalidate();
     }
 
     /**
-     * Set checkmark color
+     * Set the bordercolor when selected or not selected
+     *
+     * @param color border color
+     */
+    public void setBorderColor(boolean checked, int color) {
+        if (checked) {
+            this.mCheckedBorderColor = color;
+        } else {
+            this.mUnCheckedBorderColor = color;
+        }
+        invalidate();
+    }
+
+    /**
+     * Set flag color
      *
      * @param color color
      */
     public void setFlagColor(int color) {
-        mFlagPaint.setColor(color);
+        this.mFlagPaint.setColor(color);
+        invalidate();
     }
 
-    private int evaluateColor(float fraction, int startValue, int endValue) {
-        int startA = (startValue >> 24) & 0xff;
-        int startR = (startValue >> 16) & 0xff;
-        int startG = (startValue >> 8) & 0xff;
-        int startB = startValue & 0xff;
-
-        int endA = (endValue >> 24) & 0xff;
-        int endR = (endValue >> 16) & 0xff;
-        int endG = (endValue >> 8) & 0xff;
-        int endB = endValue & 0xff;
-
-        return ((startA + (int) (fraction * (endA - startA))) << 24)
-                | ((startR + (int) (fraction * (endR - startR))) << 16)
-                | ((startG + (int) (fraction * (endG - startG))) << 8)
-                | ((startB + (int) (fraction * (endB - startB))));
+    public int getAnimDuration() {
+        return this.mAnimDuration;
     }
 
-    private void showAsChecked(final boolean checked) {
-        if (isAnim) {
-            return;
-        }
-        isAnim = true;
-        final ValueAnimator va = ValueAnimator.ofFloat(0, 1).setDuration(mAnimDuration);
-        va.setInterpolator(new LinearInterpolator());
-        va.start();
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue(); // 0f ~ 1f
-                Log.d("showAsChecked()", "Value = " + value);
-                mRadius = (int) ((checked ? value : 1 - value) * height * 0.375f + height * 0.125f);
-                if (value >= 1) {
-                    mChecked = checked;
-                    isAnim = false;
-                    if (listener != null) {
-                        listener.onCheckedChanged(MDTouchCheckBox.this, mChecked);
-                    }
-                    if (mChecked) {
-                        showFlag(mChecked);
-                    }
-                }
-                invalidate();
-            }
-        });
-    }
-
-    private void showFlag(final boolean isVisible) {
-        if (isAnim) {
-            return;
-        }
-        isAnim = true;
-        ValueAnimator va = ValueAnimator.ofFloat(0, 1).setDuration(mAnimDuration);
-        va.setInterpolator(new LinearInterpolator());
-        va.start();
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue(); // 0f ~ 1f
-                Log.d("showAsChecked()", "Value = " + value);
-                flagProgress = isVisible ? value : 1 - value;
-                invalidate();
-                if (value >= 1) {
-                    isAnim = false;
-                    if (!isVisible) {
-                        showAsChecked(false);
-                    }
-                }
-            }
-        });
+    public void setAnimDuration(int animDuration) {
+        this.mAnimDuration = animDuration;
     }
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
-        this.listener = listener;
+        this.mCheckedChangeListener = listener;
     }
 
     public interface OnCheckedChangeListener {
-        void onCheckedChanged(View buttonView, boolean isChecked);
+        void onCheckedChanged(MDTouchCheckBox checkBox, boolean isChecked);
     }
 
-    /**
-     * According to the resolution of the mobile phone unit from dp turn became px (pixels)
-     */
-    public static int dip2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    /**
-     * According to the resolution of the phone from px (pixel) units turn become dp
-     */
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
-    }
 }

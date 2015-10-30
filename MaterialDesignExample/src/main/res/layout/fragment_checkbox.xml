@@ -62,8 +62,23 @@
 
         <ru.gdo.android.library.materialdesign.widget.MDTouchCheckBox
             android:layout_gravity="center_horizontal"
-            android:layout_width="120dp"
-            android:padding="6dp"
+            android:layout_width="320dp"
+            android:paddingLeft="6dp"
+            android:paddingTop="6dp"
+            android:layout_height="220dp"/>
+
+        <ru.gdo.android.library.materialdesign.widget.MDTouchCheckBox
+            android:layout_gravity="center_horizontal"
+            android:layout_width="220dp"
+            android:paddingLeft="6dp"
+            android:paddingTop="6dp"
+            android:layout_height="320dp"/>
+
+        <ru.gdo.android.library.materialdesign.widget.MDTouchCheckBox
+            android:layout_gravity="center_horizontal"
+            android:layout_width="100dp"
+            android:paddingLeft="6dp"
+            android:paddingTop="6dp"
             android:layout_height="100dp"/>
 
 
