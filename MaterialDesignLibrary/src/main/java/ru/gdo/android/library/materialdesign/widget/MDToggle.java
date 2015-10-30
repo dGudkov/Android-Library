@@ -31,10 +31,6 @@ import ru.gdo.android.library.materialdesign.interfaces.OnToggleListener;
 public class MDToggle extends FrameLayout implements
         View.OnClickListener, View.OnLongClickListener {
 
-    private static final String ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android";
-    private static final String ATTRIBUTE_DURATION = "duration";
-    private static final String ATTRIBUTE_CHECKED = "checked";
-
     public static final int SWITCH_ON = 0;
     public static final int SWITCH_OFF = 1;
 
@@ -120,8 +116,8 @@ public class MDToggle extends FrameLayout implements
         this.mBtnOff.setOnClickListener(this);
         this.mBtnOff.setOnLongClickListener(this);
 
-        this.mDuration = attrs.getAttributeIntValue(ANDROID_NAMESPACE, ATTRIBUTE_DURATION, DEFAULT_DURATION);
-        this.mPosition = attrs.getAttributeBooleanValue(ANDROID_NAMESPACE, ATTRIBUTE_CHECKED, DEFAULT_CHECKED) ?
+        this.mDuration = MDTools.getDurationAttributeValue(attrs, DEFAULT_DURATION);
+        this.mPosition = MDTools.getCheckedAttributeValue(attrs, DEFAULT_CHECKED) ?
                 SWITCH_ON : SWITCH_OFF;
 
         TypedArray attr = context.obtainStyledAttributes(attrs,

@@ -39,9 +39,6 @@ import ru.gdo.android.library.materialdesign.R;
 
 public abstract class MDShadow<T extends View> extends FrameLayout implements View.OnTouchListener {
 
-    private static final String ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android";
-    private static final String ATTRIBUTE_ENABLED = "enabled";
-
     private static final boolean DEFAULT_ENABLED = true;
 
     protected TranslateAnimation mDownAnimation;
@@ -314,7 +311,7 @@ public abstract class MDShadow<T extends View> extends FrameLayout implements Vi
             return;
         }
 
-        this.setEnabled(attrs.getAttributeBooleanValue(ANDROID_NAMESPACE, ATTRIBUTE_ENABLED, DEFAULT_ENABLED));
+        this.setEnabled(MDTools.getEnabledAttributeValue(attrs, DEFAULT_ENABLED));
 
         try {
             this.mShadowAttributes.setCornerRadius(attr.getDimension(R.styleable.MDShadowFrameLayout_sl_cornerRadius, MDShadowAttributes.DEFAULT_CORNER_RADIUS));

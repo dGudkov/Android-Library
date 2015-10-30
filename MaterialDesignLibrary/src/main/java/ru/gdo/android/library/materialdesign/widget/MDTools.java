@@ -1,6 +1,7 @@
 package ru.gdo.android.library.materialdesign.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
 
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
@@ -9,6 +10,23 @@ import android.content.Context;
  */
 
 public final class MDTools {
+
+    public static final String ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android";
+    public static final String ATTRIBUTE_DURATION = "duration";
+    public static final String ATTRIBUTE_CHECKED = "checked";
+    public static final String ATTRIBUTE_ENABLED = "enabled";
+
+    public static boolean getCheckedAttributeValue(AttributeSet attrs, boolean defaultValue) {
+        return attrs.getAttributeBooleanValue(ANDROID_NAMESPACE, ATTRIBUTE_CHECKED, defaultValue);
+    }
+
+    public static int getDurationAttributeValue(AttributeSet attrs, int defaultValue) {
+        return attrs.getAttributeIntValue(ANDROID_NAMESPACE, ATTRIBUTE_DURATION, defaultValue);
+    }
+
+    public static boolean getEnabledAttributeValue(AttributeSet attrs, boolean defaultValue) {
+        return attrs.getAttributeBooleanValue(ANDROID_NAMESPACE, ATTRIBUTE_ENABLED, defaultValue);
+    }
 
     public static int evaluateColor(float fraction, int startValue, int endValue) {
 

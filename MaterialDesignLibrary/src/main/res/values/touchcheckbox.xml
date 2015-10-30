@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MDTouchCheckBox">
+        <attr name="tcb_mode" format="enum" localization="suggested">
+            <enum name="rect" value="0" />
+            <enum name="circle" value="1" />
+        </attr>
+        <attr name="tcb_flagwidth" format="dimension" localization="suggested" />
+        <attr name="tcb_borderwidth" format="dimension" localization="suggested" />
+        <attr name="tcb_flagcolor" format="color" localization="suggested" />
+        <attr name="tcb_checkedcolor" format="color" localization="suggested" />
+        <attr name="tcb_uncheckedcolor" format="color" localization="suggested" />
+        <attr name="tcb_checkedbordercolor" format="color" localization="suggested" />
+        <attr name="tcb_uncheckedbordercolor" format="color" localization="suggested" />
+        <attr name="tcb_disabledbordercolor" format="color" localization="suggested" />
+        <attr name="tcb_disabledcolor" format="color" localization="suggested" />
+
+    </declare-styleable>
+</resources>

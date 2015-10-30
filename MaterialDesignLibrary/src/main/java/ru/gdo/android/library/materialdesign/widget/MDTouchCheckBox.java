@@ -4,16 +4,20 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Checkable;
+
+import ru.gdo.android.library.materialdesign.R;
 
 /**
  * @author Danil Gudkov <danil.gudkov@progforce.com>
@@ -23,27 +27,43 @@ import android.widget.Checkable;
 
 public class MDTouchCheckBox extends View implements Checkable {
 
+    private static final Mode DEFAULT_MODE = Mode.rect;
+    private static final boolean DEFAULT_CHECKED = true;
+    private static final int DEFAULT_DURATION = 100;
+    private static final int DEFAULT_FLAG_WIDTH = 2;
+    private static final int DEFAULT_FLAG_COLOR = Color.BLACK;
+    private static final int DEFAULT_CHECKED_COLOR = Color.WHITE;
+    private static final int DEFAULT_UNCHECKED_COLOR = Color.WHITE;
+    private static final int DEFAULT_CHECKED_BORDER_COLOR = Color.BLACK;
+    private static final int DEFAULT_UNCHECKED_BORDER_COLOR = Color.BLACK;
+    private static final int DEFAULT_DISABLED_BORDER_COLOR = Color.DKGRAY;
+    private static final int DEFAULT_DISABLED_COLOR = Color.GRAY;
+    private static final int DEFAULT_BORDER_WIDTH = 2;
+
     private Paint mPaint;
-    private Paint mBorderPaint;
-    private Paint mFlagPaint;
+    private RectF mPaintRect;
     private Path mPath = new Path();
-    private int mWidth, mHeight;            // Control width and mHeight
     private int mCx, mCy;                  // x, y coordinates of the center
     private float[] mFlagPoints = new float[6]; // Coordinate checkmark three mFlagPoints
-    private boolean mChecked = true;
     private boolean mInAnimation;
-
-    private int mAnimDuration = 1000;
     private float mAnimationProgress = 1;
-
-    private OnCheckedChangeListener mCheckedChangeListener;
-    private int mCheckedColor = Color.GREEN;
-    private int mCheckedBorderColor = Color.RED;
-    private int mUnCheckedColor = Color.BLUE;
-    private int mUnCheckedBorderColor = Color.YELLOW;
     private ValueAnimator mAnimator;
+    private OnCheckedChangeListener mCheckedChangeListener;
     private boolean mBroadCasting = false;
     private float mRadius;
+
+    private Mode mMode;
+    private boolean mChecked;
+    private int mDuration;
+    private int mFlagWidth;
+    private int mFlagColor;
+    private int mBorderWidth;
+    private int mCheckedColor;
+    private int mUnCheckedColor;
+    private int mCheckedBorderColor;
+    private int mUnCheckedBorderColor;
+    private int mDisabledColor;
+    private int mDisabledBorderColor;
 
     public MDTouchCheckBox(Context context) {
         this(context, null);
@@ -55,38 +75,88 @@ public class MDTouchCheckBox extends View implements Checkable {
 
     public MDTouchCheckBox(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        initView(context, attrs);
 
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MDTouchCheckBox(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context);
+        initView(context, attrs);
     }
 
     /**
      * Initialization
-     *
-     * @param context Context
      */
-    private void init(Context context) {
+    private void initView(Context context, AttributeSet attrs) {
 
         this.mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        this.mPaint.setStyle(Paint.Style.FILL);
 
-        this.mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        this.mBorderPaint.setStyle(Paint.Style.STROKE);
-        this.mBorderPaint.setStrokeWidth(MDTools.dip2px(context, 3));
-
-        this.mFlagPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        this.mFlagPaint.setColor(Color.WHITE);
-        this.mFlagPaint.setStyle(Paint.Style.STROKE);
-        this.mFlagPaint.setStrokeWidth(MDTools.dip2px(context, 5));
-
-        this.mAnimator = ValueAnimator.ofFloat(0, 1).
-                setDuration(this.mAnimDuration);
+        this.mAnimator = ValueAnimator.ofFloat(0, 1);
         this.mAnimator.setInterpolator(new LinearInterpolator());
+
+        this.mChecked = MDTools.getCheckedAttributeValue(attrs, DEFAULT_CHECKED);
+        this.mDuration = MDTools.getDurationAttributeValue(attrs, DEFAULT_DURATION);
+
+        this.mAnimationProgress = this.mChecked ? 1 : 0;
+
+        TypedArray attr = context.obtainStyledAttributes(attrs,
+                R.styleable.MDTouchCheckBox, 0, 0);
+
+        try {
+            this.mMode = Mode.fromId(attr.getInt(R.styleable.MDTouchCheckBox_tcb_mode, DEFAULT_MODE.value));
+            this.mFlagWidth = MDTools.dip2px(
+                    context,
+                    attr.getDimension(
+                            R.styleable.MDTouchCheckBox_tcb_flagwidth,
+                            DEFAULT_FLAG_WIDTH)
+            );
+
+            this.mBorderWidth = MDTools.dip2px(
+                    context,
+                    attr.getDimension(
+                            R.styleable.MDTouchCheckBox_tcb_borderwidth,
+                            DEFAULT_BORDER_WIDTH)
+            );
+
+            this.mFlagColor = attr.getColor(
+                    R.styleable.MDTouchCheckBox_tcb_flagcolor,
+                    DEFAULT_FLAG_COLOR
+            );
+
+            this.mCheckedColor = attr.getColor(
+                    R.styleable.MDTouchCheckBox_tcb_checkedcolor,
+                    DEFAULT_CHECKED_COLOR
+            );
+
+            this.mUnCheckedColor = attr.getColor(
+                    R.styleable.MDTouchCheckBox_tcb_uncheckedcolor,
+                    DEFAULT_UNCHECKED_COLOR
+            );
+
+            this.mCheckedBorderColor = attr.getColor(
+                    R.styleable.MDTouchCheckBox_tcb_checkedbordercolor,
+                    DEFAULT_CHECKED_BORDER_COLOR
+            );
+
+            this.mUnCheckedBorderColor = attr.getColor(
+                    R.styleable.MDTouchCheckBox_tcb_uncheckedbordercolor,
+                    DEFAULT_UNCHECKED_BORDER_COLOR
+            );
+
+            this.mDisabledBorderColor = attr.getColor(
+                    R.styleable.MDTouchCheckBox_tcb_disabledbordercolor,
+                    DEFAULT_DISABLED_BORDER_COLOR
+            );
+
+            this.mDisabledColor = attr.getColor(
+                    R.styleable.MDTouchCheckBox_tcb_disabledcolor,
+                    DEFAULT_DISABLED_COLOR
+            );
+
+        } finally {
+            attr.recycle();
+        }
 
         this.setOnTouchListener(new OnTouchListener() {
             @Override
@@ -99,6 +169,7 @@ public class MDTouchCheckBox extends View implements Checkable {
                 return true;
             }
         });
+
     }
 
     public void toggle() {
@@ -116,21 +187,17 @@ public class MDTouchCheckBox extends View implements Checkable {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-//        this.mHeight = this.mWidth = Math.min(
-//                w - getPaddingLeft() - getPaddingRight(),
-//                h - getPaddingBottom() - getPaddingTop());
 
-        this.mHeight = h - getPaddingBottom() - getPaddingTop();
+        int height = h - getPaddingBottom() - getPaddingTop();
+        int width = w - getPaddingLeft() - getPaddingRight();
 
-        this.mWidth = w - getPaddingLeft() - getPaddingRight();
+        this.mCx = width / 2 + getPaddingLeft();
+        this.mCy = height / 2 + getPaddingTop();
 
-        this.mCx = this.mWidth / 2 + getPaddingLeft();
-        this.mCy = this.mHeight / 2 + getPaddingTop();
-
-        if (this.mHeight < this.mWidth) {
-            this.mRadius = this.mHeight / 2.0f;
+        if (height < width) {
+            this.mRadius = height / 2.0f;
         } else {
-            this.mRadius = this.mWidth / 2.0f;
+            this.mRadius = width / 2.0f;
         }
 
         this.mFlagPoints[0] = this.mCx - this.mRadius * 0.58f;
@@ -142,30 +209,39 @@ public class MDTouchCheckBox extends View implements Checkable {
         this.mFlagPoints[4] = this.mCx + this.mRadius * 0.70f;
         this.mFlagPoints[5] = this.mCy - this.mRadius * 0.45f;
 
+        float left = this.mCx - (width * 0.5f);
+        float top = this.mCy - (height * 0.5f);
+
+        this.mPaintRect = new RectF(
+                left,
+                top,
+                left + width,
+                top + height
+        );
+
     }
 
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
 
-        this.mPaint.setColor(MDTools.evaluateColor(this.mAnimationProgress, this.mUnCheckedColor, this.mCheckedColor));
-        this.mBorderPaint.setColor(MDTools.evaluateColor(this.mAnimationProgress, this.mUnCheckedBorderColor, this.mCheckedBorderColor));
+        if (this.mMode == Mode.circle) {
+            setDrawPaint(this.mAnimationProgress);
+            canvas.drawCircle(mCx, mCy, this.mRadius, mPaint); // Circle
 
-        canvas.drawCircle(mCx, mCy, this.mRadius, mPaint); // Circle
-        canvas.drawCircle(mCx, mCy, this.mRadius, mBorderPaint); // Circle border
-//        canvas.drawRoundRect(
-//                new RectF(
-//                        this.mCx - (this.mWidth * 0.5f),
-//                        this.mCy - (this.mHeight * 0.5f),
-//                        this.mCx + (this.mWidth * 0.5f),
-//                        this.mCy + (this.mHeight * 0.5f)
-//                ),
-//                25,
-//                25,
-//                this.mPaint);
-//
+            setDrawBorderPaint(this.mAnimationProgress);
+            canvas.drawCircle(mCx, mCy, this.mRadius, mPaint); // Circle border
+        } else {
+            setDrawPaint(this.mAnimationProgress);
+            canvas.drawRoundRect(this.mPaintRect, 25, 25, this.mPaint);
+
+            setDrawBorderPaint(this.mAnimationProgress);
+            canvas.drawRoundRect(this.mPaintRect, 25, 25, this.mPaint);
+        }
+
         if (this.mAnimationProgress > 0) {
             float x, y;
+            setDrawFlagPaint();
             this.mPath.reset();
             this.mPath.moveTo(this.mFlagPoints[0], this.mFlagPoints[1]);
             if (this.mAnimationProgress < 0.33f) {
@@ -177,8 +253,38 @@ public class MDTouchCheckBox extends View implements Checkable {
                 this.mPath.lineTo(this.mFlagPoints[2], this.mFlagPoints[3]);
             }
             this.mPath.lineTo(x, y);
-            canvas.drawPath(this.mPath, this.mFlagPaint);
+            canvas.drawPath(this.mPath, this.mPaint);
         }
+    }
+
+    public void setDrawPaint(float animationProgress) {
+        this.mPaint.setStyle(Paint.Style.FILL);
+        if (isEnabled()) {
+            this.mPaint.setColor(MDTools.evaluateColor(animationProgress, this.mUnCheckedColor, this.mCheckedColor));
+        } else {
+            this.mPaint.setColor(this.mDisabledColor);
+        }
+    }
+
+    public void setDrawBorderPaint(float animationProgress) {
+        this.mPaint.setStyle(Paint.Style.STROKE);
+        this.mPaint.setStrokeWidth(this.mBorderWidth);
+        if (isEnabled()) {
+            this.mPaint.setColor(MDTools.evaluateColor(animationProgress, this.mUnCheckedBorderColor, this.mCheckedBorderColor));
+        } else {
+            this.mPaint.setColor(this.mDisabledBorderColor);
+        }
+    }
+
+    public void setDrawFlagPaint() {
+        this.mPaint.setStyle(Paint.Style.STROKE);
+        this.mPaint.setStrokeWidth(this.mFlagWidth);
+        if (isEnabled()) {
+            this.mPaint.setColor(this.mFlagColor);
+        } else {
+            this.mPaint.setColor(DEFAULT_FLAG_COLOR);
+        }
+
     }
 
     private void showAsChecked() {
@@ -187,6 +293,7 @@ public class MDTouchCheckBox extends View implements Checkable {
         }
         this.mInAnimation = true;
         this.mAnimator.setFloatValues(0, 1);
+        this.mAnimator.setDuration(this.mDuration);
         this.mAnimator.start();
         this.mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -219,6 +326,7 @@ public class MDTouchCheckBox extends View implements Checkable {
      *
      * @param checked boolean
      */
+    @SuppressWarnings("unused")
     public void setChecked(boolean checked) {
         if (this.mChecked != checked) {
             this.mChecked = checked;
@@ -231,6 +339,7 @@ public class MDTouchCheckBox extends View implements Checkable {
      *
      * @return boolean
      */
+    @SuppressWarnings("unused")
     public boolean isChecked() {
         return this.mChecked;
     }
@@ -240,6 +349,7 @@ public class MDTouchCheckBox extends View implements Checkable {
      *
      * @param color color
      */
+    @SuppressWarnings("unused")
     public void setColor(boolean checked, int color) {
         if (checked) {
             this.mCheckedColor = color;
@@ -254,6 +364,7 @@ public class MDTouchCheckBox extends View implements Checkable {
      *
      * @param color border color
      */
+    @SuppressWarnings("unused")
     public void setBorderColor(boolean checked, int color) {
         if (checked) {
             this.mCheckedBorderColor = color;
@@ -268,25 +379,67 @@ public class MDTouchCheckBox extends View implements Checkable {
      *
      * @param color color
      */
+    @SuppressWarnings("unused")
     public void setFlagColor(int color) {
-        this.mFlagPaint.setColor(color);
+        this.mFlagColor = color;
         invalidate();
     }
 
-    public int getAnimDuration() {
-        return this.mAnimDuration;
+    @SuppressWarnings("unused")
+    public int getDuration() {
+        return this.mDuration;
     }
 
-    public void setAnimDuration(int animDuration) {
-        this.mAnimDuration = animDuration;
+    @SuppressWarnings("unused")
+    public void setDuration(int duration) {
+        this.mDuration = duration;
     }
 
+    @SuppressWarnings("unused")
+    public int getBorderWidth() {
+        return MDTools.px2dip(getContext(), this.mBorderWidth);
+    }
+
+    @SuppressWarnings("unused")
+    public void setBorderWidth(int borderWidth) {
+        this.mBorderWidth = MDTools.dip2px(getContext(), borderWidth);
+        invalidate();
+    }
+
+    @SuppressWarnings("unused")
+    public int getFlagWidth() {
+        return MDTools.px2dip(getContext(), this.mFlagWidth);
+    }
+
+    @SuppressWarnings("unused")
+    public void setFlagWidth(int flagWidth) {
+        this.mFlagWidth = MDTools.dip2px(getContext(), flagWidth);
+        invalidate();
+    }
+
+    @SuppressWarnings("unused")
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         this.mCheckedChangeListener = listener;
     }
 
     public interface OnCheckedChangeListener {
         void onCheckedChanged(MDTouchCheckBox checkBox, boolean isChecked);
+    }
+
+    private enum Mode {
+        rect(0), circle(1);
+        int value;
+
+        Mode(int value) {
+            this.value = value;
+        }
+
+        static Mode fromId(int value) {
+            for (Mode f : values()) {
+                if (f.value == value) return f;
+            }
+            throw new IllegalArgumentException();
+        }
     }
 
 }
